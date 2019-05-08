@@ -1,0 +1,154 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>reclame-cidadao</groupId>
+	<artifactId>reclame-cidadao</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<packaging>war</packaging>
+
+	<properties>
+		<!-- Java Version -->
+		<java.version>1.8</java.version>
+
+		<!-- Encolding UTF-8 -->
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<!-- Maven Compiler -->
+		<maven-compiler-version>3.5.1</maven-compiler-version>
+
+		<!-- Java EE -->
+		<javaee-api.version>8.0</javaee-api.version>
+
+		<!-- JSF -->
+		<javax.faces.version>2.3.0</javax.faces.version>
+
+		<!-- Weld (Implementação do CDI) -->
+		<weld.version>2.4.8.Final</weld.version>
+
+		<!-- JSTL -->
+		<jstl.version>1.2</jstl.version>
+
+		<!-- PrimeFaces -->
+		<primefaces.version>6.0</primefaces.version>
+
+		<!-- Commons Lang3 -->
+		<commons.lang.version>3.8</commons.lang.version>
+
+		<!-- Hibernate -->
+		<hibernate.agroal.version>5.4.2.Final</hibernate.agroal.version>
+		
+		<!-- MySQL Connector -->
+		<mysql.connector.java.version>5.1.44</mysql.connector.java.version>
+		
+		<!-- Webapp Runner -->
+		<webapp-runner.version>9.0.13.0</webapp-runner.version>
+
+	</properties>
+
+	<dependencies>
+		<!-- Java EE -->
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-web-api</artifactId>
+			<version>${javaee-api.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- JSF -->
+		<dependency>
+			<groupId>org.glassfish</groupId>
+			<artifactId>javax.faces</artifactId>
+			<version>${javax.faces.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- Weld (Implementação do CDI) -->
+		<dependency>
+			<groupId>org.jboss.weld.servlet</groupId>
+			<artifactId>weld-servlet</artifactId>
+			<version>${weld.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- JSTL -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>${jstl.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- PrimeFaces -->
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>${primefaces.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<!-- Commons Lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons.lang.version}</version>
+			<scope>compile</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-agroal</artifactId>
+			<version>${hibernate.agroal.version}</version>
+			<type>pom</type>
+		</dependency>
+
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>${mysql.connector.java.version}</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<finalName>${artifactId}</finalName>
+		<plugins>
+			<!-- Plugin de Compilação -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			
+			<!-- Webapp Runner -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.3</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>com.github.jsimone</groupId>
+									<artifactId>webapp-runner</artifactId>
+									<version>${webapp-runner.version}</version>
+									<destFileName>webapp-runner.jar</destFileName>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>
