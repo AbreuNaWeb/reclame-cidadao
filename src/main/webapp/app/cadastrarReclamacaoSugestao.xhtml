@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<style type="text/css">
+.ui-datalist .ui-datalist-content {
+	border: 0 none
+}
+
+.ui-datalist ul {
+	padding: 0px 10px 0 20px;
+	margin: 5px 0;
+}
+
+.value {
+	font-weight: bold;
+}
+
+.ui-autocomplete-itemtip {
+	-moz-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
+}
+</style>
+</h:head>
+<h:body>
+	<ui:composition template="layout.xhtml">
+		<ui:param name="tituloParametro" value="#{mensagem.titulo_cadastro_reclamacao_sugestao}" />
+		<ui:define name="corpo">
+			<h:form>
+				<h:panelGrid columns="2">
+					<h:outputText value="#{mensagem.tipo}" />
+					<p:selectOneButton>
+						<f:selectItem itemLabel="#{mensagem.reclamacao}" itemValue="1" />
+						<f:selectItem itemLabel="#{mensagem.sugestao}" itemValue="2" />
+					</p:selectOneButton>
+
+					<p:outputLabel value="#{mensagem.titulo}" />
+					<p:inputText />
+
+					<p:outputLabel value="#{mensagem.descricao}" />
+					<p:inputText />
+
+					<p:outputLabel value="#{mensagem.categoria}" />
+					<p:inputText />
+
+					<p:outputLabel value="#{mensagem.rua}" />
+					<p:inputText />
+
+					<p:outputLabel value="#{mensagem.numero}" />
+					<p:inputText />
+
+					<p:outputLabel value="#{mensagem.complemento}" />
+					<p:inputText />
+
+					<p:outputLabel value="#{mensagem.bairro}" />
+					<p:inputText />
+
+					<p:outputLabel value="#{mensagem.cidade}" />
+					<p:inputText />
+
+					<p:outputLabel value="#{mensagem.estado}" />
+					<p:inputText />
+
+					<p:outputLabel value="#{mensagem.feedback}" />
+					<p:inputTextarea rows="3" cols="40"
+						counter="mostraQuantidadeCaracteres" maxlength="50"
+						counterTemplate="#{mensagem.mostraQuantidadeCaracteres}"
+						autoResize="false" />
+					<br />
+					<h:outputText id="mostraQuantidadeCaracteres" />
+
+					<p:commandButton value="#{mensagem.cadastrar}" />
+				</h:panelGrid>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
