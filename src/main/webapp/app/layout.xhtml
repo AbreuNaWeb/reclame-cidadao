@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Teste</title>
+</h:head>
+<h:body>
+	<p:layout fullPage="true">
+
+    <p:layoutUnit position="north" size="90" header="Reclame Cidadão">
+        <p:commandButton value="Deslogar" id="disabled" style="margin-right:20px;" disabled="true" />
+    </p:layoutUnit>
+    
+    <p:layoutUnit position="west" size="200">
+        <div id="menuLateral">
+	  		<ui:insert name="menuLateral" />
+	    </div>
+    </p:layoutUnit>
+
+    <p:layoutUnit position="south" size="45">
+        <h:outputText value="Desenvolvido por Robson Abreu" />
+    </p:layoutUnit>
+
+    <p:layoutUnit position="center">
+        <div id="corpo">
+	  		<ui:insert name="corpo" />
+	    </div>
+    </p:layoutUnit>
+</p:layout>
+</h:body>
+</html>
