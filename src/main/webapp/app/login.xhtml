@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+<!-- 	<h:outputStylesheet library="css" name="/default.css" /> Futuramente será utilizado -->
+<title>Login - Reclame Cidadão</title>
+</h:head>
+
+<h:body style="display:flex;">
+	<h:form style=" margin:auto;">
+		<p:panel header="#{mensagem.login}" style="width:400px;">
+
+			<h:panelGrid columns="2" cellpadding="10">
+				<h:panelGrid columns="2" cellpadding="5">
+					<p:outputLabel value="#{mensagem.modalidade}" />
+					<p:selectOneMenu style="width:125px">
+						<f:selectItem itemLabel="#{mensagem.cidadao}" itemValue="1" />
+						<f:selectItem itemLabel="#{mensagem.agente}" itemValue="2" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="#{mensagem.cpf}" />
+					<p:inputText />
+
+					<p:outputLabel value="#{mensagem.senha}" />
+					<p:password />
+ 
+	            	<br />
+	            	<p:commandButton value="#{mensagem.acessar}" icon="ui-icon-gear"/>
+				</h:panelGrid>
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>
