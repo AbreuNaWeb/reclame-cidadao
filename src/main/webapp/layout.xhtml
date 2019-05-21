@@ -11,13 +11,17 @@
 	<p:layout fullPage="true">
 
     <p:layoutUnit position="north" size="90" header="Reclame Cidadão">
-        <p:commandButton value="Deslogar" id="disabled" style="margin-right:20px;" disabled="true" />
+        <p:commandButton value="#{mensagem.deslogar}" id="disabled" style="margin-right:20px;" disabled="true" />
+        <p:commandButton value="#{mensagem.registrar}" id="disabled" style="margin-right:20px;" disabled="true" />
     </p:layoutUnit>
     
-    <p:layoutUnit position="west" size="200">
-        <div id="menuLateral">
-	  		<ui:insert name="menuLateral" />
-	    </div>
+    <p:layoutUnit position="west" size="250">
+    	<p:commandButton value="#{mensagem.alterar_dados}" style="margin-right:20px; width:250px" />
+    	<p:commandButton value="#{mensagem.cadastrar_agente}" style="margin-right:20px; width:250px" />
+    	<p:commandButton value="#{mensagem.excluir_agente}" style="margin-right:20px; width:250px" />
+    	<p:commandButton value="#{mensagem.cadastrar_reclamacao_sugestao}" style="margin-right:20px; width:250px" />
+    	<p:commandButton value="#{mensagem.listar_reclamacoes_sugestoes}" style="margin-right:20px; width:250px" />
+    	<p:commandButton value="#{mensagem.pesquisar_cidadao}" style="margin-right:20px; width:250px" />
     </p:layoutUnit>
 
     <p:layoutUnit position="south" size="45">
