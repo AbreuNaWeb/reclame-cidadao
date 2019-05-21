@@ -11,17 +11,19 @@
 	<p:layout fullPage="true">
 
     <p:layoutUnit position="north" size="90" header="Reclame Cidadão">
-        <p:commandButton value="#{mensagem.deslogar}" id="disabled" style="margin-right:20px;" disabled="true" />
-        <p:commandButton value="#{mensagem.registrar}" id="disabled" style="margin-right:20px;" disabled="true" />
+        <p:commandButton value="#{mensagem.deslogar}" style="margin-right:20px;" disabled="true" />
+        <p:commandButton value="#{mensagem.registrar}" style="margin-right:20px;" disabled="true" />
     </p:layoutUnit>
     
     <p:layoutUnit position="west" size="250">
-    	<p:commandButton value="#{mensagem.alterar_dados}" style="margin-right:20px; width:250px" />
-    	<p:commandButton value="#{mensagem.cadastrar_agente}" style="margin-right:20px; width:250px" />
-    	<p:commandButton value="#{mensagem.excluir_agente}" style="margin-right:20px; width:250px" />
-    	<p:commandButton value="#{mensagem.cadastrar_reclamacao_sugestao}" style="margin-right:20px; width:250px" />
-    	<p:commandButton value="#{mensagem.listar_reclamacoes_sugestoes}" style="margin-right:20px; width:250px" />
-    	<p:commandButton value="#{mensagem.pesquisar_cidadao}" style="margin-right:20px; width:250px" />
+    	<h:form>
+    		<p:commandButton value="#{mensagem.alterar_dados}" action="alterarDadosPessoais?faces-redirect=true" style="margin-right:20px; width:250px" />
+    		<p:commandButton value="#{mensagem.cadastrar_agente}" action="cadastrarAgente?faces-redirect=true" style="margin-right:20px; width:250px" />
+    		<p:commandButton value="#{mensagem.excluir_agente}" action="pesquisarCidadao?faces-redirect=true" style="margin-right:20px; width:250px" />
+    		<p:commandButton value="#{mensagem.cadastrar_reclamacao_sugestao}" action="cadastrarReclamacaoSugestao?faces-redirect=true" style="margin-right:20px; width:250px" />
+    		<p:commandButton value="#{mensagem.listar_reclamacoes_sugestoes}" action="listarReclamacoesSugestoes?faces-redirect=true" style="margin-right:20px; width:250px" />
+    		<p:commandButton value="#{mensagem.pesquisar_cidadao}" action="pesquisarCidadao?faces-redirect=true" style="margin-right:20px; width:250px" />
+    	</h:form>
     </p:layoutUnit>
 
     <p:layoutUnit position="south" size="45">
