@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.sun.istack.NotNull;
+
 import br.com.principal.constante.CategoriasEnum;
 import br.com.principal.constante.TipoReclamacaoSugestaoEnum;
 
@@ -19,9 +21,11 @@ public class ReclamacaoSugestaoEntidade {
 	@Column(name = "ID")
 	private Long id;
 	
+	@NotNull
 	@Column(name = "TIPO")
-	private Byte tipo;
+	private String tipo;
 	
+	@NotNull
 	@Column(name = "DATA_CRIACAO")
 	private Calendar dataCriacao;
 	
@@ -31,21 +35,24 @@ public class ReclamacaoSugestaoEntidade {
 	@Column(name = "DATA_ENCERRAMENTO")
 	private Calendar dataEncerramento;
 	
+	@NotNull
 	@Column(name = "TITULO")
 	private String titulo;
 	
+	@NotNull
 	@Column(name = "DESCRICAO")
 	private String descricao;
 	
 	@Column(name = "STATUS")
 	private Byte status;
 	
+	@NotNull
 	@Column(name = "CATEGORIA")
-	private Byte categoria; 
+	private String categoria; 
 	
 	public ReclamacaoSugestaoEntidade() {
-		this.tipo = TipoReclamacaoSugestaoEnum.RECLAMACAO.getCodigo();
-		this.categoria = CategoriasEnum.TRANSPORTE_PUBLICO.getCodigo();
+		this.tipo = TipoReclamacaoSugestaoEnum.RECLAMACAO.getDescricao();
+		this.categoria = CategoriasEnum.TRANSPORTE_PUBLICO.getDescricao();
 	}
 
 	public Long getId() {
@@ -56,11 +63,11 @@ public class ReclamacaoSugestaoEntidade {
 		this.id = id;
 	}
 
-	public Byte getTipo() {
+	public String getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(Byte tipo) {
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
 
@@ -112,11 +119,11 @@ public class ReclamacaoSugestaoEntidade {
 		this.status = status;
 	}
 	
-	public Byte getCategoria() {
+	public String getCategoria() {
 		return categoria;
 	}
 	
-	public void setCategoria(Byte categoria) {
+	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
 }

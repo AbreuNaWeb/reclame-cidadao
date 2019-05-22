@@ -43,7 +43,7 @@
 					<h:outputText value="#{mensagem.tipo}" />
 					<p:selectOneMenu value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.tipo}">
 						<f:selectItems value="#{cadastraReclamacaoSugestaoTela.opcoesDeTipo()}" var="tipo" 
-							itemLabel="#{tipo.descricao}" itemValue="#{tipo.codigo}" />
+							itemLabel="#{tipo.descricao}" itemValue="#{tipo.descricao}" />
 					</p:selectOneMenu>
 
 					<p:outputLabel value="#{mensagem.titulo}" />
@@ -57,7 +57,7 @@
 					<p:outputLabel value="#{mensagem.categoria}" />
 					<p:selectOneMenu value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.categoria}">
 						<f:selectItems value="#{cadastraReclamacaoSugestaoTela.categorias()}" var="categoria" 
-							itemLabel="#{categoria.descricao}" itemValue="#{categoria.codigo}" />
+							itemLabel="#{categoria.descricao}" itemValue="#{categoria.descricao}" />
 					</p:selectOneMenu>
 
 					<p:outputLabel value="#{mensagem.rua}" />

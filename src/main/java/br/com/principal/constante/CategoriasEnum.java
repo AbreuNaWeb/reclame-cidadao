@@ -2,27 +2,21 @@ package br.com.principal.constante;
 
 public enum CategoriasEnum {
 
-	TRANSPORTE_PUBLICO((byte) 1, "Transporte Público"), 
-	ILUMINACAO_PUBLICA((byte) 2, "Iluminação Pública"),
-	LIMPEZA_URBANA((byte) 3, "Limpeza Urbana"),
-	AGUA_ESGOTO((byte) 4, "Água e Esgoto"),
-	SAUDE((byte) 5, "Saúde"),
-	SEGURANCA((byte) 6, "Segurança"),
-	EDUCACAO((byte) 7, "Educação"),
-	OUTROS((byte) 8, "Outros");
+	TRANSPORTE_PUBLICO("Transporte Público"), 
+	ILUMINACAO_PUBLICA("Iluminação Pública"),
+	LIMPEZA_URBANA("Limpeza Urbana"),
+	AGUA_ESGOTO("Água e Esgoto"),
+	SAUDE("Saúde"),
+	SEGURANCA("Segurança"),
+	EDUCACAO("Educação"),
+	OUTROS("Outros");
 
-	private final Byte codigo;
 	private final String descricao;
 
-	private CategoriasEnum(Byte codigo, String descricao) {
-		this.codigo = codigo;
+	private CategoriasEnum(String descricao) {
 		this.descricao = descricao;
 	}
 
-	public Byte getCodigo() {
-		return codigo;
-	}
-	
 	public String getDescricao() {
 		return descricao;
 	}
