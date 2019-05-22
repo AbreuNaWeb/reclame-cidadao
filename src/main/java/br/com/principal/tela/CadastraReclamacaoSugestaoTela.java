@@ -9,6 +9,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.principal.constante.CategoriasEnum;
 import br.com.principal.constante.TipoReclamacaoSugestaoEnum;
 import br.com.principal.entidade.ReclamacaoSugestaoEntidade;
 import br.com.principal.regra.ReclamacaoSugestaoRegras;
@@ -19,7 +20,7 @@ public class CadastraReclamacaoSugestaoTela {
 
 	@Inject
 	private ReclamacaoSugestaoRegras regra;
-	
+
 	private ReclamacaoSugestaoEntidade novaReclamacaoSugestao;
 	
 	@PostConstruct
@@ -35,6 +36,10 @@ public class CadastraReclamacaoSugestaoTela {
 	
 	public TipoReclamacaoSugestaoEnum[] opcoesDeTipo() {
 		return TipoReclamacaoSugestaoEnum.values();
+	}
+	
+	public CategoriasEnum[] categorias() {
+		return CategoriasEnum.values();
 	}
 
 	public ReclamacaoSugestaoEntidade getNovaReclamacaoSugestao() {

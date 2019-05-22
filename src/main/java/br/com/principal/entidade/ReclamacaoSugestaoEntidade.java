@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import br.com.principal.constante.CategoriasEnum;
 import br.com.principal.constante.TipoReclamacaoSugestaoEnum;
 
 @Entity
@@ -39,8 +40,12 @@ public class ReclamacaoSugestaoEntidade {
 	@Column(name = "STATUS")
 	private Byte status;
 	
+	@Column(name = "CATEGORIA")
+	private Byte categoria; 
+	
 	public ReclamacaoSugestaoEntidade() {
 		this.tipo = TipoReclamacaoSugestaoEnum.RECLAMACAO.getCodigo();
+		this.categoria = CategoriasEnum.TRANSPORTE_PUBLICO.getCodigo();
 	}
 
 	public Long getId() {
@@ -105,5 +110,13 @@ public class ReclamacaoSugestaoEntidade {
 
 	public void setStatus(Byte status) {
 		this.status = status;
+	}
+	
+	public Byte getCategoria() {
+		return categoria;
+	}
+	
+	public void setCategoria(Byte categoria) {
+		this.categoria = categoria;
 	}
 }
