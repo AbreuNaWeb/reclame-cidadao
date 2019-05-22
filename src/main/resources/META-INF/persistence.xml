@@ -5,7 +5,8 @@
     <!-- Implementação do JPA -->
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <!-- Lista de entidades -->
-    <class>br.com.principal.Notificacao</class>
+    <class>br.com.principal.entidade.ReclamacaoSugestaoEntidade</class>
+    <class>br.com.principal.entidade.Notificacao</class>
     <properties>
       <!-- Propriedades JDBC -->
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>

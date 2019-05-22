@@ -6,12 +6,13 @@ import br.com.principal.conexao.FabricaConexao;
 
 abstract class GenericoDAO {
 
-	Object salvar(Object entidade) {
+	public Object salvar(Object entidade) {
 		EntityManager em = new FabricaConexao().buscar();
 
 		try {
 			em.getTransaction().begin();
 			em.persist(entidade);
+			em.getTransaction().commit();
 		} catch (Exception erro) {
 			em.getTransaction().rollback();
 		} finally {
@@ -21,22 +22,23 @@ abstract class GenericoDAO {
 		return entidade;
 	}
 
-	Object atualizar(Object entidade) {
-		EntityManager em = new FabricaConexao().buscar();
+	public Object atualizar(Object entidade) {
+		EntityManager entityManager = new FabricaConexao().buscar();
 
 		try {
-			em.getTransaction().begin();
-			em.merge(entidade);
+			entityManager.getTransaction().begin();
+			entityManager.merge(entidade);
+			entityManager.getTransaction().commit();
 		} catch (Exception erro) {
-			em.getTransaction().rollback();
+			entityManager.getTransaction().rollback();
 		} finally {
-			em.close();
+			entityManager.close();
 		}
 
 		return entidade;
 	}
 	
-	EntityManager obtemEntityManager() {
+	public EntityManager obtemEntityManager() {
 		return new FabricaConexao().buscar();
 	}
 }

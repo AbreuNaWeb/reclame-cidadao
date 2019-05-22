@@ -8,6 +8,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import br.com.principal.constante.TipoReclamacaoSugestaoEnum;
+
 @Entity
 public class ReclamacaoSugestaoEntidade {
 
@@ -36,6 +38,10 @@ public class ReclamacaoSugestaoEntidade {
 	
 	@Column(name = "STATUS")
 	private Byte status;
+	
+	public ReclamacaoSugestaoEntidade() {
+		this.tipo = TipoReclamacaoSugestaoEnum.RECLAMACAO.getCodigo();
+	}
 
 	public Long getId() {
 		return id;

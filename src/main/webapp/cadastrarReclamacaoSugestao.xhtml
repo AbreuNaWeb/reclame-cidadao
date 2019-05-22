@@ -25,6 +25,11 @@
 	box-sizing: content-box;
 }
 </style>
+
+<!-- <f:metadata> -->
+<!--         <f:event type="preRenderView" listener="#{cadastraReclamacaoSugestaoTela.inicializar()}"/> -->
+<!-- </f:metadata> -->
+
 </h:head>
 <h:body>
 	<ui:composition template="layout.xhtml">
@@ -32,17 +37,23 @@
 		<ui:define name="corpo">
 			<h:form>
 				<h:panelGrid columns="2">
+					<f:facet name="cabecalho">
+						<p:messages id="mensagens" />
+					</f:facet>
+					
 					<h:outputText value="#{mensagem.tipo}" />
-					<p:selectOneButton>
-						<f:selectItem itemLabel="#{mensagem.reclamacao}" itemValue="1" />
-						<f:selectItem itemLabel="#{mensagem.sugestao}" itemValue="2" />
+					<p:selectOneButton value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.tipo}" required="true">
+						<f:selectItems value="#{cadastraReclamacaoSugestaoTela.opcoesDeTipo()}" var="tipo" 
+							itemLabel="#{tipo.descricao}" itemValue="#{tipo.codigo}" />
 					</p:selectOneButton>
 
 					<p:outputLabel value="#{mensagem.titulo}" />
-					<p:inputText />
+					<p:inputText value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.titulo}" required="true" 
+						requiredMessage="#{mensagem.titulo_obrigatorio}" />
 
 					<p:outputLabel value="#{mensagem.descricao}" />
-					<p:inputText />
+					<p:inputText value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.descricao}" required="true" 
+						requiredMessage="#{mensagem.descricao_obrigatorio}" />
 
 					<p:outputLabel value="#{mensagem.categoria}" />
 					<p:inputText />
@@ -65,15 +76,15 @@
 					<p:outputLabel value="#{mensagem.estado}" />
 					<p:inputText />
 
-					<p:outputLabel value="#{mensagem.feedback}" />
+					<p:outputLabel value="#{mensagem.feedback}" rendered="false" />
 					<p:inputTextarea rows="3" cols="40"
 						counter="mostraQuantidadeCaracteres" maxlength="50"
 						counterTemplate="#{mensagem.mostraQuantidadeCaracteres}"
-						autoResize="false" />
+						autoResize="false" rendered="false" />
 					<br />
 					<h:outputText id="mostraQuantidadeCaracteres" />
 
-					<p:commandButton value="#{mensagem.cadastrar}" />
+					<p:commandButton value="#{mensagem.cadastrar}" actionListener="#{cadastraReclamacaoSugestaoTela.cadastrar()}" update="@form" />
 				</h:panelGrid>
 			</h:form>
 		</ui:define>
