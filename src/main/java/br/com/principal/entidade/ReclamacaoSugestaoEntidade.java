@@ -8,51 +8,47 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import com.sun.istack.NotNull;
-
 import br.com.principal.constante.CategoriasEnum;
 import br.com.principal.constante.TipoReclamacaoSugestaoEnum;
 
-@Entity
+@Entity(name = "ReclamacaoSugestao")
 public class ReclamacaoSugestaoEntidade {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")
 	private Long id;
-	
-	@NotNull
+
 	@Column(name = "TIPO")
 	private String tipo;
-	
-	@NotNull
+
 	@Column(name = "DATA_CRIACAO")
 	private Calendar dataCriacao;
-	
+
 	@Column(name = "DATA_ATUALIZACAO")
 	private Calendar dataAtualizacao;
-	
+
 	@Column(name = "DATA_ENCERRAMENTO")
 	private Calendar dataEncerramento;
-	
-	@NotNull
+
 	@Column(name = "TITULO")
 	private String titulo;
-	
-	@NotNull
+
 	@Column(name = "DESCRICAO")
 	private String descricao;
-	
+
 	@Column(name = "STATUS")
 	private Byte status;
-	
-	@NotNull
+
 	@Column(name = "CATEGORIA")
-	private String categoria; 
+	private String categoria;
+
+	private EnderecoEntidade endereco;
 	
 	public ReclamacaoSugestaoEntidade() {
 		this.tipo = TipoReclamacaoSugestaoEnum.RECLAMACAO.getDescricao();
 		this.categoria = CategoriasEnum.TRANSPORTE_PUBLICO.getDescricao();
+		this.endereco = new EnderecoEntidade();
 	}
 
 	public Long getId() {
@@ -125,5 +121,13 @@ public class ReclamacaoSugestaoEntidade {
 	
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
+	}
+	
+	public EnderecoEntidade getEndereco() {
+		return endereco;
+	}
+	
+	public void setEndereco(EnderecoEntidade endereco) {
+		this.endereco = endereco;
 	}
 }

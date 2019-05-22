@@ -76,7 +76,10 @@
 					<p:inputText />
 
 					<p:outputLabel value="#{mensagem.estado}" />
-					<p:inputText />
+					<p:selectOneMenu value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.estado}">
+						<f:selectItems value="#{cadastraReclamacaoSugestaoTela.unidadesFederativas()}" var="unidadeFederativa" 
+							itemLabel="#{unidadeFederativa.nome}" itemValue="#{unidadeFederativa.nome}" />
+					</p:selectOneMenu>
 
 					<p:outputLabel value="#{mensagem.feedback}" rendered="false" />
 					<p:inputTextarea rows="3" cols="40"

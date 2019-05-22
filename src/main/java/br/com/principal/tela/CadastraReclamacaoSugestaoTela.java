@@ -11,6 +11,7 @@ import javax.inject.Named;
 
 import br.com.principal.constante.CategoriasEnum;
 import br.com.principal.constante.TipoReclamacaoSugestaoEnum;
+import br.com.principal.constante.UnidadeFederativaEnum;
 import br.com.principal.entidade.ReclamacaoSugestaoEntidade;
 import br.com.principal.regra.ReclamacaoSugestaoRegras;
 
@@ -40,6 +41,10 @@ public class CadastraReclamacaoSugestaoTela {
 	
 	public CategoriasEnum[] categorias() {
 		return CategoriasEnum.values();
+	}
+	
+	public UnidadeFederativaEnum[] unidadesFederativas() {
+		return UnidadeFederativaEnum.values();
 	}
 
 	public ReclamacaoSugestaoEntidade getNovaReclamacaoSugestao() {
