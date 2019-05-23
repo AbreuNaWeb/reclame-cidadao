@@ -11,8 +11,18 @@ public class ReclamacaoSugestaoRegras {
 	
 	@Inject
 	private ReclamacaoSugestaoDAO reclamacaoSugestaoDAO;
+
+	@Inject
+	private EnderecoRegras enderecoRegras;
 	
 	public void salvar(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade) {
+		if (possuiEndereco(reclamacaoSugestaoEntidade)) {
+			enderecoRegras.salvar(reclamacaoSugestaoEntidade.getEndereco());
+		}
 		reclamacaoSugestaoDAO.salvar(reclamacaoSugestaoEntidade);
+	}
+
+	private boolean possuiEndereco(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade) {
+		return reclamacaoSugestaoEntidade.getEndereco() != null;
 	}
 }

@@ -4,14 +4,17 @@ import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 import br.com.principal.constante.CategoriasEnum;
 import br.com.principal.constante.TipoReclamacaoSugestaoEnum;
 
-@Entity(name = "ReclamacaoSugestao")
+@Entity
 public class ReclamacaoSugestaoEntidade {
 
 	@Id
@@ -43,6 +46,8 @@ public class ReclamacaoSugestaoEntidade {
 	@Column(name = "CATEGORIA")
 	private String categoria;
 
+	@OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_endereco")
 	private EnderecoEntidade endereco;
 	
 	public ReclamacaoSugestaoEntidade() {
