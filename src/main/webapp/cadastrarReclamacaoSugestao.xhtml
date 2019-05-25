@@ -26,14 +26,11 @@
 }
 </style>
 
-<!-- <f:metadata> -->
-<!--         <f:event type="preRenderView" listener="#{cadastraReclamacaoSugestaoTela.inicializar()}"/> -->
-<!-- </f:metadata> -->
-
 </h:head>
 <h:body>
 	<ui:composition template="layout.xhtml">
-		<ui:param name="tituloParametro" value="#{mensagem.titulo_cadastro_reclamacao_sugestao}" />
+		<ui:param name="tituloParametro"
+			value="#{mensagem.titulo_cadastro_reclamacao_sugestao}" />
 		<ui:define name="corpo">
 			<h:form>
 				<h:panelGrid columns="2">
@@ -41,55 +38,78 @@
 						<p:messages id="mensagens" />
 					</f:facet>
 					<h:outputText value="#{mensagem.tipo}" />
-					<p:selectOneMenu value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.tipo}">
-						<f:selectItems value="#{cadastraReclamacaoSugestaoTela.opcoesDeTipo()}" var="tipo" 
-							itemLabel="#{tipo.descricao}" itemValue="#{tipo.descricao}" />
+					<p:selectOneMenu
+						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.tipo}">
+						<f:selectItems
+							value="#{cadastraReclamacaoSugestaoTela.opcoesDeTipo()}"
+							var="tipo" itemLabel="#{tipo.descricao}"
+							itemValue="#{tipo.descricao}" />
 					</p:selectOneMenu>
 
 					<p:outputLabel value="#{mensagem.titulo}" />
-					<p:inputText value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.titulo}" required="true" 
-						requiredMessage="#{mensagem.titulo_obrigatorio}" />
+					<p:inputText
+						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.titulo}"
+						required="true" requiredMessage="#{mensagem.titulo_obrigatorio}" />
 
 					<p:outputLabel value="#{mensagem.descricao}" />
-					<p:inputText value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.descricao}" required="true" 
+					<p:inputText
+						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.descricao}"
+						required="true"
 						requiredMessage="#{mensagem.descricao_obrigatorio}" />
 
 					<p:outputLabel value="#{mensagem.categoria}" />
-					<p:selectOneMenu value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.categoria}">
-						<f:selectItems value="#{cadastraReclamacaoSugestaoTela.categorias()}" var="categoria" 
-							itemLabel="#{categoria.descricao}" itemValue="#{categoria.descricao}" />
+					<p:selectOneMenu
+						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.categoria}">
+						<f:selectItems
+							value="#{cadastraReclamacaoSugestaoTela.categorias()}"
+							var="categoria" itemLabel="#{categoria.descricao}"
+							itemValue="#{categoria.descricao}" />
 					</p:selectOneMenu>
 
 					<p:outputLabel value="#{mensagem.rua}" />
-					<p:inputText />
+					<p:inputText
+						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.rua}" />
 
 					<p:outputLabel value="#{mensagem.numero}" />
-					<p:inputText />
+					<p:inputText
+						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.numero}" />
 
 					<p:outputLabel value="#{mensagem.complemento}" />
-					<p:inputText />
+					<p:inputText
+						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.complemento}" />
 
 					<p:outputLabel value="#{mensagem.bairro}" />
-					<p:inputText />
+					<p:inputText
+						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.bairro}" />
 
 					<p:outputLabel value="#{mensagem.cidade}" />
-					<p:inputText />
+					<p:inputText
+						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.cidade}" />
 
 					<p:outputLabel value="#{mensagem.estado}" />
-					<p:selectOneMenu value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.estado}">
-						<f:selectItems value="#{cadastraReclamacaoSugestaoTela.unidadesFederativas()}" var="unidadeFederativa" 
-							itemLabel="#{unidadeFederativa.nome}" itemValue="#{unidadeFederativa.nome}" />
+					<p:selectOneMenu
+						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.estado}">
+						<f:selectItems
+							value="#{cadastraReclamacaoSugestaoTela.unidadesFederativas()}"
+							var="unidadeFederativa" itemLabel="#{unidadeFederativa.nome}"
+							itemValue="#{unidadeFederativa.nome}" />
 					</p:selectOneMenu>
+				</h:panelGrid>
 
-					<p:outputLabel value="#{mensagem.feedback}" rendered="false" />
+				<h:panelGrid columns="2" rendered="false">
+					<p:outputLabel value="#{mensagem.feedback}" />
 					<p:inputTextarea rows="3" cols="40"
 						counter="mostraQuantidadeCaracteres" maxlength="50"
 						counterTemplate="#{mensagem.mostraQuantidadeCaracteres}"
 						autoResize="false" rendered="false" />
 					<br />
 					<h:outputText id="mostraQuantidadeCaracteres" />
+				</h:panelGrid>
 
-					<p:commandButton value="#{mensagem.cadastrar}" actionListener="#{cadastraReclamacaoSugestaoTela.cadastrar()}" update="@form" />
+				<h:panelGrid columns="1">
+					<p:commandButton value="#{mensagem.cadastrar}"
+						actionListener="#{cadastraReclamacaoSugestaoTela.cadastrar()}"
+						update="@form" />
 				</h:panelGrid>
 			</h:form>
 		</ui:define>
