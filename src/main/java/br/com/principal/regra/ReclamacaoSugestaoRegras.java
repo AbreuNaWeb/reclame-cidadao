@@ -1,5 +1,7 @@
 package br.com.principal.regra;
 
+import java.util.Calendar;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -19,6 +21,8 @@ public class ReclamacaoSugestaoRegras {
 		if (possuiEndereco(reclamacaoSugestaoEntidade)) {
 			enderecoRegras.salvar(reclamacaoSugestaoEntidade.getEndereco());
 		}
+		
+		reclamacaoSugestaoEntidade.setDataCriacao(Calendar.getInstance());
 		reclamacaoSugestaoDAO.salvar(reclamacaoSugestaoEntidade);
 	}
 
