@@ -49,7 +49,9 @@
 					<p:outputLabel value="#{mensagem.titulo}" />
 					<p:inputText
 						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.titulo}"
-						required="true" requiredMessage="#{mensagem.titulo_obrigatorio}" />
+						required="true" requiredMessage="#{mensagem.titulo_obrigatorio}">
+						<p:keyFilter regEx="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/"/>  
+					</p:inputText>
 
 					<p:outputLabel value="#{mensagem.descricao}" />
 					<p:inputText
@@ -68,27 +70,38 @@
 
 					<p:outputLabel value="#{mensagem.rua}" />
 					<p:inputText
-						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.rua}" />
+						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.rua}">
+						<p:keyFilter regEx="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/"/>
+					</p:inputText>
 
 					<p:outputLabel value="#{mensagem.numero}" />
 					<p:inputText
-						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.numero}" />
+						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.numero}">
+						<p:keyFilter regEx="/[\d\.]/"/>
+					</p:inputText>
 
 					<p:outputLabel value="#{mensagem.complemento}" />
 					<p:inputText
-						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.complemento}" />
+						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.complemento}">
+						<p:keyFilter regEx="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/"/>
+					</p:inputText>
 
 					<p:outputLabel value="#{mensagem.bairro}" />
 					<p:inputText
-						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.bairro}" />
+						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.bairro}">
+						<p:keyFilter regEx="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/"/>
+					</p:inputText>
 
 					<p:outputLabel value="#{mensagem.cidade}" />
 					<p:inputText
-						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.cidade}" />
+						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.cidade}">
+						<p:keyFilter regEx="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/"/>
+					</p:inputText>
 
 					<p:outputLabel value="#{mensagem.estado}" />
 					<p:selectOneMenu
 						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.estado}">
+						<f:selectItem itemLabel="" itemValue="" />
 						<f:selectItems
 							value="#{cadastraReclamacaoSugestaoTela.unidadesFederativas()}"
 							var="unidadeFederativa" itemLabel="#{unidadeFederativa.nome}"
