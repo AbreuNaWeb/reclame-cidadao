@@ -10,10 +10,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import br.com.principal.constante.CategoriasEnum;
 import br.com.principal.constante.TipoReclamacaoSugestaoEnum;
+import br.com.principal.tela.TelaUtil;
 
+@Table(name = "ReclamacaoSugestao")
 @Entity
 public class ReclamacaoSugestaoEntidade {
 
@@ -26,7 +29,10 @@ public class ReclamacaoSugestaoEntidade {
 	private String tipo;
 
 	@Column(name = "DATA_CRIACAO")
-	private Calendar dataCriacao;
+	private String dataCriacao;
+
+	@Column(name = "HORA_CRIACAO")
+	private String horaCriacao;
 
 	@Column(name = "DATA_ATUALIZACAO")
 	private Calendar dataAtualizacao;
@@ -47,11 +53,12 @@ public class ReclamacaoSugestaoEntidade {
 	private String categoria;
 
 	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id_endereco")
+	@JoinColumn(name = "id_endereco")
 	private EnderecoEntidade endereco;
-	
+
 	public ReclamacaoSugestaoEntidade() {
 		this.tipo = TipoReclamacaoSugestaoEnum.RECLAMACAO.getDescricao();
+		this.dataCriacao = TelaUtil.converterCalendarParaDiaMesAno(Calendar.getInstance());
 		this.categoria = CategoriasEnum.TRANSPORTE_PUBLICO.getDescricao();
 		this.endereco = new EnderecoEntidade();
 	}
@@ -72,12 +79,20 @@ public class ReclamacaoSugestaoEntidade {
 		this.tipo = tipo;
 	}
 
-	public Calendar getDataCriacao() {
+	public String getDataCriacao() {
 		return dataCriacao;
 	}
 
-	public void setDataCriacao(Calendar dataCriacao) {
+	public void setDataCriacao(String dataCriacao) {
 		this.dataCriacao = dataCriacao;
+	}
+
+	public String getHoraCriacao() {
+		return horaCriacao;
+	}
+
+	public void setHoraCriacao(String horaCriacao) {
+		this.horaCriacao = horaCriacao;
 	}
 
 	public Calendar getDataAtualizacao() {
@@ -119,19 +134,19 @@ public class ReclamacaoSugestaoEntidade {
 	public void setStatus(Byte status) {
 		this.status = status;
 	}
-	
+
 	public String getCategoria() {
 		return categoria;
 	}
-	
+
 	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
-	
+
 	public EnderecoEntidade getEndereco() {
 		return endereco;
 	}
-	
+
 	public void setEndereco(EnderecoEntidade endereco) {
 		this.endereco = endereco;
 	}

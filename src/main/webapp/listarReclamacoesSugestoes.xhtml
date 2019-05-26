@@ -31,21 +31,23 @@
 		<ui:param name="tituloParametro"
 			value="#{mensagem.titulo_alterar_dados_pessoais}" />
 		<ui:define name="corpo">
-			<p:dataTable var="dado" emptyMessage="#{mensagem.nenhum_registro_encontrado}">
+			<p:dataTable var="dado"
+				emptyMessage="#{mensagem.nenhum_registro_encontrado}"
+				value="#{listaReclamacaoSugestao.listaReclamacaoSugestaoEntidade}">
 				<p:column headerText="#{mensagem.data_criacao}">
-					<h:outputText />
+					<h:outputText value="#{dado.dataCriacao}" />
 				</p:column>
 
 				<p:column headerText="#{mensagem.titulo_label_tabela}">
-					<h:outputText />
+					<h:outputText value="#{dado.titulo}" />
 				</p:column>
 
 				<p:column headerText="#{mensagem.status}">
-					<h:outputText />
+					<h:outputText value="#{dado.status}" />
 				</p:column>
 
 				<p:column headerText="#{mensagem.categoria_label_tabela}">
-					<h:outputText />
+					<h:outputText value="#{dado.categoria}" />
 				</p:column>
 			</p:dataTable>
 		</ui:define>

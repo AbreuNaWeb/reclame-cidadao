@@ -1,6 +1,6 @@
 package br.com.principal.regra;
 
-import java.util.Calendar;
+import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -22,8 +22,11 @@ public class ReclamacaoSugestaoRegras {
 			enderecoRegras.salvar(reclamacaoSugestaoEntidade.getEndereco());
 		}
 		
-		reclamacaoSugestaoEntidade.setDataCriacao(Calendar.getInstance());
 		reclamacaoSugestaoDAO.salvar(reclamacaoSugestaoEntidade);
+	}
+	
+	public List<ReclamacaoSugestaoEntidade> buscarTodasReclamacoesSugestoes() {
+		return reclamacaoSugestaoDAO.buscarTodasReclamacoesSugestoes();
 	}
 
 	private boolean possuiEndereco(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade) {

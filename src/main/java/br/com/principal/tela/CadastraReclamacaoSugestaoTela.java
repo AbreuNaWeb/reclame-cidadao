@@ -1,5 +1,7 @@
 package br.com.principal.tela;
 
+import java.util.Calendar;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
@@ -39,6 +41,7 @@ public class CadastraReclamacaoSugestaoTela {
 				endereco.getCidade())) {
 			TelaUtil.adicionarMensagemDeErro(MensagemDeErroEnum.INFORAR_CAMPOS_ENDERECO);
 		} else {
+			novaReclamacaoSugestao.setHoraCriacao(TelaUtil.converterCalendarParaHoraMinuto(Calendar.getInstance()));
 			regra.salvar(novaReclamacaoSugestao);
 		}
 	}
