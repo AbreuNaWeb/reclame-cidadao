@@ -2,7 +2,8 @@ package br.com.principal.constante;
 
 public enum MensagemDeErroEnum {
 	
-	INFORAR_CAMPOS_ENDERECO("Foi informado o estado, então deve ser preenchido todos campos obrigatórios de endereço.");
+	INFORAR_CAMPOS_ENDERECO("Foi informado o estado, então deve ser preenchido todos campos obrigatórios de endereço."),
+	ERRO_FAVOR_RETORNAR_PAGINA_INICIAL("Ops! Ocorreu um erro. Favor retornar a página inicial.");
 	
 	private final String descricao;
 	

@@ -27,22 +27,23 @@ public class CadastraReclamacaoSugestaoTela {
 	private ReclamacaoSugestaoRegras regra;
 
 	private ReclamacaoSugestaoEntidade novaReclamacaoSugestao;
-	
+
 	@PostConstruct
 	public void inicializar() {
-		novaReclamacaoSugestao = new ReclamacaoSugestaoEntidade();
+		this.novaReclamacaoSugestao = new ReclamacaoSugestaoEntidade();
 	}
-	
+
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void cadastrar() {
 		EnderecoEntidade endereco = novaReclamacaoSugestao.getEndereco();
-		
-		if (informouEstado(endereco) && TelaUtil.campoNaoInformado(endereco.getRua(), endereco.getNumero(), endereco.getBairro(), 
-				endereco.getCidade())) {
+
+		if (informouEstado(endereco) && TelaUtil.campoNaoInformado(endereco.getRua(), endereco.getNumero(),
+				endereco.getBairro(), endereco.getCidade())) {
 			TelaUtil.adicionarMensagemDeErro(MensagemDeErroEnum.INFORAR_CAMPOS_ENDERECO);
 		} else {
 			novaReclamacaoSugestao.setHoraCriacao(TelaUtil.converterCalendarParaHoraMinuto(Calendar.getInstance()));
-			regra.salvar(novaReclamacaoSugestao);
+			this.novaReclamacaoSugestao = regra.salvar(novaReclamacaoSugestao);
+			TelaUtil.redirecionarParaOutraPagina("detalheReclamacaoSugestao.xhtml?id=" + novaReclamacaoSugestao.getId(), "Gravou com sucesso");
 		}
 	}
 
@@ -53,11 +54,11 @@ public class CadastraReclamacaoSugestaoTela {
 	public TipoReclamacaoSugestaoEnum[] opcoesDeTipo() {
 		return TipoReclamacaoSugestaoEnum.values();
 	}
-	
+
 	public CategoriasEnum[] categorias() {
 		return CategoriasEnum.values();
 	}
-	
+
 	public UnidadeFederativaEnum[] unidadesFederativas() {
 		return UnidadeFederativaEnum.values();
 	}

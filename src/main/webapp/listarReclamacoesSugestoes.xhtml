@@ -35,7 +35,9 @@
 				emptyMessage="#{mensagem.nenhum_registro_encontrado}"
 				value="#{listaReclamacaoSugestao.listaReclamacaoSugestaoEntidade}">
 				<p:column headerText="#{mensagem.data_criacao}">
-					<h:outputText value="#{dado.dataCriacao}" />
+					<h:link value="#{dado.dataCriacao}" outcome="detalheReclamacaoSugestao.xhtml" includeViewParams="true">
+        				<f:param name="id" value="#{dado.id}"/>
+        			</h:link>
 				</p:column>
 
 				<p:column headerText="#{mensagem.titulo_label_tabela}">

@@ -17,16 +17,20 @@ public class ReclamacaoSugestaoRegras {
 	@Inject
 	private EnderecoRegras enderecoRegras;
 	
-	public void salvar(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade) {
+	public ReclamacaoSugestaoEntidade salvar(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade) {
 		if (possuiEndereco(reclamacaoSugestaoEntidade)) {
 			enderecoRegras.salvar(reclamacaoSugestaoEntidade.getEndereco());
 		}
 		
-		reclamacaoSugestaoDAO.salvar(reclamacaoSugestaoEntidade);
+		return (ReclamacaoSugestaoEntidade) reclamacaoSugestaoDAO.salvar(reclamacaoSugestaoEntidade);
 	}
 	
 	public List<ReclamacaoSugestaoEntidade> buscarTodasReclamacoesSugestoes() {
 		return reclamacaoSugestaoDAO.buscarTodasReclamacoesSugestoes();
+	}
+	
+	public ReclamacaoSugestaoEntidade buscarPorID(Long id) {
+		return reclamacaoSugestaoDAO.buscarPorID(id);
 	}
 
 	private boolean possuiEndereco(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade) {
