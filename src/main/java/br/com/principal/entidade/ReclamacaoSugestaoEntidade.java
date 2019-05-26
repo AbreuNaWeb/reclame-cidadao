@@ -13,6 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.principal.constante.CategoriasEnum;
+import br.com.principal.constante.StatusEnum;
 import br.com.principal.constante.TipoReclamacaoSugestaoEnum;
 import br.com.principal.tela.TelaUtil;
 
@@ -47,7 +48,7 @@ public class ReclamacaoSugestaoEntidade {
 	private String descricao;
 
 	@Column(name = "STATUS")
-	private Byte status;
+	private String status;
 
 	@Column(name = "CATEGORIA")
 	private String categoria;
@@ -59,6 +60,7 @@ public class ReclamacaoSugestaoEntidade {
 	public ReclamacaoSugestaoEntidade() {
 		this.tipo = TipoReclamacaoSugestaoEnum.RECLAMACAO.getDescricao();
 		this.dataCriacao = TelaUtil.converterCalendarParaDiaMesAno(Calendar.getInstance());
+		this.status = StatusEnum.ABERTA.getDescricao();
 		this.categoria = CategoriasEnum.TRANSPORTE_PUBLICO.getDescricao();
 		this.endereco = new EnderecoEntidade();
 	}
@@ -127,11 +129,11 @@ public class ReclamacaoSugestaoEntidade {
 		this.descricao = descricao;
 	}
 
-	public Byte getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
-	public void setStatus(Byte status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
