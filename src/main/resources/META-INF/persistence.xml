@@ -7,7 +7,6 @@
     <!-- Lista de entidades -->
     <class>br.com.principal.entidade.ReclamacaoSugestaoEntidade</class>
     <class>br.com.principal.entidade.EnderecoEntidade</class>
-    <class>br.com.principal.entidade.CidadaoEntidade</class>
     <properties>
       <!-- Propriedades JDBC -->
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>

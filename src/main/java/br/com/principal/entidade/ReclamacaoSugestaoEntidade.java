@@ -54,7 +54,7 @@ public class ReclamacaoSugestaoEntidade {
 	private String categoria;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_endereco")
+	@JoinColumn(name = "ID_ENDERECO")
 	private EnderecoEntidade endereco;
 
 	public ReclamacaoSugestaoEntidade() {

@@ -8,36 +8,36 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<!-- 	<h:outputStylesheet library="css" name="/default.css" /> Futuramente será utilizado -->
-<title>Cadastro - Reclame Cidadão</title>
+	<!-- 	<h:outputStylesheet library="css" name="/default.css" /> Futuramente será utilizado -->
+	<title>Cadastro - Reclame Cidadão</title>
 </h:head>
 
 <h:body style="display:flex;">
 	<h:form style=" margin:auto;">
 		<p:panel header="#{mensagem.login}" style="width:400px;">
-
+			<p:messages id="messages" closable="true" autoUpdate="true"/>
 			<h:panelGrid columns="2" cellpadding="10">
 				<h:panelGrid columns="2" cellpadding="5">
 					<p:outputLabel value="#{mensagem.cpf}" />
-					<p:inputText />
+					<p:inputText value="#{cadastroTela.pessoaRegistro.cpf}" />
 
 					<p:outputLabel value="#{mensagem.email}" />
-					<p:inputText />
-					
+					<p:inputText value="#{cadastroTela.pessoaRegistro.email}" />
+
 					<p:outputLabel value="#{mensagem.confirma_email}" />
-					<p:inputText />
-					
+					<p:inputText value="#{cadastroTela.pessoaRegistro.emailConfirmado}" />
+
 					<p:outputLabel value="#{mensagem.senha}" />
-					<p:inputText />
-					
+					<p:inputText value="#{cadastroTela.pessoaRegistro.senha}" />
+
 					<p:outputLabel value="#{mensagem.confirma_senha}" />
-					<p:inputText />
-					
+					<p:inputText value="#{cadastroTela.pessoaRegistro.senhaConfirmada}" />
+
 					<p:outputLabel value="#{mensagem.ddd_numero}" />
-					<p:inputText />
- 
-	            	<br />
-	            	<p:commandButton value="#{mensagem.acessar}" icon="ui-icon-gear"/>
+					<p:inputText value="#{cadastroTela.pessoaRegistro.dddCelular}" />
+
+					<br />
+					<p:commandButton value="#{mensagem.cadastrar}" icon="ui-icon-gear" actionListener="#{cadastroTela.cadastrar()}" />
 				</h:panelGrid>
 			</h:panelGrid>
 		</p:panel>
