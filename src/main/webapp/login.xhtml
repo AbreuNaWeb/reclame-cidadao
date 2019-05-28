@@ -25,13 +25,13 @@
 					</p:selectOneMenu>
 
 					<p:outputLabel value="#{mensagem.cpf}" />
-					<p:inputText />
+					<p:inputText value="#{loginTela.cpf}" />
 
 					<p:outputLabel value="#{mensagem.senha}" />
-					<p:password />
+					<p:password value="#{loginTela.senha}" />
  
 	            	<br />
-	            	<p:commandButton value="#{mensagem.acessar}" icon="ui-icon-gear"/>
+	            	<p:commandButton value="#{mensagem.acessar}" action="#{loginTela.realizarLogin()}" ajax="false" icon="ui-icon-gear"/>
 				</h:panelGrid>
 			</h:panelGrid>
 		</p:panel>

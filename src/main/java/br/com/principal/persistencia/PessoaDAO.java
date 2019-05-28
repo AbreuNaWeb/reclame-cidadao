@@ -20,4 +20,18 @@ public class PessoaDAO extends GenericoDAO {
 			return null;
 		}
 	}
+	
+	public PessoaEntidade buscarPorCpfESenhaEmMD5(Long cpf, String senhaEmMD5) {
+		EntityManager em = obtemEntityManager();
+		StringBuilder sql = new StringBuilder("SELECT * FROM Pessoa WHERE CPF = :CPF AND SENHA = :SENHA");
+		Query consulta = em.createNativeQuery(sql.toString(), PessoaEntidade.class);
+		consulta.setParameter("CPF", cpf);
+		consulta.setParameter("SENHA", senhaEmMD5);
+		
+		try {
+			return (PessoaEntidade) consulta.getSingleResult();
+		} catch (NoResultException excecao) {
+			return null;
+		}
+	}
 }

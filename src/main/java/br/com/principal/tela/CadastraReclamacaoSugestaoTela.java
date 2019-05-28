@@ -35,6 +35,7 @@ public class CadastraReclamacaoSugestaoTela {
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void cadastrar() {
+		SessaoUtil.obterUsuarioLogado(); //FIXME: remover
 		EnderecoEntidade endereco = novaReclamacaoSugestao.getEndereco();
 
 		if (informouEstado(endereco) && TelaUtil.campoNaoInformado(endereco.getRua(), endereco.getNumero(),

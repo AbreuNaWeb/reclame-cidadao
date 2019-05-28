@@ -1,11 +1,10 @@
 package br.com.principal.entidade;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -15,18 +14,16 @@ import br.com.principal.tela.TelaUtil;
 
 @Table(name = "Pessoa")
 @Entity
-public class PessoaEntidade {
+public class PessoaEntidade implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ID")
-	private Long id;
+	@Column(name = "CPF")
+	private Long cpf;
 	
 	@Column(name = "NOME")
 	private String nome;
-	
-	@Column(name = "CPF")
-	private Long cpf;
 	
 	@Column(name = "EMAIL")
 	private String email;
@@ -70,14 +67,6 @@ public class PessoaEntidade {
 		this.tipo = tipoPessoaEnum.getDescricao();
 	}
 	
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public String getNome() {
 		return nome;
 	}
