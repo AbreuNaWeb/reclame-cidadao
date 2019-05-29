@@ -20,22 +20,22 @@
 		<p:layoutUnit position="west" size="250">
 			<h:form>
 				<p:commandButton value="#{mensagem.alterar_dados}"
-					action="alterarDadosPessoais?faces-redirect=true"
+					action="/cidadao/alterarDadosPessoais?faces-redirect=true"
 					style="margin-right:20px; width:250px" />
 				<p:commandButton value="#{mensagem.cadastrar_agente}"
-					action="cadastrarAgente?faces-redirect=true"
+					action="/administrador/cadastrarAgente?faces-redirect=true"
 					style="margin-right:20px; width:250px" />
 				<p:commandButton value="#{mensagem.excluir_agente}"
-					action="pesquisarCidadao?faces-redirect=true"
+					action="/agente/pesquisarCidadao?faces-redirect=true"
 					style="margin-right:20px; width:250px" />
 				<p:commandButton value="#{mensagem.cadastrar_reclamacao_sugestao}"
-					action="cadastrarReclamacaoSugestao?faces-redirect=true"
+					action="/cidadao/cadastrarReclamacaoSugestao?faces-redirect=true"
 					style="margin-right:20px; width:250px" />
 				<p:commandButton value="#{mensagem.listar_reclamacoes_sugestoes}"
 					action="listarReclamacoesSugestoes?faces-redirect=true"
 					style="margin-right:20px; width:250px" />
 				<p:commandButton value="#{mensagem.pesquisar_cidadao}"
-					action="pesquisarCidadao?faces-redirect=true"
+					action="/agente/pesquisarCidadao?faces-redirect=true"
 					style="margin-right:20px; width:250px" />
 			</h:form>
 		</p:layoutUnit>

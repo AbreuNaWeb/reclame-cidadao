@@ -25,9 +25,15 @@ public class LoginTela implements Serializable {
 	
 	private String senha;
 	
+	private PessoaEntidade usuario;
+	
+	public boolean usuarioLogado() {
+		return this.usuario != null;
+	}
+	
 	public String realizarLogin() {
 		try {
-			final PessoaEntidade usuario = pessoaRegras.buscarPorCpfESenhaEmMD5(cpf, senha);
+			this.usuario = pessoaRegras.buscarPorCpfESenhaEmMD5(cpf, senha);
 
 			if (usuarioNaoEncontrado(usuario)) {
 				return retornarMensagemDeUsuarioNaoEncontrado();

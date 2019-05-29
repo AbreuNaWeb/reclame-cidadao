@@ -32,5 +32,16 @@
 	<welcome-file-list>
 		<welcome-file>home.xhtml</welcome-file>
 	</welcome-file-list>
+	
+	<filter>
+		<filter-name>FiltroLogin</filter-name>
+		<filter-class>br.com.principal.seguranca.FiltroLogin</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>FiltroLogin</filter-name>
+		<url-pattern>/admin/*</url-pattern>
+		<url-pattern>/agente/*</url-pattern>
+		<url-pattern>/cidadao/*</url-pattern>
+	</filter-mapping>
 
 </web-app>
