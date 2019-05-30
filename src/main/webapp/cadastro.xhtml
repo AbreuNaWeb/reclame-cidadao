@@ -19,25 +19,28 @@
 			<h:panelGrid columns="2" cellpadding="10">
 				<h:panelGrid columns="2" cellpadding="5">
 					<p:outputLabel value="#{mensagem.cpf}" />
-					<p:inputText value="#{cadastroTela.pessoaRegistro.cpf}" />
+					<p:inputText value="#{cadastroTela.usuarioRegistro.cpf}" />
+					
+					<p:outputLabel value="#{mensagem.nome}" />
+					<p:inputText value="#{cadastroTela.usuarioRegistro.nome}" />
 
 					<p:outputLabel value="#{mensagem.email}" />
-					<p:inputText value="#{cadastroTela.pessoaRegistro.email}" />
+					<p:inputText value="#{cadastroTela.usuarioRegistro.email}" />
 
 					<p:outputLabel value="#{mensagem.confirma_email}" />
-					<p:inputText value="#{cadastroTela.pessoaRegistro.emailConfirmado}" />
+					<p:inputText value="#{cadastroTela.usuarioRegistro.emailConfirmado}" />
 
 					<p:outputLabel value="#{mensagem.senha}" />
-					<p:inputText value="#{cadastroTela.pessoaRegistro.senha}" />
+					<p:inputText value="#{cadastroTela.usuarioRegistro.senha}" />
 
 					<p:outputLabel value="#{mensagem.confirma_senha}" />
-					<p:inputText value="#{cadastroTela.pessoaRegistro.senhaConfirmada}" />
+					<p:inputText value="#{cadastroTela.usuarioRegistro.senhaConfirmada}" />
 
 					<p:outputLabel value="#{mensagem.ddd_numero}" />
-					<p:inputText value="#{cadastroTela.pessoaRegistro.dddCelular}" />
+					<p:inputText value="#{cadastroTela.usuarioRegistro.dddCelular}" />
 
 					<br />
-					<p:commandButton value="#{mensagem.cadastrar}" icon="ui-icon-gear" actionListener="#{cadastroTela.cadastrar()}" />
+					<p:commandButton value="#{mensagem.cadastrar}" icon="ui-icon-gear" actionListener="#{cadastroTela.cadastrar()}" ajax="true" />
 				</h:panelGrid>
 			</h:panelGrid>
 		</p:panel>

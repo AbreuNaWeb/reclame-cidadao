@@ -10,14 +10,14 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 
-import br.com.principal.constante.MensagemDeErroEnum;
+import br.com.principal.constante.MensagemEnum;
 
 public class TelaUtil {
 	
 	TelaUtil() {
 	}
 
-	static void adicionarMensagemDeErro(MensagemDeErroEnum mensagemDeErroEnum) {
+	static void adicionarMensagemDeErro(MensagemEnum mensagemDeErroEnum) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, 
 				mensagemDeErroEnum.getDescricao(), null));
 	}
@@ -32,7 +32,7 @@ public class TelaUtil {
 					mensagem, null));
 			contextoExterno.redirect(url);
 		} catch (IOException excecao) {
-			adicionarMensagemDeErro(MensagemDeErroEnum.ERRO_FAVOR_RETORNAR_PAGINA_INICIAL);
+			adicionarMensagemDeErro(MensagemEnum.ERRO_FAVOR_RETORNAR_PAGINA_INICIAL);
 		}
 	}
 	

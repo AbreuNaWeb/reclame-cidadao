@@ -4,7 +4,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.principal.constante.MensagemDeErroEnum;
+import br.com.principal.constante.MensagemEnum;
 import br.com.principal.entidade.ReclamacaoSugestaoEntidade;
 import br.com.principal.regra.ReclamacaoSugestaoRegras;
 
@@ -23,7 +23,7 @@ public class DetalheReclamacaoSugestaoTela {
 		if (informadoID()) {
 			this.reclamacaoSugestaoRegistro = regra.buscarPorID(id);
 		} else {
-			TelaUtil.adicionarMensagemDeErro(MensagemDeErroEnum.ERRO_FAVOR_RETORNAR_PAGINA_INICIAL);
+			TelaUtil.adicionarMensagemDeErro(MensagemEnum.ERRO_FAVOR_RETORNAR_PAGINA_INICIAL);
 		}
 	}
 

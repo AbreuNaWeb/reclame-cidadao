@@ -1,11 +1,13 @@
 package br.com.principal.tela;
 
+import java.util.Calendar;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.principal.constante.MensagemDeErroEnum;
+import br.com.principal.constante.MensagemEnum;
 import br.com.principal.constante.TipoUsuarioEnum;
 import br.com.principal.entidade.UsuarioEntidade;
 import br.com.principal.regra.UsuarioRegras;
@@ -31,10 +33,12 @@ public class CadastroTela {
 
 		if (cpfAindaNaoCadastrado(usuarioPesquisada)) {
 			cadastrarCidadao();
+			TelaUtil.redirecionarParaOutraPagina("login.xhtml", MensagemEnum.GRAVOU_SUCESSO.getDescricao());
 		} else if (agenteAindaNaoSeCadastrou(usuarioPesquisada)) {
 			atualizarDadosDoAgente(usuarioPesquisada);
+			TelaUtil.redirecionarParaOutraPagina("login.xhtml", MensagemEnum.GRAVOU_SUCESSO.getDescricao());
 		} else {
-			TelaUtil.adicionarMensagemDeErro(MensagemDeErroEnum.CPF_JA_CADASTRADO);
+			TelaUtil.adicionarMensagemDeErro(MensagemEnum.CPF_JA_CADASTRADO);
 		}
 	}
 
@@ -44,11 +48,11 @@ public class CadastroTela {
 	}
 
 	private void atualizarDadosDoAgente(UsuarioEntidade usuarioPesquisada) {
-		usuarioPesquisada.setCpf(this.usuarioRegistro.getCpf());
 		usuarioPesquisada.setEmail(this.usuarioRegistro.getEmail());
 		usuarioPesquisada.setSenha(this.usuarioRegistro.getSenha());
 		usuarioPesquisada.setDdd(this.usuarioRegistro.getDdd());
 		usuarioPesquisada.setNumeroCelular(this.usuarioRegistro.getNumeroCelular());
+		usuarioPesquisada.setDataCadastro(TelaUtil.converterCalendarParaDiaMesAno(Calendar.getInstance()));
 		usuarioRegras.atualizar(usuarioPesquisada);
 	}
 

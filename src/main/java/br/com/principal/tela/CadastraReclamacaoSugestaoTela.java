@@ -12,7 +12,7 @@ import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
 
 import br.com.principal.constante.CategoriasEnum;
-import br.com.principal.constante.MensagemDeErroEnum;
+import br.com.principal.constante.MensagemEnum;
 import br.com.principal.constante.TipoReclamacaoSugestaoEnum;
 import br.com.principal.constante.UnidadeFederativaEnum;
 import br.com.principal.entidade.EnderecoEntidade;
@@ -35,16 +35,15 @@ public class CadastraReclamacaoSugestaoTela {
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void cadastrar() {
-		SessaoUtil.obterUsuarioLogado(); //FIXME: remover
 		EnderecoEntidade endereco = novaReclamacaoSugestao.getEndereco();
 
 		if (informouEstado(endereco) && TelaUtil.campoNaoInformado(endereco.getRua(), endereco.getNumero(),
 				endereco.getBairro(), endereco.getCidade())) {
-			TelaUtil.adicionarMensagemDeErro(MensagemDeErroEnum.INFORAR_CAMPOS_ENDERECO);
+			TelaUtil.adicionarMensagemDeErro(MensagemEnum.INFORAR_CAMPOS_ENDERECO);
 		} else {
 			novaReclamacaoSugestao.setHoraCriacao(TelaUtil.converterCalendarParaHoraMinuto(Calendar.getInstance()));
 			this.novaReclamacaoSugestao = regra.salvar(novaReclamacaoSugestao);
-			TelaUtil.redirecionarParaOutraPagina("detalheReclamacaoSugestao.xhtml?id=" + novaReclamacaoSugestao.getId(), "Gravou com sucesso");
+			TelaUtil.redirecionarParaOutraPagina("detalheReclamacaoSugestao.xhtml?id=" + novaReclamacaoSugestao.getId(), MensagemEnum.GRAVOU_SUCESSO.getDescricao());
 		}
 	}
 
