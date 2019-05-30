@@ -9,6 +9,10 @@ import br.com.principal.constante.TipoUsuarioEnum;
 @RequestScoped
 public class LayoutTela {
 	
+	public boolean usuarioNaoEstaLogado() {
+		return !usuarioEstaLogado();
+	}
+	
 	public boolean usuarioEstaLogado() {
 		return SessaoUtil.usuarioEstaLogado();
 	}

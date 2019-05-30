@@ -48,7 +48,7 @@ public class LoginTela implements Serializable {
 	public String deslogar() {
 		HttpSession session = SessaoUtil.obterSessao();
 		session.invalidate();
-		return "home";
+		return "/home.xhtml?faces-redirect=true";
 	}
 
 	private String tratarErroDesconhecido() {
