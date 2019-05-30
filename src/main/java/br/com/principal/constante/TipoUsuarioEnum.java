@@ -1,6 +1,6 @@
 package br.com.principal.constante;
 
-import br.com.principal.entidade.PessoaEntidade;
+import br.com.principal.entidade.UsuarioEntidade;
 
 public enum TipoUsuarioEnum {
 
@@ -18,7 +18,7 @@ public enum TipoUsuarioEnum {
 		return descricao;
 	}
 	
-	public boolean igual(PessoaEntidade pessoaRegistro) {
+	public boolean igual(UsuarioEntidade pessoaRegistro) {
 		return getDescricao().equals(pessoaRegistro.getTipo());
 	}
 }

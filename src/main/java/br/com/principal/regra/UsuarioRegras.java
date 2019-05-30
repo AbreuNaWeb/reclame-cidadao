@@ -8,32 +8,32 @@ import java.security.NoSuchAlgorithmException;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.principal.entidade.PessoaEntidade;
-import br.com.principal.persistencia.PessoaDAO;
+import br.com.principal.entidade.UsuarioEntidade;
+import br.com.principal.persistencia.UsuarioDAO;
 
 @Named
-public class PessoaRegras implements Serializable {
+public class UsuarioRegras implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
-	private PessoaDAO pessoaDAO;
+	private UsuarioDAO usuarioDAO;
 
-	public void salvar(PessoaEntidade pessoaEntidade) {
-		pessoaEntidade.setSenha(converterSenhaParaMD5(pessoaEntidade.getSenha()));
-		pessoaDAO.salvar(pessoaEntidade);
+	public void salvar(UsuarioEntidade usuarioEntidade) {
+		usuarioEntidade.setSenha(converterSenhaParaMD5(usuarioEntidade.getSenha()));
+		usuarioDAO.salvar(usuarioEntidade);
 	}
 	
-	public void atualizar(PessoaEntidade pessoaEntidade) {
-		pessoaDAO.atualizar(pessoaEntidade);
+	public void atualizar(UsuarioEntidade usuarioEntidade) {
+		usuarioDAO.atualizar(usuarioEntidade);
 	}
 	
-	public PessoaEntidade buscarPorCPF(Long cpf) {
-		return pessoaDAO.buscarPorCPF(cpf);
+	public UsuarioEntidade buscarPorCPF(Long cpf) {
+		return usuarioDAO.buscarPorCPF(cpf);
 	}
 	
-	public PessoaEntidade buscarPorCpfESenhaEmMD5(Long cpf, String senha) {
-		return pessoaDAO.buscarPorCpfESenhaEmMD5(cpf, converterSenhaParaMD5(senha));
+	public UsuarioEntidade buscarPorCpfESenhaEmMD5(Long cpf, String senha) {
+		return usuarioDAO.buscarPorCpfESenhaEmMD5(cpf, converterSenhaParaMD5(senha));
 	}
 	
 	private String converterSenhaParaMD5(String senha) {

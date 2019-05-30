@@ -7,65 +7,65 @@ import javax.inject.Named;
 
 import br.com.principal.constante.MensagemDeErroEnum;
 import br.com.principal.constante.TipoUsuarioEnum;
-import br.com.principal.entidade.PessoaEntidade;
-import br.com.principal.regra.PessoaRegras;
+import br.com.principal.entidade.UsuarioEntidade;
+import br.com.principal.regra.UsuarioRegras;
 
 @Named
 @RequestScoped
 public class CadastroTela {
 
 	@Inject
-	private PessoaRegras pessoaRegras;
+	private UsuarioRegras usuarioRegras;
 
-	private PessoaEntidade pessoaRegistro;
+	private UsuarioEntidade usuarioRegistro;
 
 	private boolean cpfDeAgente;
 	
 	@PostConstruct
 	public void inicializar() {
-		this.pessoaRegistro = new PessoaEntidade();
+		this.usuarioRegistro = new UsuarioEntidade();
 	}
 	
 	public void cadastrar() {
-		PessoaEntidade pessoaPesquisada = pessoaRegras.buscarPorCPF(this.pessoaRegistro.getCpf());
+		UsuarioEntidade usuarioPesquisada = usuarioRegras.buscarPorCPF(this.usuarioRegistro.getCpf());
 
-		if (cpfAindaNaoCadastrado(pessoaPesquisada)) {
+		if (cpfAindaNaoCadastrado(usuarioPesquisada)) {
 			cadastrarCidadao();
-		} else if (agenteAindaNaoSeCadastrou(pessoaPesquisada)) {
-			atualizarDadosDoAgente(pessoaPesquisada);
+		} else if (agenteAindaNaoSeCadastrou(usuarioPesquisada)) {
+			atualizarDadosDoAgente(usuarioPesquisada);
 		} else {
 			TelaUtil.adicionarMensagemDeErro(MensagemDeErroEnum.CPF_JA_CADASTRADO);
 		}
 	}
 
 	private void cadastrarCidadao() {
-		this.pessoaRegistro.setTipo(TipoUsuarioEnum.CIDADAO.getDescricao());
-		pessoaRegras.salvar(pessoaRegistro);
+		this.usuarioRegistro.setTipo(TipoUsuarioEnum.CIDADAO.getDescricao());
+		usuarioRegras.salvar(usuarioRegistro);
 	}
 
-	private void atualizarDadosDoAgente(PessoaEntidade pessoaPesquisada) {
-		pessoaPesquisada.setCpf(this.pessoaRegistro.getCpf());
-		pessoaPesquisada.setEmail(this.pessoaRegistro.getEmail());
-		pessoaPesquisada.setSenha(this.pessoaRegistro.getSenha());
-		pessoaPesquisada.setDdd(this.pessoaRegistro.getDdd());
-		pessoaPesquisada.setNumeroCelular(this.pessoaRegistro.getNumeroCelular());
-		pessoaRegras.atualizar(pessoaPesquisada);
+	private void atualizarDadosDoAgente(UsuarioEntidade usuarioPesquisada) {
+		usuarioPesquisada.setCpf(this.usuarioRegistro.getCpf());
+		usuarioPesquisada.setEmail(this.usuarioRegistro.getEmail());
+		usuarioPesquisada.setSenha(this.usuarioRegistro.getSenha());
+		usuarioPesquisada.setDdd(this.usuarioRegistro.getDdd());
+		usuarioPesquisada.setNumeroCelular(this.usuarioRegistro.getNumeroCelular());
+		usuarioRegras.atualizar(usuarioPesquisada);
 	}
 
-	private boolean agenteAindaNaoSeCadastrou(PessoaEntidade pessoaPesquisada) {
-		return TipoUsuarioEnum.AGENTE.igual(pessoaPesquisada) && pessoaPesquisada.getDataCadastro() == null;
+	private boolean agenteAindaNaoSeCadastrou(UsuarioEntidade usuarioPesquisada) {
+		return TipoUsuarioEnum.AGENTE.igual(usuarioPesquisada) && usuarioPesquisada.getDataCadastro() == null;
 	}
 
-	private boolean cpfAindaNaoCadastrado(PessoaEntidade pessoaPesquisada) {
-		return pessoaPesquisada == null;
+	private boolean cpfAindaNaoCadastrado(UsuarioEntidade usuarioPesquisada) {
+		return usuarioPesquisada == null;
 	}
 
-	public PessoaEntidade getPessoaRegistro() {
-		return pessoaRegistro;
+	public UsuarioEntidade getusuarioRegistro() {
+		return usuarioRegistro;
 	}
 	
-	public void setPessoaRegistro(PessoaEntidade pessoaRegistro) {
-		this.pessoaRegistro = pessoaRegistro;
+	public void setusuarioRegistro(UsuarioEntidade usuarioRegistro) {
+		this.usuarioRegistro = usuarioRegistro;
 	}
 	
 	public boolean isCpfDeAgente() {

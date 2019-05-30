@@ -11,7 +11,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.principal.entidade.PessoaEntidade;
+import br.com.principal.entidade.UsuarioEntidade;
 
 public class FiltroLogin implements Filter {
 
@@ -21,7 +21,7 @@ public class FiltroLogin implements Filter {
 	}
 
 	public void doFilter(ServletRequest requisicao, ServletResponse resposta, FilterChain filtro) throws IOException, ServletException {
-		PessoaEntidade usuario = (PessoaEntidade) ((HttpServletRequest) requisicao).getSession().getAttribute("usuarioLogado");
+		UsuarioEntidade usuario = (UsuarioEntidade) ((HttpServletRequest) requisicao).getSession().getAttribute("usuarioLogado");
 
 		if (usuario == null) {
 			String contextPath = ((HttpServletRequest) requisicao).getContextPath();

@@ -12,9 +12,9 @@ import javax.persistence.Transient;
 import br.com.principal.constante.TipoUsuarioEnum;
 import br.com.principal.tela.TelaUtil;
 
-@Table(name = "Pessoa")
+@Table(name = "Usuario")
 @Entity
-public class PessoaEntidade implements Serializable {
+public class UsuarioEntidade implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -58,11 +58,11 @@ public class PessoaEntidade implements Serializable {
 	@Transient
 	private String dddCelular;
 	
-	public PessoaEntidade() {
+	public UsuarioEntidade() {
 		this.dataCadastro = TelaUtil.converterCalendarParaDiaMesAno(Calendar.getInstance());
 	}
 	
-	public PessoaEntidade(TipoUsuarioEnum tipoPessoaEnum) {
+	public UsuarioEntidade(TipoUsuarioEnum tipoPessoaEnum) {
 		this.dataCadastro = TelaUtil.converterCalendarParaDiaMesAno(Calendar.getInstance());
 		this.tipo = tipoPessoaEnum.getDescricao();
 	}

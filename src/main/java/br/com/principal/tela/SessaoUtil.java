@@ -4,7 +4,7 @@ import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import br.com.principal.entidade.PessoaEntidade;
+import br.com.principal.entidade.UsuarioEntidade;
 
 public class SessaoUtil {
 
@@ -23,8 +23,8 @@ public class SessaoUtil {
 		return obterUsuarioLogado() != null;
 	}
 
-	public static PessoaEntidade obterUsuarioLogado() {
+	public static UsuarioEntidade obterUsuarioLogado() {
 		HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);
-		return (PessoaEntidade) sessao.getAttribute("usuarioLogado");
+		return (UsuarioEntidade) sessao.getAttribute("usuarioLogado");
 	}
 }

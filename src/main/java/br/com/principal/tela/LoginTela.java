@@ -9,8 +9,8 @@ import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 import br.com.principal.constante.MensagemDeErroEnum;
-import br.com.principal.entidade.PessoaEntidade;
-import br.com.principal.regra.PessoaRegras;
+import br.com.principal.entidade.UsuarioEntidade;
+import br.com.principal.regra.UsuarioRegras;
 
 @Named
 @SessionScoped
@@ -19,13 +19,13 @@ public class LoginTela implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private PessoaRegras pessoaRegras;
+	private UsuarioRegras usuarioRegras;
 	
 	private Long cpf;
 	
 	private String senha;
 	
-	private PessoaEntidade usuario;
+	private UsuarioEntidade usuario;
 	
 	public boolean usuarioLogado() {
 		return this.usuario != null;
@@ -33,7 +33,7 @@ public class LoginTela implements Serializable {
 	
 	public String realizarLogin() {
 		try {
-			this.usuario = pessoaRegras.buscarPorCpfESenhaEmMD5(cpf, senha);
+			this.usuario = usuarioRegras.buscarPorCpfESenhaEmMD5(cpf, senha);
 
 			if (usuarioNaoEncontrado(usuario)) {
 				return retornarMensagemDeUsuarioNaoEncontrado();
@@ -57,7 +57,7 @@ public class LoginTela implements Serializable {
 		return "";
 	}
 
-	private String redirecionarParaPaginaInicial(final PessoaEntidade usuario) {
+	private String redirecionarParaPaginaInicial(final UsuarioEntidade usuario) {
 		HttpSession session = SessaoUtil.obterSessao();
 		session.setAttribute("usuarioLogado", usuario);
 		return "/home.xhtml?faces-redirect=true";
@@ -69,7 +69,7 @@ public class LoginTela implements Serializable {
 		return "";
 	}
 
-	private boolean usuarioNaoEncontrado(final PessoaEntidade usuario) {
+	private boolean usuarioNaoEncontrado(final UsuarioEntidade usuario) {
 		return usuario == null;
 	}
 	
