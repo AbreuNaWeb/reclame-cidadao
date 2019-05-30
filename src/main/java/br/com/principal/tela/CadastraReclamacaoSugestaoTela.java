@@ -44,7 +44,7 @@ public class CadastraReclamacaoSugestaoTela {
 		} else {
 			novaReclamacaoSugestao.setHoraCriacao(TelaUtil.converterCalendarParaHoraMinuto(Calendar.getInstance()));
 			this.novaReclamacaoSugestao = regra.salvar(novaReclamacaoSugestao);
-			TelaUtil.redirecionarParaOutraPagina("cidadao/detalheReclamacaoSugestao.xhtml?id=" + novaReclamacaoSugestao.getId(), "Gravou com sucesso");
+			TelaUtil.redirecionarParaOutraPagina("detalheReclamacaoSugestao.xhtml?id=" + novaReclamacaoSugestao.getId(), "Gravou com sucesso");
 		}
 	}
 
