@@ -2,14 +2,15 @@ package br.com.principal.constante;
 
 import br.com.principal.entidade.PessoaEntidade;
 
-public enum TipoPessoaEnum {
+public enum TipoUsuarioEnum {
 
 	CIDADAO("Cidadão"),
-	AGENTE("Agente");
+	AGENTE("Agente"),
+	ADMINISTRADOR("Administrador");
 
 	private final String descricao;
 
-	private TipoPessoaEnum(String descricao) {
+	private TipoUsuarioEnum(String descricao) {
 		this.descricao = descricao;
 	}
 

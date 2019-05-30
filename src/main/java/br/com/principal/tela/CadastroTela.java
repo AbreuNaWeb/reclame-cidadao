@@ -6,7 +6,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.principal.constante.MensagemDeErroEnum;
-import br.com.principal.constante.TipoPessoaEnum;
+import br.com.principal.constante.TipoUsuarioEnum;
 import br.com.principal.entidade.PessoaEntidade;
 import br.com.principal.regra.PessoaRegras;
 
@@ -39,7 +39,7 @@ public class CadastroTela {
 	}
 
 	private void cadastrarCidadao() {
-		this.pessoaRegistro.setTipo(TipoPessoaEnum.CIDADAO.getDescricao());
+		this.pessoaRegistro.setTipo(TipoUsuarioEnum.CIDADAO.getDescricao());
 		pessoaRegras.salvar(pessoaRegistro);
 	}
 
@@ -53,7 +53,7 @@ public class CadastroTela {
 	}
 
 	private boolean agenteAindaNaoSeCadastrou(PessoaEntidade pessoaPesquisada) {
-		return TipoPessoaEnum.AGENTE.igual(pessoaPesquisada) && pessoaPesquisada.getDataCadastro() == null;
+		return TipoUsuarioEnum.AGENTE.igual(pessoaPesquisada) && pessoaPesquisada.getDataCadastro() == null;
 	}
 
 	private boolean cpfAindaNaoCadastrado(PessoaEntidade pessoaPesquisada) {

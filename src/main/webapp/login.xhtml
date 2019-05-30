@@ -8,8 +8,8 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<!-- 	<h:outputStylesheet library="css" name="/default.css" /> Futuramente será utilizado -->
-<title>Login - Reclame Cidadão</title>
+	<!-- 	<h:outputStylesheet library="css" name="/default.css" /> Futuramente será utilizado -->
+	<title>Login - Reclame Cidadão</title>
 </h:head>
 
 <h:body style="display:flex;">
@@ -18,22 +18,22 @@
 
 			<h:panelGrid columns="2" cellpadding="10">
 				<h:panelGrid columns="2" cellpadding="5">
-					<p:outputLabel value="#{mensagem.modalidade}" />
-					<p:selectOneMenu style="width:125px">
-						<f:selectItem itemLabel="#{mensagem.cidadao}" itemValue="1" />
-						<f:selectItem itemLabel="#{mensagem.agente}" itemValue="2" />
-					</p:selectOneMenu>
-
 					<p:outputLabel value="#{mensagem.cpf}" />
 					<p:inputText value="#{loginTela.cpf}" />
 
 					<p:outputLabel value="#{mensagem.senha}" />
 					<p:password value="#{loginTela.senha}" />
- 
-	            	<br />
-	            	<p:commandButton value="#{mensagem.acessar}" action="#{loginTela.realizarLogin()}" ajax="false" icon="ui-icon-gear"/>
+
 				</h:panelGrid>
 			</h:panelGrid>
+			<div align="center">
+				<h:panelGrid columns="2">
+					<p:commandButton value="#{mensagem.voltar}" action="home" />
+					<p:commandButton value="#{mensagem.acessar}"
+						action="#{loginTela.realizarLogin()}" ajax="false"
+						icon="ui-icon-gear" />
+				</h:panelGrid>
+			</div>
 		</p:panel>
 	</h:form>
 </h:body>

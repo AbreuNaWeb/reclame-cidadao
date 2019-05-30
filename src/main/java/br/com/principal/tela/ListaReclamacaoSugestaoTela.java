@@ -12,7 +12,7 @@ import br.com.principal.regra.ReclamacaoSugestaoRegras;
 
 @Named
 @RequestScoped
-public class ListaReclamacaoSugestao {
+public class ListaReclamacaoSugestaoTela {
 
 	@Inject
 	private ReclamacaoSugestaoRegras regra;

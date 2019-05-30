@@ -9,7 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import br.com.principal.constante.TipoPessoaEnum;
+import br.com.principal.constante.TipoUsuarioEnum;
 import br.com.principal.tela.TelaUtil;
 
 @Table(name = "Pessoa")
@@ -62,7 +62,7 @@ public class PessoaEntidade implements Serializable {
 		this.dataCadastro = TelaUtil.converterCalendarParaDiaMesAno(Calendar.getInstance());
 	}
 	
-	public PessoaEntidade(TipoPessoaEnum tipoPessoaEnum) {
+	public PessoaEntidade(TipoUsuarioEnum tipoPessoaEnum) {
 		this.dataCadastro = TelaUtil.converterCalendarParaDiaMesAno(Calendar.getInstance());
 		this.tipo = tipoPessoaEnum.getDescricao();
 	}

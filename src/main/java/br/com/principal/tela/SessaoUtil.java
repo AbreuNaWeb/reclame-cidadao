@@ -18,6 +18,10 @@ public class SessaoUtil {
 	public static HttpServletRequest obterRequisicao() {
 		return (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
 	}
+	
+	public static boolean usuarioEstaLogado() {
+		return obterUsuarioLogado() != null;
+	}
 
 	public static PessoaEntidade obterUsuarioLogado() {
 		HttpSession sessao = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false);

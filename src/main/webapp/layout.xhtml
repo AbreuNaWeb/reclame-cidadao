@@ -10,33 +10,43 @@
 <h:body>
 	<p:layout fullPage="true">
 
-		<p:layoutUnit position="north" size="90" header="#{mensagem.titulo_sistema}">
-			<p:commandButton value="#{mensagem.deslogar}"
-				style="margin-right:20px;" action="#{loginTela.deslogar()}" />
+		<p:layoutUnit position="north" size="90"
+			header="#{mensagem.titulo_sistema}">
+			<p:commandButton value="#{mensagem.login}" style="margin-right:20px;"
+				action="login?faces-redirect=true" />
 			<p:commandButton value="#{mensagem.registrar}"
 				style="margin-right:20px;" action="cadastro?faces-redirect=true" />
+			<p:commandButton value="#{mensagem.deslogar}"
+				style="margin-right:20px;"
+				rendered="#{layoutTela.usuarioEstaLogado()}"
+				action="#{loginTela.deslogar()}" />
 		</p:layoutUnit>
 
 		<p:layoutUnit position="west" size="250">
 			<h:form>
 				<p:commandButton value="#{mensagem.alterar_dados}"
-					action="/cidadao/alterarDadosPessoais?faces-redirect=true"
-					style="margin-right:20px; width:250px" />
+					action="/cidadao/alterarDadosPessoais"
+					style="margin-right:20px; width:250px"
+					rendered="#{layoutTela.isCidadao()}" />
 				<p:commandButton value="#{mensagem.cadastrar_agente}"
-					action="/administrador/cadastrarAgente?faces-redirect=true"
-					style="margin-right:20px; width:250px" />
+					action="/administrador/cadastrarAgente"
+					style="margin-right:20px; width:250px"
+					rendered="#{layoutTela.isAdministrador()}" />
 				<p:commandButton value="#{mensagem.excluir_agente}"
-					action="/agente/pesquisarCidadao?faces-redirect=true"
-					style="margin-right:20px; width:250px" />
+					action="/agente/pesquisarCidadao"
+					style="margin-right:20px; width:250px"
+					rendered="#{layoutTela.isAdministrador()}" />
 				<p:commandButton value="#{mensagem.cadastrar_reclamacao_sugestao}"
-					action="/cidadao/cadastrarReclamacaoSugestao?faces-redirect=true"
-					style="margin-right:20px; width:250px" />
+					action="/cidadao/cadastrarReclamacaoSugestao"
+					style="margin-right:20px; width:250px"
+					rendered="#{layoutTela.isCidadao()}" />
 				<p:commandButton value="#{mensagem.listar_reclamacoes_sugestoes}"
-					action="listarReclamacoesSugestoes?faces-redirect=true"
+					action="listarReclamacoesSugestoes"
 					style="margin-right:20px; width:250px" />
 				<p:commandButton value="#{mensagem.pesquisar_cidadao}"
-					action="/agente/pesquisarCidadao?faces-redirect=true"
-					style="margin-right:20px; width:250px" />
+					action="/agente/pesquisarCidadao"
+					style="margin-right:20px; width:250px"
+					rendered="#{layoutTela.isAgente()}" />
 			</h:form>
 		</p:layoutUnit>
 
