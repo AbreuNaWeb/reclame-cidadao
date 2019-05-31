@@ -31,6 +31,8 @@
 	<ui:composition template="/layout.xhtml">
 		<ui:param name="tituloParametro"
 			value="#{mensagem.titulo_cadastro_reclamacao_sugestao}" />
+		<ui:param name="caminhoGifCarregamentoParametro"
+			value="../imagens/gif_carregando.gif" />
 		<ui:define name="corpo">
 			<h:form>
 				<h:panelGrid columns="2">
@@ -50,7 +52,7 @@
 					<p:inputText
 						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.titulo}"
 						required="true" requiredMessage="#{mensagem.titulo_obrigatorio}">
-						<p:keyFilter regEx="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/"/>  
+						<p:keyFilter regEx="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/" />
 					</p:inputText>
 
 					<p:outputLabel value="#{mensagem.descricao}" />
@@ -71,31 +73,31 @@
 					<p:outputLabel value="#{mensagem.rua}" />
 					<p:inputText
 						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.rua}">
-						<p:keyFilter regEx="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/"/>
+						<p:keyFilter regEx="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/" />
 					</p:inputText>
 
 					<p:outputLabel value="#{mensagem.numero}" />
 					<p:inputText
 						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.numero}">
-						<p:keyFilter regEx="/[\d\.]/"/>
+						<p:keyFilter regEx="/[\d\.]/" />
 					</p:inputText>
 
 					<p:outputLabel value="#{mensagem.complemento}" />
 					<p:inputText
 						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.complemento}">
-						<p:keyFilter regEx="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/"/>
+						<p:keyFilter regEx="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/" />
 					</p:inputText>
 
 					<p:outputLabel value="#{mensagem.bairro}" />
 					<p:inputText
 						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.bairro}">
-						<p:keyFilter regEx="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/"/>
+						<p:keyFilter regEx="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/" />
 					</p:inputText>
 
 					<p:outputLabel value="#{mensagem.cidade}" />
 					<p:inputText
 						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.cidade}">
-						<p:keyFilter regEx="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/"/>
+						<p:keyFilter regEx="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/" />
 					</p:inputText>
 
 					<p:outputLabel value="#{mensagem.estado}" />

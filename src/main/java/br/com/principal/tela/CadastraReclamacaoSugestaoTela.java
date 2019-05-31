@@ -43,7 +43,7 @@ public class CadastraReclamacaoSugestaoTela {
 		} else {
 			novaReclamacaoSugestao.setHoraCriacao(TelaUtil.converterCalendarParaHoraMinuto(Calendar.getInstance()));
 			this.novaReclamacaoSugestao = regra.salvar(novaReclamacaoSugestao);
-			TelaUtil.redirecionarParaOutraPagina("detalheReclamacaoSugestao.xhtml?id=" + novaReclamacaoSugestao.getId(), MensagemEnum.GRAVOU_SUCESSO.getDescricao());
+			TelaUtil.redirecionarParaOutraPagina("detalheReclamacaoSugestao.xhtml?id=" + novaReclamacaoSugestao.getId(), MensagemEnum.CADASTROU_SUCESSO.getDescricao());
 		}
 	}
 

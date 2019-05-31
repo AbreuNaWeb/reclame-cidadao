@@ -1,16 +1,12 @@
 package br.com.principal.entidade;
 
 import java.io.Serializable;
-import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-
-import br.com.principal.constante.TipoUsuarioEnum;
-import br.com.principal.tela.TelaUtil;
 
 @Table(name = "Usuario")
 @Entity
@@ -57,15 +53,6 @@ public class UsuarioEntidade implements Serializable {
 	
 	@Transient
 	private String dddCelular;
-	
-	public UsuarioEntidade() {
-		this.dataCadastro = TelaUtil.converterCalendarParaDiaMesAno(Calendar.getInstance());
-	}
-	
-	public UsuarioEntidade(TipoUsuarioEnum tipoPessoaEnum) {
-		this.dataCadastro = TelaUtil.converterCalendarParaDiaMesAno(Calendar.getInstance());
-		this.tipo = tipoPessoaEnum.getDescricao();
-	}
 	
 	public String getNome() {
 		return nome;

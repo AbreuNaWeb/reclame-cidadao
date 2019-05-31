@@ -28,25 +28,28 @@
 </h:head>
 <h:body>
 	<ui:composition template="/layout.xhtml">
-		<ui:param name="tituloParametro" value="#{mensagem.titulo_alterar_dados_pessoais}" />
+		<ui:param name="tituloParametro"
+			value="#{mensagem.titulo_alterar_dados_pessoais}" />
+		<ui:param name="caminhoGifCarregamentoParametro"
+			value="../imagens/gif_carregando.gif" />
 		<ui:define name="corpo">
 			<h:form>
-				<h:panelGrid columns="2">				
+				<h:panelGrid columns="2">
 					<p:outputLabel value="#{mensagem.email}" />
 					<p:inputText />
-					
+
 					<p:outputLabel value="#{mensagem.confirma_email}" />
 					<p:inputText />
-					
+
 					<p:outputLabel value="#{mensagem.senha}" />
 					<p:inputText />
-					
+
 					<p:outputLabel value="#{mensagem.confirma_senha}" />
 					<p:inputText />
-					
+
 					<p:outputLabel value="#{mensagem.ddd_numero}" />
 					<p:inputText />
-					
+
 					<p:commandButton value="#{mensagem.atualizar}" />
 				</h:panelGrid>
 			</h:form>

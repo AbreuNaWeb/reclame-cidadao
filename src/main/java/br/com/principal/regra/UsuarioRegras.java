@@ -8,8 +8,10 @@ import java.security.NoSuchAlgorithmException;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.principal.constante.TipoUsuarioEnum;
 import br.com.principal.entidade.UsuarioEntidade;
 import br.com.principal.persistencia.UsuarioDAO;
+import br.com.principal.tela.TelaUtil;
 
 @Named
 public class UsuarioRegras implements Serializable {
@@ -19,12 +21,20 @@ public class UsuarioRegras implements Serializable {
 	@Inject
 	private UsuarioDAO usuarioDAO;
 
-	public void salvar(UsuarioEntidade usuarioEntidade) {
+	public void salvarCidadao(UsuarioEntidade usuarioEntidade) {
 		usuarioEntidade.setSenha(converterSenhaParaMD5(usuarioEntidade.getSenha()));
+		usuarioEntidade.setTipo(TipoUsuarioEnum.CIDADAO.getDescricao());
+		usuarioEntidade.setDataCadastro(TelaUtil.diaAtualEmFormatoDiaMesAno());
+		usuarioDAO.salvar(usuarioEntidade);
+	}
+	
+	public void salvarAgente(UsuarioEntidade usuarioEntidade) {
+		usuarioEntidade.setTipo(TipoUsuarioEnum.AGENTE.getDescricao());
 		usuarioDAO.salvar(usuarioEntidade);
 	}
 	
 	public void atualizar(UsuarioEntidade usuarioEntidade) {
+		usuarioEntidade.setSenha(converterSenhaParaMD5(usuarioEntidade.getSenha()));
 		usuarioDAO.atualizar(usuarioEntidade);
 	}
 	

@@ -7,7 +7,7 @@ public enum MensagemEnum {
 	CPF_JA_CADASTRADO("CPF informado já está cadastrado no sistema."),
 	LOGIN_ERRADO("E-mail e/ou senha incorretos. Tente novamente!"),
 	ERRO_REALIZAR_LOGIN("Ops! Ocoreu algum erro ao realizar login. Tente novamente!"),
-	GRAVOU_SUCESSO("Gravou com sucesso!");
+	CADASTROU_SUCESSO("Cadastrou com sucesso!");
 	
 	private final String descricao;
 	

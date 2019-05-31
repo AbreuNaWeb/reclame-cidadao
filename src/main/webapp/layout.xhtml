@@ -32,7 +32,7 @@
 					style="margin-right:20px; width:250px"
 					rendered="#{layoutTela.isCidadao()}" ajax="true" />
 				<p:commandButton value="#{mensagem.cadastrar_agente}"
-					action="/administrador/cadastrarAgente?faces-redirect=true"
+					action="/admin/cadastrarAgente?faces-redirect=true"
 					style="margin-right:20px; width:250px"
 					rendered="#{layoutTela.isAdministrador()}" ajax="true" />
 				<p:commandButton value="#{mensagem.excluir_agente}"
@@ -69,7 +69,7 @@
 
 	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
 		closable="false" resizable="false" showHeader="false">
-		<img src="imagens/gif_carregando.gif" alt="" />
+		<img src="#{caminhoGifCarregamentoParametro}" alt=""/>
 	</p:dialog>
 </h:body>
 </html>

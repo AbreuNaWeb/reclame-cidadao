@@ -30,14 +30,17 @@
 	<ui:composition template="layout.xhtml">
 		<ui:param name="tituloParametro"
 			value="#{mensagem.titulo_alterar_dados_pessoais}" />
+		<ui:param name="caminhoGifCarregamentoParametro"
+			value="imagens/gif_carregando.gif" />
 		<ui:define name="corpo">
 			<p:dataTable var="dado"
 				emptyMessage="#{mensagem.nenhum_registro_encontrado}"
 				value="#{listaReclamacaoSugestaoTela.listaReclamacaoSugestaoEntidade}">
 				<p:column headerText="#{mensagem.data_criacao}">
-					<h:link value="#{dado.dataCriacao}" outcome="detalheReclamacaoSugestao.xhtml" includeViewParams="true">
-        				<f:param name="id" value="#{dado.id}"/>
-        			</h:link>
+					<h:link value="#{dado.dataCriacao}"
+						outcome="detalheReclamacaoSugestao.xhtml" includeViewParams="true">
+						<f:param name="id" value="#{dado.id}" />
+					</h:link>
 				</p:column>
 
 				<p:column headerText="#{mensagem.titulo_label_tabela}">

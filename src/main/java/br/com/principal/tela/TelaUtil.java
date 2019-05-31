@@ -17,9 +17,9 @@ public class TelaUtil {
 	TelaUtil() {
 	}
 
-	static void adicionarMensagemDeErro(MensagemEnum mensagemDeErroEnum) {
+	static void adicionarMensagemDeErro(MensagemEnum mensagemEnum) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-				mensagemDeErroEnum.getDescricao(), null));
+				mensagemEnum.getDescricao(), null));
 	}
 	
 	static void redirecionarParaOutraPagina(String url, String mensagem) {
@@ -46,9 +46,9 @@ public class TelaUtil {
 		return false;
 	}
 	
-	public static String converterCalendarParaDiaMesAno(Calendar calendar) {
+	public static String diaAtualEmFormatoDiaMesAno() {
 		DateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
-		return formatoData.format(calendar.getTime());
+		return formatoData.format(Calendar.getInstance().getTime());
 	}
 	
 	static String converterCalendarParaHoraMinuto(Calendar calendar) {
