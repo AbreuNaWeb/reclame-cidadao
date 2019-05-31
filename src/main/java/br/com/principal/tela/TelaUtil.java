@@ -22,6 +22,11 @@ public class TelaUtil {
 				mensagemEnum.getDescricao(), null));
 	}
 	
+	static void adicionarMensagemDeInformacao(MensagemEnum mensagemEnum) {
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, 
+				mensagemEnum.getDescricao(), null));
+	}
+	
 	static void redirecionarParaOutraPagina(String url, String mensagem) {
 		try {
 			FacesContext contextoAtual = FacesContext.getCurrentInstance();

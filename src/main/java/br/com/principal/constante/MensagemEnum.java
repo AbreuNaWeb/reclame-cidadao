@@ -7,7 +7,12 @@ public enum MensagemEnum {
 	CPF_JA_CADASTRADO("CPF informado já está cadastrado no sistema."),
 	LOGIN_ERRADO("E-mail e/ou senha incorretos. Tente novamente!"),
 	ERRO_REALIZAR_LOGIN("Ops! Ocoreu algum erro ao realizar login. Tente novamente!"),
-	CADASTROU_SUCESSO("Cadastrou com sucesso!");
+	CADASTROU_SUCESSO("Cadastrou com sucesso!"),
+	CPF_INEXISTENTE("O CPF informado não está cadastrado no sistema."),
+	CPF_INFORMADO_NAO_PERTENCE_AGENTE("O CPF informado não pertence a um agente."),
+	RECLAMACAO_SUGESTAO_ABERTA_AGENTE("Existe reclamações e/ou sugestões abertas atríbuidas ao agente."),
+	ERRO_DESCONHECIDO("Opss! Aconteceu algum erro desconhecido."),
+	AGENTE_EXCLUIDO_SUCESSO("Agente excluído com sucesso!");
 	
 	private final String descricao;
 	

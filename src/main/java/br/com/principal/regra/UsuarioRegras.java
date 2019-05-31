@@ -8,8 +8,10 @@ import java.security.NoSuchAlgorithmException;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.principal.constante.MensagemEnum;
 import br.com.principal.constante.TipoUsuarioEnum;
 import br.com.principal.entidade.UsuarioEntidade;
+import br.com.principal.excecao.RegraValidacaoException;
 import br.com.principal.persistencia.UsuarioDAO;
 import br.com.principal.tela.TelaUtil;
 
@@ -20,6 +22,9 @@ public class UsuarioRegras implements Serializable {
 	
 	@Inject
 	private UsuarioDAO usuarioDAO;
+	
+	@Inject
+	private ReclamacaoSugestaoRegras reclamacaoSugestaoRegras;
 
 	public void salvarCidadao(UsuarioEntidade usuarioEntidade) {
 		usuarioEntidade.setSenha(converterSenhaParaMD5(usuarioEntidade.getSenha()));
@@ -33,6 +38,28 @@ public class UsuarioRegras implements Serializable {
 		usuarioDAO.salvar(usuarioEntidade);
 	}
 	
+	public UsuarioEntidade buscarAgenteParaExclusao(Long cpf) throws RegraValidacaoException {
+		UsuarioEntidade usuario = usuarioDAO.buscarPorCPF(cpf);
+
+		if (usuarioNaoEncontrado(usuario)) {
+			throw new RegraValidacaoException(MensagemEnum.CPF_INEXISTENTE);
+		}
+		
+		if (TipoUsuarioEnum.CIDADAO.igual(usuario) || TipoUsuarioEnum.ADMINISTRADOR.igual(usuario)) {
+			throw new RegraValidacaoException(MensagemEnum.CPF_INFORMADO_NAO_PERTENCE_AGENTE);
+		}
+		
+		if (reclamacaoSugestaoRegras.existeReclamacaoOuSugestaoAbertaVinculadaAoAgente(cpf)) {
+			throw new RegraValidacaoException(MensagemEnum.RECLAMACAO_SUGESTAO_ABERTA_AGENTE);
+		}
+		
+		return usuario;
+	}
+	
+	public void excluir(UsuarioEntidade usuario) {
+		usuarioDAO.excluir(usuario);
+	}
+
 	public void atualizar(UsuarioEntidade usuarioEntidade) {
 		usuarioEntidade.setSenha(converterSenhaParaMD5(usuarioEntidade.getSenha()));
 		usuarioDAO.atualizar(usuarioEntidade);
@@ -44,6 +71,10 @@ public class UsuarioRegras implements Serializable {
 	
 	public UsuarioEntidade buscarPorCpfESenhaEmMD5(Long cpf, String senha) {
 		return usuarioDAO.buscarPorCpfESenhaEmMD5(cpf, converterSenhaParaMD5(senha));
+	}
+	
+	private boolean usuarioNaoEncontrado(UsuarioEntidade usuario) {
+		return usuario == null;
 	}
 	
 	private String converterSenhaParaMD5(String senha) {

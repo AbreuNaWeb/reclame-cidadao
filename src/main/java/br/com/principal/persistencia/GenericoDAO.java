@@ -5,40 +5,64 @@ import javax.persistence.EntityManager;
 import br.com.principal.conexao.FabricaConexao;
 
 abstract class GenericoDAO {
-
+	
+	EntityManager gerenciadorDeEntidade;
+	
 	public Object salvar(Object entidade) {
-		EntityManager em = new FabricaConexao().buscar();
+		criarGerenciadorDeEntidadeSeNulo();
 
 		try {
-			em.getTransaction().begin();
-			em.persist(entidade);
-			em.getTransaction().commit();
+			gerenciadorDeEntidade.getTransaction().begin();
+			gerenciadorDeEntidade.persist(entidade);
+			gerenciadorDeEntidade.getTransaction().commit();
 		} catch (Exception erro) {
-			em.getTransaction().rollback();
+			gerenciadorDeEntidade.getTransaction().rollback();
 		} finally {
-			em.close();
+			gerenciadorDeEntidade.close();
 		}
 
 		return entidade;
 	}
 
 	public Object atualizar(Object entidade) {
-		EntityManager entityManager = new FabricaConexao().buscar();
+		criarGerenciadorDeEntidadeSeNulo();
 
 		try {
-			entityManager.getTransaction().begin();
-			entityManager.merge(entidade);
-			entityManager.getTransaction().commit();
+			gerenciadorDeEntidade.getTransaction().begin();
+			gerenciadorDeEntidade.merge(entidade);
+			gerenciadorDeEntidade.getTransaction().commit();
 		} catch (Exception erro) {
-			entityManager.getTransaction().rollback();
+			gerenciadorDeEntidade.getTransaction().rollback();
 		} finally {
-			entityManager.close();
+			gerenciadorDeEntidade.close();
+		}
+
+		return entidade;
+	}
+	
+	public Object excluir(Object entidade) {
+		criarGerenciadorDeEntidadeSeNulo();
+
+		try {
+			gerenciadorDeEntidade.getTransaction().begin();
+			gerenciadorDeEntidade.remove(entidade);
+			gerenciadorDeEntidade.flush();
+			gerenciadorDeEntidade.getTransaction().commit();
+		} catch (Exception erro) {
+			gerenciadorDeEntidade.getTransaction().rollback();
+		} finally {
+			gerenciadorDeEntidade.close();
 		}
 
 		return entidade;
 	}
 	
 	public EntityManager obtemEntityManager() {
-		return new FabricaConexao().buscar();
+		criarGerenciadorDeEntidadeSeNulo();
+		return gerenciadorDeEntidade;
+	}
+	
+	private void criarGerenciadorDeEntidadeSeNulo() {
+		this.gerenciadorDeEntidade = gerenciadorDeEntidade == null ? new FabricaConexao().buscar() : gerenciadorDeEntidade;
 	}
 }

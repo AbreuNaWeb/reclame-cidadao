@@ -56,6 +56,10 @@ public class ReclamacaoSugestaoEntidade {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_ENDERECO")
 	private EnderecoEntidade endereco;
+	
+	@OneToOne(orphanRemoval = true)
+	@JoinColumn(name = "CPF_AGENTE")
+	private UsuarioEntidade usuario;
 
 	public ReclamacaoSugestaoEntidade() {
 		this.tipo = TipoReclamacaoSugestaoEnum.RECLAMACAO.getDescricao();

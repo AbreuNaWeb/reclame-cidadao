@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import br.com.principal.constante.StatusEnum;
 import br.com.principal.entidade.ReclamacaoSugestaoEntidade;
 
 public class ReclamacaoSugestaoDAO extends GenericoDAO {
@@ -29,5 +30,17 @@ public class ReclamacaoSugestaoDAO extends GenericoDAO {
 		} catch (NoResultException excecao) {
 			return null;
 		}
+	}
+	
+	public boolean existeReclamacaoOuSugestaoAbertaVinculadaAoAgente(Long cpf) {
+		EntityManager em = obtemEntityManager();
+		StringBuilder sql = new StringBuilder("SELECT * FROM ReclamacaoSugestao WHERE ");
+		sql.append("CPF_AGENTE = :CPF AND ");
+		sql.append("STATUS = :STATUS_ABERTO");
+		Query consulta = em.createNativeQuery(sql.toString(), ReclamacaoSugestaoEntidade.class);
+		consulta.setParameter("CPF", cpf);
+		consulta.setParameter("STATUS_ABERTO", StatusEnum.ABERTA.getDescricao());
+		consulta.setMaxResults(1);
+		return !consulta.getResultList().isEmpty();
 	}
 }

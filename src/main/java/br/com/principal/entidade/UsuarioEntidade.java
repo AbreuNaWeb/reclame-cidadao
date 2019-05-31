@@ -17,19 +17,19 @@ public class UsuarioEntidade implements Serializable {
 	@Id
 	@Column(name = "CPF")
 	private Long cpf;
-	
+
 	@Column(name = "NOME")
 	private String nome;
-	
+
 	@Column(name = "EMAIL")
 	private String email;
-	
+
 	@Column(name = "SENHA")
 	private String senha;
-	
+
 	@Column(name = "TIPO")
 	private String tipo;
-	
+
 	@Column(name = "DDD")
 	private Byte ddd;
 
@@ -38,22 +38,22 @@ public class UsuarioEntidade implements Serializable {
 
 	@Column(name = "STATUS")
 	private String status;
-	
+
 	@Column(name = "SETOR")
 	private String setor;
-	
+
 	@Column(name = "DATA_CADASTRO")
 	private String dataCadastro;
-	
+
 	@Transient
 	private String emailConfirmado;
-	
+
 	@Transient
 	private String senhaConfirmada;
-	
+
 	@Transient
 	private String dddCelular;
-	
+
 	public String getNome() {
 		return nome;
 	}
@@ -110,6 +110,10 @@ public class UsuarioEntidade implements Serializable {
 		this.numeroCelular = numeroCelular;
 	}
 
+	public String getdddNumeroCelular() {
+		return "(" + ddd + ") " + numeroCelular;
+	}
+
 	public String getStatus() {
 		return status;
 	}
@@ -125,11 +129,11 @@ public class UsuarioEntidade implements Serializable {
 	public void setSetor(String setor) {
 		this.setor = setor;
 	}
-	
+
 	public String getDataCadastro() {
 		return dataCadastro;
 	}
-	
+
 	public void setDataCadastro(String dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
@@ -149,11 +153,11 @@ public class UsuarioEntidade implements Serializable {
 	public void setSenhaConfirmada(String senhaConfirmada) {
 		this.senhaConfirmada = senhaConfirmada;
 	}
-	
+
 	public String getDddCelular() {
 		return dddCelular;
 	}
-	
+
 	public void setDddCelular(String dddCelular) {
 		this.dddCelular = dddCelular;
 	}

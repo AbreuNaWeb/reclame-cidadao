@@ -32,6 +32,10 @@ public class ReclamacaoSugestaoRegras {
 	public ReclamacaoSugestaoEntidade buscarPorID(Long id) {
 		return reclamacaoSugestaoDAO.buscarPorID(id);
 	}
+	
+	public boolean existeReclamacaoOuSugestaoAbertaVinculadaAoAgente(Long cpf) {
+		return reclamacaoSugestaoDAO.existeReclamacaoOuSugestaoAbertaVinculadaAoAgente(cpf);
+	}
 
 	private boolean possuiEndereco(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade) {
 		return reclamacaoSugestaoEntidade.getEndereco() != null;
