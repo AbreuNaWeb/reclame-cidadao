@@ -26,10 +26,20 @@ public class UsuarioRegras implements Serializable {
 	@Inject
 	private ReclamacaoSugestaoRegras reclamacaoSugestaoRegras;
 
+	public UsuarioEntidade realizarLogin(Long cpfInformado, String senhaInformada) throws RegraValidacaoException {
+		UsuarioEntidade usuarioPesquisado = usuarioDAO.buscarPorCpfESenhaEmMD5(cpfInformado, converterSenhaParaMD5(senhaInformada));
+		
+		if (usuarioNaoEncontrado(usuarioPesquisado)) {
+			throw new RegraValidacaoException(MensagemEnum.LOGIN_ERRADO);
+		}
+		
+		return usuarioPesquisado;
+	}
+	
 	public void salvarAgente(UsuarioEntidade novoAgente) throws RegraValidacaoException {
 		UsuarioEntidade usuarioPesquisado = buscarPorCPF(novoAgente.getCpf());
 		
-		if (cpfNaoCadastrado(usuarioPesquisado)) {
+		if (usuarioNaoEncontrado(usuarioPesquisado)) {
 			novoAgente.setTipo(TipoUsuarioEnum.AGENTE.getDescricao());
 			usuarioDAO.salvar(novoAgente);
 		} else {
@@ -37,17 +47,10 @@ public class UsuarioRegras implements Serializable {
 		}
 	}
 	
-	public void salvarCidadao(UsuarioEntidade usuarioEntidade) {
-		usuarioEntidade.setSenha(converterSenhaParaMD5(usuarioEntidade.getSenha()));
-		usuarioEntidade.setTipo(TipoUsuarioEnum.CIDADAO.getDescricao());
-		usuarioEntidade.setDataCadastro(TelaUtil.diaAtualEmFormatoDiaMesAno());
-		usuarioDAO.salvar(usuarioEntidade);
-	}
-	
 	public UsuarioEntidade buscarAgenteParaAtualizarOuExcluir(Long cpf) throws RegraValidacaoException {
 		UsuarioEntidade usuario = usuarioDAO.buscarPorCPF(cpf);
 
-		if (cpfNaoCadastrado(usuario)) {
+		if (usuarioNaoEncontrado(usuario)) {
 			throw new RegraValidacaoException(MensagemEnum.CPF_INEXISTENTE);
 		}
 		
@@ -60,6 +63,13 @@ public class UsuarioRegras implements Serializable {
 		}
 		
 		return usuario;
+	}
+	
+	public void salvarCidadao(UsuarioEntidade usuarioEntidade) {
+		usuarioEntidade.setSenha(converterSenhaParaMD5(usuarioEntidade.getSenha()));
+		usuarioEntidade.setTipo(TipoUsuarioEnum.CIDADAO.getDescricao());
+		usuarioEntidade.setDataCadastro(TelaUtil.diaAtualEmFormatoDiaMesAno());
+		usuarioDAO.salvar(usuarioEntidade);
 	}
 	
 	public void excluir(UsuarioEntidade usuario) {
@@ -79,11 +89,7 @@ public class UsuarioRegras implements Serializable {
 		return usuarioDAO.buscarPorCPF(cpf);
 	}
 	
-	public UsuarioEntidade buscarPorCpfESenhaEmMD5(Long cpf, String senha) {
-		return usuarioDAO.buscarPorCpfESenhaEmMD5(cpf, converterSenhaParaMD5(senha));
-	}
-	
-	private boolean cpfNaoCadastrado(UsuarioEntidade usuarioPesquisado) {
+	private boolean usuarioNaoEncontrado(UsuarioEntidade usuarioPesquisado) {
 		return usuarioPesquisado == null;
 	}
 	

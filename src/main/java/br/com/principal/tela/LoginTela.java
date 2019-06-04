@@ -10,41 +10,39 @@ import javax.servlet.http.HttpSession;
 
 import br.com.principal.constante.MensagemEnum;
 import br.com.principal.entidade.UsuarioEntidade;
+import br.com.principal.excecao.RegraValidacaoException;
 import br.com.principal.regra.UsuarioRegras;
 
 @Named
 @SessionScoped
 public class LoginTela implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private UsuarioRegras usuarioRegras;
-	
+
 	private Long cpf;
-	
+
 	private String senha;
-	
+
 	private UsuarioEntidade usuario;
-	
-	public boolean usuarioLogado() {
-		return this.usuario != null;
-	}
-	
+
 	public String realizarLogin() {
 		try {
-			this.usuario = usuarioRegras.buscarPorCpfESenhaEmMD5(cpf, senha);
-
-			if (usuarioNaoEncontrado(usuario)) {
-				return retornarMensagemDeUsuarioNaoEncontrado();
-			}
-
+			this.usuario = usuarioRegras.realizarLogin(cpf, senha);
 			return redirecionarParaPaginaInicial(usuario);
-		} catch (Exception excecao) {
+		} catch (RegraValidacaoException erroValidacao) {
+			return retornarMensagemDeUsuarioNaoEncontrado();
+		} catch (Exception erroDesconhecido) {
 			return tratarErroDesconhecido();
 		}
 	}
-	
+
+	public boolean usuarioLogado() {
+		return this.usuario != null;
+	}
+
 	public String deslogar() {
 		HttpSession session = SessaoUtil.obterSessao();
 		session.invalidate();
@@ -57,7 +55,7 @@ public class LoginTela implements Serializable {
 		return "";
 	}
 
-	private String redirecionarParaPaginaInicial(final UsuarioEntidade usuario) {
+	private String redirecionarParaPaginaInicial(UsuarioEntidade usuario) {
 		HttpSession session = SessaoUtil.obterSessao();
 		session.setAttribute("usuarioLogado", usuario);
 		return "/home.xhtml?faces-redirect=true";
@@ -69,22 +67,18 @@ public class LoginTela implements Serializable {
 		return "";
 	}
 
-	private boolean usuarioNaoEncontrado(final UsuarioEntidade usuario) {
-		return usuario == null;
-	}
-	
 	public Long getCpf() {
 		return cpf;
 	}
-	
+
 	public void setCpf(Long cpf) {
 		this.cpf = cpf;
 	}
-	
+
 	public String getSenha() {
 		return senha;
 	}
-	
+
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
