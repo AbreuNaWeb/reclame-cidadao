@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import br.com.principal.constante.CategoriasEnum;
 import br.com.principal.constante.StatusEnum;
 import br.com.principal.constante.TipoReclamacaoSugestaoEnum;
-import br.com.principal.tela.TelaUtil;
+import br.com.principal.tela.util.TelaUtil;
 
 @Table(name = "ReclamacaoSugestao")
 @Entity

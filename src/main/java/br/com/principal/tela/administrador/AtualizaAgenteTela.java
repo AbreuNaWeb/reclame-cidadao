@@ -1,4 +1,4 @@
-package br.com.principal.tela;
+package br.com.principal.tela.administrador;
 
 import java.io.Serializable;
 
@@ -11,6 +11,7 @@ import br.com.principal.constante.MensagemEnum;
 import br.com.principal.entidade.UsuarioEntidade;
 import br.com.principal.excecao.RegraValidacaoException;
 import br.com.principal.regra.UsuarioRegras;
+import br.com.principal.tela.util.TelaUtil;
 
 @Named
 @ViewScoped

@@ -1,4 +1,4 @@
-package br.com.principal.tela;
+package br.com.principal.tela.cidadao;
 
 import java.util.Calendar;
 
@@ -18,6 +18,7 @@ import br.com.principal.constante.UnidadeFederativaEnum;
 import br.com.principal.entidade.EnderecoEntidade;
 import br.com.principal.entidade.ReclamacaoSugestaoEntidade;
 import br.com.principal.regra.ReclamacaoSugestaoRegras;
+import br.com.principal.tela.util.TelaUtil;
 
 @Named
 @RequestScoped

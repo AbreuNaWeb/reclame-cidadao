@@ -1,4 +1,4 @@
-package br.com.principal.tela;
+package br.com.principal.tela.visitante;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -9,6 +9,7 @@ import br.com.principal.constante.MensagemEnum;
 import br.com.principal.constante.TipoUsuarioEnum;
 import br.com.principal.entidade.UsuarioEntidade;
 import br.com.principal.regra.UsuarioRegras;
+import br.com.principal.tela.util.TelaUtil;
 
 @Named
 @RequestScoped

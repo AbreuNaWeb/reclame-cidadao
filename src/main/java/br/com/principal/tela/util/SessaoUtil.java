@@ -1,4 +1,4 @@
-package br.com.principal.tela;
+package br.com.principal.tela.util;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;

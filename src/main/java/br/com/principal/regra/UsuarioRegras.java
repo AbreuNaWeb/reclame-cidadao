@@ -13,7 +13,7 @@ import br.com.principal.constante.TipoUsuarioEnum;
 import br.com.principal.entidade.UsuarioEntidade;
 import br.com.principal.excecao.RegraValidacaoException;
 import br.com.principal.persistencia.UsuarioDAO;
-import br.com.principal.tela.TelaUtil;
+import br.com.principal.tela.util.TelaUtil;
 
 @Named
 public class UsuarioRegras implements Serializable {

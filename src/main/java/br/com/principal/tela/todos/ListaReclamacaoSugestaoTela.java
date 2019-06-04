@@ -1,4 +1,4 @@
-package br.com.principal.tela;
+package br.com.principal.tela.todos;
 
 import java.util.List;
 

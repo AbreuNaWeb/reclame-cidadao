@@ -1,4 +1,4 @@
-package br.com.principal.tela;
+package br.com.principal.tela.todos;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -7,6 +7,7 @@ import javax.inject.Named;
 import br.com.principal.constante.MensagemEnum;
 import br.com.principal.entidade.ReclamacaoSugestaoEntidade;
 import br.com.principal.regra.ReclamacaoSugestaoRegras;
+import br.com.principal.tela.util.TelaUtil;
 
 @Named
 @RequestScoped

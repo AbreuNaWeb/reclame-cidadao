@@ -1,4 +1,4 @@
-package br.com.principal.tela;
+package br.com.principal.tela.util;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -17,17 +17,17 @@ public class TelaUtil {
 	TelaUtil() {
 	}
 
-	static void adicionarMensagemDeErro(MensagemEnum mensagemEnum) {
+	public static void adicionarMensagemDeErro(MensagemEnum mensagemEnum) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, 
 				mensagemEnum.getDescricao(), null));
 	}
 	
-	static void adicionarMensagemDeInformacao(MensagemEnum mensagemEnum) {
+	public static void adicionarMensagemDeInformacao(MensagemEnum mensagemEnum) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, 
 				mensagemEnum.getDescricao(), null));
 	}
 	
-	static void redirecionarParaOutraPagina(String url, String mensagem) {
+	public static void redirecionarParaOutraPagina(String url, String mensagem) {
 		try {
 			FacesContext contextoAtual = FacesContext.getCurrentInstance();
 			ExternalContext contextoExterno = contextoAtual.getExternalContext();
@@ -41,7 +41,7 @@ public class TelaUtil {
 		}
 	}
 	
-	static boolean campoNaoInformado(Object... campos) {
+	public static boolean campoNaoInformado(Object... campos) {
 		for (Object campo : campos) {
 			if (campo == null) {
 				return true;
@@ -56,7 +56,7 @@ public class TelaUtil {
 		return formatoData.format(Calendar.getInstance().getTime());
 	}
 	
-	static String converterCalendarParaHoraMinuto(Calendar calendar) {
+	public static String converterCalendarParaHoraMinuto(Calendar calendar) {
 		DateFormat formatoData = new SimpleDateFormat("HH:mm");
 		return formatoData.format(calendar.getTime());
 	}

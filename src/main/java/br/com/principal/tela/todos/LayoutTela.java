@@ -1,9 +1,10 @@
-package br.com.principal.tela;
+package br.com.principal.tela.todos;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Named;
 
 import br.com.principal.constante.TipoUsuarioEnum;
+import br.com.principal.tela.util.SessaoUtil;
 
 @Named
 @RequestScoped
