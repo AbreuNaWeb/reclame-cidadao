@@ -56,13 +56,13 @@
 
 					<p:outputLabel value="#{mensagem.ddd_numero}" />
 					<p:outputLabel
-						value="#{excluirAgenteTela.agenteParaExcluir.dddNumeroCelular}" />
+						value="#{excluirAgenteTela.agenteParaExcluir.dddCelular}" />
 				</h:panelGrid>
 				<br />
 				<h:panelGrid columns="2">
 					<p:commandButton value="#{mensagem.pesquisar}"
 						actionListener="#{excluirAgenteTela.pesquisarAgenteParaExcluir()}"
-						update="@form" process="@form" />
+						update="@form" />
 					<p:commandButton value="#{mensagem.excluir}"
 						actionListener="#{excluirAgenteTela.excluir()}" update="@form"
 						rendered="#{not empty excluirAgenteTela.agenteParaExcluir}"  />
