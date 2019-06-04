@@ -46,7 +46,7 @@ public class CadastroTela {
 		usuarioPesquisada.setDdd(this.usuarioRegistro.getDdd());
 		usuarioPesquisada.setNumeroCelular(this.usuarioRegistro.getNumeroCelular());
 		usuarioPesquisada.setDataCadastro(TelaUtil.diaAtualEmFormatoDiaMesAno());
-		usuarioRegras.atualizar(usuarioPesquisada);
+		usuarioRegras.atualizarComConversaoDeSenhaParaMD5(usuarioPesquisada);
 	}
 
 	private boolean agenteAindaNaoSeCadastrou(UsuarioEntidade usuarioPesquisada) {

@@ -17,8 +17,6 @@ abstract class GenericoDAO {
 			gerenciadorDeEntidade.getTransaction().commit();
 		} catch (Exception erro) {
 			gerenciadorDeEntidade.getTransaction().rollback();
-		} finally {
-			gerenciadorDeEntidade.close();
 		}
 
 		return entidade;
@@ -33,8 +31,6 @@ abstract class GenericoDAO {
 			gerenciadorDeEntidade.getTransaction().commit();
 		} catch (Exception erro) {
 			gerenciadorDeEntidade.getTransaction().rollback();
-		} finally {
-			gerenciadorDeEntidade.close();
 		}
 
 		return entidade;
@@ -50,10 +46,8 @@ abstract class GenericoDAO {
 			gerenciadorDeEntidade.getTransaction().commit();
 		} catch (Exception erro) {
 			gerenciadorDeEntidade.getTransaction().rollback();
-		} finally {
-			gerenciadorDeEntidade.close();
 		}
-
+		
 		return entidade;
 	}
 	

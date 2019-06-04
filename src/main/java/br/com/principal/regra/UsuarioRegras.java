@@ -44,7 +44,7 @@ public class UsuarioRegras implements Serializable {
 		usuarioDAO.salvar(usuarioEntidade);
 	}
 	
-	public UsuarioEntidade buscarAgenteParaExclusao(Long cpf) throws RegraValidacaoException {
+	public UsuarioEntidade buscarAgenteParaAtualizarOuExcluir(Long cpf) throws RegraValidacaoException {
 		UsuarioEntidade usuario = usuarioDAO.buscarPorCPF(cpf);
 
 		if (cpfNaoCadastrado(usuario)) {
@@ -65,8 +65,12 @@ public class UsuarioRegras implements Serializable {
 	public void excluir(UsuarioEntidade usuario) {
 		usuarioDAO.excluir(usuario);
 	}
-
-	public void atualizar(UsuarioEntidade usuarioEntidade) {
+	
+	public void atualizar(UsuarioEntidade usuario) {
+		usuarioDAO.atualizar(usuario);
+	}
+	
+	public void atualizarComConversaoDeSenhaParaMD5(UsuarioEntidade usuarioEntidade) {
 		usuarioEntidade.setSenha(converterSenhaParaMD5(usuarioEntidade.getSenha()));
 		usuarioDAO.atualizar(usuarioEntidade);
 	}

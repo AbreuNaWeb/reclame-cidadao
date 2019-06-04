@@ -6,6 +6,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.principal.constante.CategoriasEnum;
 import br.com.principal.constante.MensagemEnum;
 import br.com.principal.entidade.UsuarioEntidade;
 import br.com.principal.excecao.RegraValidacaoException;
@@ -13,38 +14,46 @@ import br.com.principal.regra.UsuarioRegras;
 
 @Named
 @ViewScoped
-public class ExcluirAgenteTela implements Serializable {
+public class AtualizaAgenteTela implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private UsuarioRegras usuarioRegras;
 
-	private UsuarioEntidade agenteParaExcluir;
+	private UsuarioEntidade agenteParaAtualizar;
 
 	private Long cpfInformado;
 
-	public void pesquisarAgenteParaExcluir() {
+	public void pesquisarAgenteParaAtualizar() {
 		try {
-			this.agenteParaExcluir = usuarioRegras.buscarAgenteParaAtualizarOuExcluir(cpfInformado);
+			this.agenteParaAtualizar = usuarioRegras.buscarAgenteParaAtualizarOuExcluir(cpfInformado);
 		} catch (RegraValidacaoException erroValidacao) {
-			this.agenteParaExcluir = null;
+			this.agenteParaAtualizar = null;
 			TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemEnum());
 		} catch (Exception erroDesconhecido) {
-			this.agenteParaExcluir = null;
+			this.agenteParaAtualizar = null;
 			TelaUtil.adicionarMensagemDeErro(MensagemEnum.ERRO_DESCONHECIDO);
 		}
 	}
 
-	public void excluir() {
+	public void atualizar() {
 		try {
-			usuarioRegras.excluir(agenteParaExcluir);
+			usuarioRegras.atualizar(agenteParaAtualizar);
 			this.cpfInformado = null;
-			this.agenteParaExcluir = null;
-			TelaUtil.adicionarMensagemDeInformacao(MensagemEnum.AGENTE_EXCLUIDO_SUCESSO);
+			this.agenteParaAtualizar = null;
+			TelaUtil.adicionarMensagemDeInformacao(MensagemEnum.AGENTE_ATUALIZADO_SUCESSO);
 		} catch (Exception erroDesconhecido) {
 			TelaUtil.adicionarMensagemDeErro(MensagemEnum.ERRO_DESCONHECIDO);
 		}
+	}
+
+	public CategoriasEnum[] categorias() {
+		return CategoriasEnum.values();
+	}
+
+	public UsuarioEntidade getAgenteParaAtualizar() {
+		return agenteParaAtualizar;
 	}
 
 	public Long getCpfInformado() {
@@ -53,9 +62,5 @@ public class ExcluirAgenteTela implements Serializable {
 
 	public void setCpfInformado(Long cpfInformado) {
 		this.cpfInformado = cpfInformado;
-	}
-
-	public UsuarioEntidade getAgenteParaExcluir() {
-		return agenteParaExcluir;
 	}
 }
