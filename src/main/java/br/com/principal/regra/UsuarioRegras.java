@@ -26,6 +26,17 @@ public class UsuarioRegras implements Serializable {
 	@Inject
 	private ReclamacaoSugestaoRegras reclamacaoSugestaoRegras;
 
+	public void salvarAgente(UsuarioEntidade novoAgente) throws RegraValidacaoException {
+		UsuarioEntidade usuarioPesquisado = buscarPorCPF(novoAgente.getCpf());
+		
+		if (cpfNaoCadastrado(usuarioPesquisado)) {
+			novoAgente.setTipo(TipoUsuarioEnum.AGENTE.getDescricao());
+			usuarioDAO.salvar(novoAgente);
+		} else {
+			throw new RegraValidacaoException(MensagemEnum.CPF_JA_CADASTRADO);
+		}
+	}
+	
 	public void salvarCidadao(UsuarioEntidade usuarioEntidade) {
 		usuarioEntidade.setSenha(converterSenhaParaMD5(usuarioEntidade.getSenha()));
 		usuarioEntidade.setTipo(TipoUsuarioEnum.CIDADAO.getDescricao());
@@ -33,15 +44,10 @@ public class UsuarioRegras implements Serializable {
 		usuarioDAO.salvar(usuarioEntidade);
 	}
 	
-	public void salvarAgente(UsuarioEntidade usuarioEntidade) {
-		usuarioEntidade.setTipo(TipoUsuarioEnum.AGENTE.getDescricao());
-		usuarioDAO.salvar(usuarioEntidade);
-	}
-	
 	public UsuarioEntidade buscarAgenteParaExclusao(Long cpf) throws RegraValidacaoException {
 		UsuarioEntidade usuario = usuarioDAO.buscarPorCPF(cpf);
 
-		if (usuarioNaoEncontrado(usuario)) {
+		if (cpfNaoCadastrado(usuario)) {
 			throw new RegraValidacaoException(MensagemEnum.CPF_INEXISTENTE);
 		}
 		
@@ -73,8 +79,8 @@ public class UsuarioRegras implements Serializable {
 		return usuarioDAO.buscarPorCpfESenhaEmMD5(cpf, converterSenhaParaMD5(senha));
 	}
 	
-	private boolean usuarioNaoEncontrado(UsuarioEntidade usuario) {
-		return usuario == null;
+	private boolean cpfNaoCadastrado(UsuarioEntidade usuarioPesquisado) {
+		return usuarioPesquisado == null;
 	}
 	
 	private String converterSenhaParaMD5(String senha) {
