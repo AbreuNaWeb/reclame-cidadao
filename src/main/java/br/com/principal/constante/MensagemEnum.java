@@ -13,7 +13,8 @@ public enum MensagemEnum {
 	RECLAMACAO_SUGESTAO_ABERTA_AGENTE("Existe reclamações e/ou sugestões abertas atríbuidas ao agente."),
 	ERRO_DESCONHECIDO("Opss! Aconteceu algum erro desconhecido."),
 	AGENTE_EXCLUIDO_SUCESSO("Agente excluído com sucesso!"),
-	AGENTE_ATUALIZADO_SUCESSO("Agente atualizado com sucesso!");
+	AGENTE_ATUALIZADO_SUCESSO("Agente atualizado com sucesso!"),
+	DADOS_ATUALIZADOS_SUCESSO("Dados atualizados com sucesso.");
 	
 	private final String descricao;
 	

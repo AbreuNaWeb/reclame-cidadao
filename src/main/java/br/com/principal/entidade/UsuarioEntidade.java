@@ -30,11 +30,8 @@ public class UsuarioEntidade implements Serializable {
 	@Column(name = "TIPO")
 	private String tipo;
 
-	@Column(name = "DDD")
-	private Byte ddd;
-
-	@Column(name = "NUMERO_CELULAR")
-	private Integer numeroCelular;
+	@Column(name = "DDD_CELULAR")
+	private Long dddCelular;
 
 	@Column(name = "STATUS")
 	private String status;
@@ -51,8 +48,13 @@ public class UsuarioEntidade implements Serializable {
 	@Transient
 	private String senhaConfirmada;
 
-	@Transient
-	private String dddCelular;
+	public Long getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(Long cpf) {
+		this.cpf = cpf;
+	}
 
 	public String getNome() {
 		return nome;
@@ -60,14 +62,6 @@ public class UsuarioEntidade implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-
-	public Long getCpf() {
-		return cpf;
-	}
-
-	public void setCpf(Long cpf) {
-		this.cpf = cpf;
 	}
 
 	public String getEmail() {
@@ -94,24 +88,12 @@ public class UsuarioEntidade implements Serializable {
 		this.tipo = tipo;
 	}
 
-	public Byte getDdd() {
-		return ddd;
+	public Long getDddCelular() {
+		return dddCelular;
 	}
 
-	public void setDdd(Byte ddd) {
-		this.ddd = ddd;
-	}
-
-	public Integer getNumeroCelular() {
-		return numeroCelular;
-	}
-
-	public void setNumeroCelular(Integer numeroCelular) {
-		this.numeroCelular = numeroCelular;
-	}
-
-	public String getdddNumeroCelular() {
-		return "(" + ddd + ") " + numeroCelular;
+	public void setDddCelular(Long dddCelular) {
+		this.dddCelular = dddCelular;
 	}
 
 	public String getStatus() {
@@ -152,13 +134,5 @@ public class UsuarioEntidade implements Serializable {
 
 	public void setSenhaConfirmada(String senhaConfirmada) {
 		this.senhaConfirmada = senhaConfirmada;
-	}
-
-	public String getDddCelular() {
-		return dddCelular;
-	}
-
-	public void setDddCelular(String dddCelular) {
-		this.dddCelular = dddCelular;
 	}
 }

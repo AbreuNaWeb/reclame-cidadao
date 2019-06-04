@@ -34,23 +34,52 @@
 			value="../imagens/gif_carregando.gif" />
 		<ui:define name="corpo">
 			<h:form>
+				<p:messages id="mensagens" autoUpdate="true" />
 				<h:panelGrid columns="2">
 					<p:outputLabel value="#{mensagem.email}" />
-					<p:inputText />
+					<p:inputText
+						value="#{alteraDadosPessoaisTela.usuarioLogadoAtualizado.email}"
+						required="true"
+						requiredMessage="#{mensagem.campo_email_obrigatorio}" validatorMessage="#{mensagem.email_invalido}">
+						<f:validateRegex
+							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					</p:inputText>
 
 					<p:outputLabel value="#{mensagem.confirma_email}" />
-					<p:inputText />
+					<p:inputText
+						value="#{alteraDadosPessoaisTela.usuarioLogadoAtualizado.emailConfirmado}"
+						required="true"
+						requiredMessage="#{mensagem.campo_confirma_email_obrigatorio}" validatorMessage="#{mensagem.email_invalido}">
+						<f:validateRegex
+							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					</p:inputText>
 
 					<p:outputLabel value="#{mensagem.senha}" />
-					<p:inputText />
+					<p:password
+						value="#{alteraDadosPessoaisTela.usuarioLogadoAtualizado.senha}"
+						feedback="true" promptLabel="#{mensagem.senha_insira}"
+						weakLabel="#{mensagem.senha_fraca}"
+						goodLabel="#{mensagem.senha_medio}"
+						strongLabel="#{mensagem.senha_forte}" match="confirmaSenha"
+						required="true"
+						requiredMessage="#{mensagem.campo_senha_obrigatorio}"
+						validatorMessage="#{mensagem.senha_nao_coicidem}" />
 
 					<p:outputLabel value="#{mensagem.confirma_senha}" />
-					<p:inputText />
+					<p:password id="confirmaSenha"
+						value="#{alteraDadosPessoaisTela.usuarioLogadoAtualizado.senhaConfirmada}"
+						required="true"
+						requiredMessage="#{mensagem.campo_confirma_senha_obrigatorio}" />
 
 					<p:outputLabel value="#{mensagem.ddd_numero}" />
-					<p:inputText />
+					<p:inputMask
+						value="#{alteraDadosPessoaisTela.usuarioLogadoAtualizado.dddCelular}"
+						mask="(99) 99999-9999" converter="conversorDddCelular"
+						required="true"
+						requiredMessage="#{mensagem.campo_ddd_numero_celular_obrigatorio}" />
 
-					<p:commandButton value="#{mensagem.atualizar}" />
+					<p:commandButton value="#{mensagem.atualizar}"
+						action="#{alteraDadosPessoaisTela.atualizar()}" update="@form" />
 				</h:panelGrid>
 			</h:form>
 		</ui:define>
