@@ -8,7 +8,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.principal.entidade.ReclamacaoSugestaoEntidade;
-import br.com.principal.excecao.RegraValidacaoException;
 import br.com.principal.persistencia.ReclamacaoSugestaoDAO;
 import br.com.principal.tela.util.TelaUtil;
 
@@ -23,8 +22,8 @@ public class ReclamacaoSugestaoRegras implements Serializable {
 	@Inject
 	private EnderecoRegras enderecoRegras;
 
-	public ReclamacaoSugestaoEntidade salvar(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade) throws RegraValidacaoException {
-		reclamacaoSugestaoEntidade.setEndereco(enderecoRegras.salvar(reclamacaoSugestaoEntidade.getEndereco()));
+	public ReclamacaoSugestaoEntidade salvar(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade, boolean informouEndereco) {
+		verificarEndereco(reclamacaoSugestaoEntidade, informouEndereco);
 		reclamacaoSugestaoEntidade.setHoraCriacao(TelaUtil.converterCalendarParaHoraMinuto(Calendar.getInstance()));
 		return (ReclamacaoSugestaoEntidade) reclamacaoSugestaoDAO.salvar(reclamacaoSugestaoEntidade);
 	}
@@ -39,5 +38,13 @@ public class ReclamacaoSugestaoRegras implements Serializable {
 
 	public boolean existeReclamacaoOuSugestaoAbertaVinculadaAoAgente(Long cpf) {
 		return reclamacaoSugestaoDAO.existeReclamacaoOuSugestaoAbertaVinculadaAoAgente(cpf);
+	}
+
+	private void verificarEndereco(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade, boolean informouEndereco) {
+		if (informouEndereco) {
+			reclamacaoSugestaoEntidade.setEndereco(enderecoRegras.salvar(reclamacaoSugestaoEntidade.getEndereco()));
+		} else {
+			reclamacaoSugestaoEntidade.setEndereco(null);
+		}
 	}
 }

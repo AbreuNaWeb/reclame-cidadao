@@ -44,7 +44,7 @@ public class ReclamacaoSugestaoEntidade {
 	@Column(name = "TITULO")
 	private String titulo;
 
-	@Column(name = "DESCRICAO")
+	@Column(name = "DESCRICAO", length = 300)
 	private String descricao;
 
 	@Column(name = "STATUS")

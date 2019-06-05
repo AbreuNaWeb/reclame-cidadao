@@ -33,8 +33,7 @@ public class TelaUtil {
 			ExternalContext contextoExterno = contextoAtual.getExternalContext();
 			Flash memoria = contextoExterno.getFlash();
 			memoria.setKeepMessages(true);
-			contextoAtual.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, 
-					mensagem, null));
+			contextoAtual.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, mensagem, null));
 			contextoExterno.redirect(url);
 		} catch (IOException excecao) {
 			adicionarMensagemDeErro(MensagemEnum.ERRO_FAVOR_RETORNAR_PAGINA_INICIAL);
