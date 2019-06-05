@@ -12,6 +12,7 @@ import br.com.principal.constante.MensagemEnum;
 import br.com.principal.constante.TipoReclamacaoSugestaoEnum;
 import br.com.principal.constante.UnidadeFederativaEnum;
 import br.com.principal.entidade.ReclamacaoSugestaoEntidade;
+import br.com.principal.excecao.RegraValidacaoException;
 import br.com.principal.regra.ReclamacaoSugestaoRegras;
 import br.com.principal.tela.util.SessaoUtil;
 import br.com.principal.tela.util.TelaUtil;
@@ -28,16 +29,33 @@ public class CadastraReclamacaoSugestaoTela implements Serializable {
 	private ReclamacaoSugestaoEntidade novaReclamacaoSugestao;
 	
 	private boolean informarEndereco;
+	
+	private boolean naoExedeuLimiteDePublicacoes;
 
 	@PostConstruct
 	public void inicializar() {
 		this.novaReclamacaoSugestao = new ReclamacaoSugestaoEntidade();
+	}
+	
+	public void verificarSeAtingiuLimite() {
+		try {
+			regra.verificarSeExedeuLimites(SessaoUtil.obterUsuarioLogado());
+			this.naoExedeuLimiteDePublicacoes = true;
+		} catch (RegraValidacaoException erroValidacao) {
+			TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemEnum());
+			this.naoExedeuLimiteDePublicacoes = false;
+		} catch (Exception erroDesconhecido) {
+			TelaUtil.adicionarMensagemDeErro(MensagemEnum.ERRO_DESCONHECIDO);
+			this.naoExedeuLimiteDePublicacoes = true;
+		}
 	}
 
 	public void cadastrar() {
 		try {
 			this.novaReclamacaoSugestao = regra.salvar(novaReclamacaoSugestao, SessaoUtil.obterUsuarioLogado(), informarEndereco);
 			TelaUtil.redirecionarParaOutraPagina("detalheReclamacaoSugestao.xhtml?id=" + novaReclamacaoSugestao.getId(), MensagemEnum.CADASTROU_SUCESSO.getDescricao());
+		} catch (RegraValidacaoException erroValidacao) {
+			TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemEnum());
 		} catch (Exception erroDesconhecido) {
 			TelaUtil.adicionarMensagemDeErro(MensagemEnum.ERRO_DESCONHECIDO);
 		}
@@ -69,5 +87,9 @@ public class CadastraReclamacaoSugestaoTela implements Serializable {
 	
 	public void setInformarEndereco(boolean informarEndereco) {
 		this.informarEndereco = informarEndereco;
+	}
+	
+	public boolean isNaoExedeuLimiteDePublicacoes() {
+		return naoExedeuLimiteDePublicacoes;
 	}
 }

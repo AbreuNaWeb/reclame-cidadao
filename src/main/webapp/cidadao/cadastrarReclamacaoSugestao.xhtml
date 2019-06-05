@@ -25,7 +25,10 @@
 	box-sizing: content-box;
 }
 </style>
-
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{cadastraReclamacaoSugestaoTela.verificarSeAtingiuLimite()}" />
+	</f:metadata>
 </h:head>
 <h:body>
 	<ui:composition template="/layout.xhtml">
@@ -35,10 +38,13 @@
 			value="../imagens/gif_carregando.gif" />
 		<ui:define name="corpo">
 			<h:form>
-				<h:panelGrid columns="2">
+				<h:panelGrid>
 					<f:facet name="header">
 						<p:messages id="mensagens" />
 					</f:facet>
+				</h:panelGrid>
+				<p:panel rendered="#{cadastraReclamacaoSugestaoTela.naoExedeuLimiteDePublicacoes}">
+				<h:panelGrid columns="2">
 					<h:outputText value="#{mensagem.tipo}" />
 					<p:selectOneMenu
 						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.tipo}">
@@ -140,6 +146,7 @@
 						actionListener="#{cadastraReclamacaoSugestaoTela.cadastrar()}"
 						update="@form" ajax="true" />
 				</h:panelGrid>
+				</p:panel>
 			</h:form>
 		</ui:define>
 	</ui:composition>

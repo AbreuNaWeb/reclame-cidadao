@@ -7,8 +7,10 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.com.principal.constante.MensagemEnum;
 import br.com.principal.entidade.ReclamacaoSugestaoEntidade;
 import br.com.principal.entidade.UsuarioEntidade;
+import br.com.principal.excecao.RegraValidacaoException;
 import br.com.principal.persistencia.ReclamacaoSugestaoDAO;
 import br.com.principal.tela.util.TelaUtil;
 
@@ -23,11 +25,23 @@ public class ReclamacaoSugestaoRegras implements Serializable {
 	@Inject
 	private EnderecoRegras enderecoRegras;
 
-	public ReclamacaoSugestaoEntidade salvar(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade, UsuarioEntidade usuarioEntidade, boolean informouEndereco) {
+	public ReclamacaoSugestaoEntidade salvar(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade, UsuarioEntidade usuarioEntidade, boolean informouEndereco) throws RegraValidacaoException {
 		verificarEndereco(reclamacaoSugestaoEntidade, informouEndereco);
 		reclamacaoSugestaoEntidade.setCidadao(usuarioEntidade);
 		reclamacaoSugestaoEntidade.setHoraCriacao(TelaUtil.converterCalendarParaHoraMinuto(Calendar.getInstance()));
 		return (ReclamacaoSugestaoEntidade) reclamacaoSugestaoDAO.salvar(reclamacaoSugestaoEntidade);
+	}
+
+	public void verificarSeExedeuLimites(UsuarioEntidade usuarioEntidade) throws RegraValidacaoException {
+		List<ReclamacaoSugestaoEntidade> reclamacoesSugestoesAbertas = reclamacaoSugestaoDAO.buscarReclamacoesOuSugestoesAbertasDoCidadao(usuarioEntidade.getCpf());
+		
+		if (exedeuLimiteDeSeisReclamacoesOuSugestoesAbertas(reclamacoesSugestoesAbertas)) {
+			throw new RegraValidacaoException(MensagemEnum.ATINGIU_LIMITE_RECLAMACOES_SUGESTOES_ABERTAS);
+		}
+	}
+
+	private boolean exedeuLimiteDeSeisReclamacoesOuSugestoesAbertas(List<ReclamacaoSugestaoEntidade> reclamacoesSugestoesAbertas) {
+		return reclamacoesSugestoesAbertas.size() > 5;
 	}
 
 	public List<ReclamacaoSugestaoEntidade> buscarTodasReclamacoesSugestoes() {
