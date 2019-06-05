@@ -41,18 +41,10 @@
 						value="#{alteraDadosPessoaisTela.usuarioLogadoAtualizado.email}"
 						required="true"
 						requiredMessage="#{mensagem.campo_email_obrigatorio}"
-						validatorMessage="#{mensagem.email_invalido}" maxlength="60"
-						label="#{mensagem.email}">
+						validatorMessage="#{mensagem.email_invalido}" maxlength="60">
 						<f:validateRegex
 							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 					</p:inputText>
-
-					<p:outputLabel value="#{mensagem.confirma_email}" />
-					<p:inputText
-						value="#{alteraDadosPessoaisTela.usuarioLogadoAtualizado.emailConfirmado}"
-						required="true"
-						requiredMessage="#{mensagem.campo_confirma_email_obrigatorio}"
-						validatorMessage="#{mensagem.email_invalido}" maxlength="60" />
 
 					<p:outputLabel value="#{mensagem.ddd_numero}" />
 					<p:inputMask

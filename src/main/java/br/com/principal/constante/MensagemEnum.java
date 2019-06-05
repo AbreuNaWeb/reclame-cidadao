@@ -11,11 +11,10 @@ public enum MensagemEnum {
 	CPF_INEXISTENTE("O CPF informado não está cadastrado no sistema."),
 	CPF_INFORMADO_NAO_PERTENCE_AGENTE("O CPF informado não pertence a um agente."),
 	RECLAMACAO_SUGESTAO_ABERTA_AGENTE("Existe reclamações e/ou sugestões abertas atríbuidas ao agente."),
-	ERRO_DESCONHECIDO("Opss! Aconteceu algum erro desconhecido."),
+	ERRO_DESCONHECIDO("Opss! Aconteceu algum erro desconhecido. Tente novamente mais tarde."),
 	AGENTE_EXCLUIDO_SUCESSO("Agente excluído com sucesso!"),
 	AGENTE_ATUALIZADO_SUCESSO("Agente atualizado com sucesso!"),
 	DADOS_ATUALIZADOS_SUCESSO("Dados atualizados com sucesso."),
-	EMAILS_DIVERGEM("E-mails divergem."),
 	CELULAR_INVALIDO("Celular inválido.");
 	
 	private final String descricao;

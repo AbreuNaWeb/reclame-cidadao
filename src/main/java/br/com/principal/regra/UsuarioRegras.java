@@ -80,25 +80,7 @@ public class UsuarioRegras implements Serializable {
 	public void atualizar(UsuarioEntidade usuario) {
 		usuarioDAO.atualizar(usuario);
 	}
-
-	public void validarDadosPessoais(UsuarioEntidade usuarioEntidade) throws RegraValidacaoException {
-		if (emailsDivergem(usuarioEntidade)) {
-			throw new RegraValidacaoException(MensagemEnum.EMAILS_DIVERGEM);
-		}
-
-		if (celularInvalido(usuarioEntidade)) {
-			throw new RegraValidacaoException(MensagemEnum.CELULAR_INVALIDO);
-		}
-	}
-
-	private boolean celularInvalido(UsuarioEntidade usuarioEntidade) {
-		return !usuarioEntidade.getDddCelular().matches("^[1-9]{2}(?:[2-8]|9[1-9])[0-9]{3}[0-9]{4}$");
-	}
-
-	private boolean emailsDivergem(UsuarioEntidade usuarioEntidade) {
-		return !usuarioEntidade.getEmail().equals(usuarioEntidade.getEmailConfirmado());
-	}
-
+	
 	public void atualizarComConversaoDeSenhaParaMD5(UsuarioEntidade usuarioEntidade) {
 		usuarioEntidade.setSenha(converterSenhaParaMD5(usuarioEntidade.getSenha()));
 		usuarioDAO.atualizar(usuarioEntidade);

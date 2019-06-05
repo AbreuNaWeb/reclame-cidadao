@@ -41,10 +41,7 @@ public class UsuarioEntidade implements Serializable {
 
 	@Column(name = "DATA_CADASTRO")
 	private String dataCadastro;
-
-	@Transient
-	private String emailConfirmado;
-
+	
 	@Transient
 	private String senhaConfirmada;
 
@@ -119,15 +116,7 @@ public class UsuarioEntidade implements Serializable {
 	public void setDataCadastro(String dataCadastro) {
 		this.dataCadastro = dataCadastro;
 	}
-
-	public String getEmailConfirmado() {
-		return emailConfirmado;
-	}
-
-	public void setEmailConfirmado(String emailConfirmado) {
-		this.emailConfirmado = emailConfirmado;
-	}
-
+	
 	public String getSenhaConfirmada() {
 		return senhaConfirmada;
 	}
