@@ -72,13 +72,17 @@
 
 					<p:outputLabel value="#{mensagem.rua}" />
 					<p:inputText
-						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.rua}">
+						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.rua}"
+						required="#{cadastraReclamacaoSugestaoTela.estadoSelecionado()}"
+						requiredMessage="#{mensagem.campo_rua_obrigatorio}">
 						<p:keyFilter regEx="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/" />
 					</p:inputText>
 
 					<p:outputLabel value="#{mensagem.numero}" />
 					<p:inputText
-						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.numero}">
+						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.numero}"
+						required="#{cadastraReclamacaoSugestaoTela.estadoSelecionado()}"
+						requiredMessage="#{mensagem.campo_numero_obrigatorio}">
 						<p:keyFilter regEx="/[\d\.]/" />
 					</p:inputText>
 
@@ -90,13 +94,17 @@
 
 					<p:outputLabel value="#{mensagem.bairro}" />
 					<p:inputText
-						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.bairro}">
+						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.bairro}"
+						required="#{cadastraReclamacaoSugestaoTela.estadoSelecionado()}"
+						requiredMessage="#{mensagem.campo_bairro_obrigatorio}">
 						<p:keyFilter regEx="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/" />
 					</p:inputText>
 
 					<p:outputLabel value="#{mensagem.cidade}" />
 					<p:inputText
-						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.cidade}">
+						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.cidade}"
+						required="#{cadastraReclamacaoSugestaoTela.estadoSelecionado()}"
+						requiredMessage="#{mensagem.campo_cidade_obrigatorio}">
 						<p:keyFilter regEx="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/" />
 					</p:inputText>
 
@@ -107,7 +115,10 @@
 						<f:selectItems
 							value="#{cadastraReclamacaoSugestaoTela.unidadesFederativas()}"
 							var="unidadeFederativa" itemLabel="#{unidadeFederativa.nome}"
-							itemValue="#{unidadeFederativa.nome}" />
+							itemValue="#{unidadeFederativa.nome}">
+						</f:selectItems>
+						<p:ajax process="@form" />
+						<p:ajax update="@form" />
 					</p:selectOneMenu>
 				</h:panelGrid>
 

@@ -41,16 +41,6 @@ public class TelaUtil {
 		}
 	}
 	
-	public static boolean campoNaoInformado(Object... campos) {
-		for (Object campo : campos) {
-			if (campo == null) {
-				return true;
-			}
-		}
-		
-		return false;
-	}
-	
 	public static String diaAtualEmFormatoDiaMesAno() {
 		DateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
 		return formatoData.format(Calendar.getInstance().getTime());

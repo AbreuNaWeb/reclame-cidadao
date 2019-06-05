@@ -1,11 +1,9 @@
 package br.com.principal.tela.cidadao;
 
-import java.util.Calendar;
+import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
-import javax.ejb.TransactionAttribute;
-import javax.ejb.TransactionAttributeType;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -15,14 +13,16 @@ import br.com.principal.constante.CategoriasEnum;
 import br.com.principal.constante.MensagemEnum;
 import br.com.principal.constante.TipoReclamacaoSugestaoEnum;
 import br.com.principal.constante.UnidadeFederativaEnum;
-import br.com.principal.entidade.EnderecoEntidade;
 import br.com.principal.entidade.ReclamacaoSugestaoEntidade;
+import br.com.principal.excecao.RegraValidacaoException;
 import br.com.principal.regra.ReclamacaoSugestaoRegras;
 import br.com.principal.tela.util.TelaUtil;
 
 @Named
-@RequestScoped
-public class CadastraReclamacaoSugestaoTela {
+@ViewScoped
+public class CadastraReclamacaoSugestaoTela implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Inject
 	private ReclamacaoSugestaoRegras regra;
@@ -34,22 +34,19 @@ public class CadastraReclamacaoSugestaoTela {
 		this.novaReclamacaoSugestao = new ReclamacaoSugestaoEntidade();
 	}
 
-	@TransactionAttribute(TransactionAttributeType.REQUIRES_NEW)
 	public void cadastrar() {
-		EnderecoEntidade endereco = novaReclamacaoSugestao.getEndereco();
-
-		if (informouEstado(endereco) && TelaUtil.campoNaoInformado(endereco.getRua(), endereco.getNumero(),
-				endereco.getBairro(), endereco.getCidade())) {
-			TelaUtil.adicionarMensagemDeErro(MensagemEnum.INFORAR_CAMPOS_ENDERECO);
-		} else {
-			novaReclamacaoSugestao.setHoraCriacao(TelaUtil.converterCalendarParaHoraMinuto(Calendar.getInstance()));
+		try {
 			this.novaReclamacaoSugestao = regra.salvar(novaReclamacaoSugestao);
 			TelaUtil.redirecionarParaOutraPagina("detalheReclamacaoSugestao.xhtml?id=" + novaReclamacaoSugestao.getId(), MensagemEnum.CADASTROU_SUCESSO.getDescricao());
+		} catch (RegraValidacaoException erroValidacao) {
+			TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemEnum());
+		} catch (Exception erroDesconhecido) {
+			TelaUtil.adicionarMensagemDeErro(MensagemEnum.ERRO_DESCONHECIDO);
 		}
 	}
-
-	private boolean informouEstado(EnderecoEntidade endereco) {
-		return StringUtils.isNotBlank(endereco.getEstado());
+	
+	public boolean estadoSelecionado() {
+		return StringUtils.isNotBlank(novaReclamacaoSugestao.getEndereco().getEstado());
 	}
 
 	public TipoReclamacaoSugestaoEnum[] opcoesDeTipo() {
