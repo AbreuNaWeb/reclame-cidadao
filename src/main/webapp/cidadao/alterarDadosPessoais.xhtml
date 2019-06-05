@@ -35,13 +35,14 @@
 		<ui:define name="corpo">
 			<h:form>
 				<p:messages id="mensagens" autoUpdate="true" />
-				<h:panelGrid columns="2">
+				<h:panelGrid columns="2" cellspacing="5">
 					<p:outputLabel value="#{mensagem.email}" />
 					<p:inputText
 						value="#{alteraDadosPessoaisTela.usuarioLogadoAtualizado.email}"
 						required="true"
 						requiredMessage="#{mensagem.campo_email_obrigatorio}"
-						validatorMessage="#{mensagem.email_invalido}" maxlength="60">
+						validatorMessage="#{mensagem.email_invalido}" maxlength="60"
+						size="55">
 						<f:validateRegex
 							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 					</p:inputText>
@@ -52,7 +53,7 @@
 						mask="(99) 99999-9999" converter="conversorDddCelular"
 						required="true"
 						requiredMessage="#{mensagem.campo_ddd_numero_celular_obrigatorio}"
-						validatorMessage="#{mensagem.numero_celular_invalido}">
+						validatorMessage="#{mensagem.numero_celular_invalido}" size="11">
 						<f:validateRegex
 							pattern="^[1-9]{2}(?:[2-8]|9[1-9])[0-9]{3}[0-9]{4}$" />
 					</p:inputMask>
@@ -66,7 +67,8 @@
 						strongLabel="#{mensagem.senha_forte}" match="confirmaSenha"
 						required="true"
 						requiredMessage="#{mensagem.campo_senha_obrigatorio}"
-						validatorMessage="#{mensagem.senha_nao_coicidem}" maxlength="16">
+						validatorMessage="#{mensagem.senha_nao_coicidem}" maxlength="16"
+						size="11">
 						<f:validator validatorId="validadorSenha" />
 					</p:password>
 
@@ -75,7 +77,7 @@
 						value="#{alteraDadosPessoaisTela.usuarioLogadoAtualizado.senhaConfirmada}"
 						required="true"
 						requiredMessage="#{mensagem.campo_confirma_senha_obrigatorio}"
-						maxlength="16" />
+						maxlength="16" size="11" />
 
 					<p:commandButton value="#{mensagem.atualizar}"
 						action="#{alteraDadosPessoaisTela.atualizar()}" update="@form" />
