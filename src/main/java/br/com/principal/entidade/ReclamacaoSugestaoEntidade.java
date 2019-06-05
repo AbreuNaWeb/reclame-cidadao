@@ -65,7 +65,7 @@ public class ReclamacaoSugestaoEntidade {
 		this.tipo = TipoReclamacaoSugestaoEnum.RECLAMACAO.getDescricao();
 		this.dataCriacao = TelaUtil.diaAtualEmFormatoDiaMesAno();
 		this.status = StatusEnum.ABERTA.getDescricao();
-		this.categoria = CategoriasEnum.TRANSPORTE_PUBLICO.getDescricao();
+		this.categoria = CategoriasEnum.AGUA_ESGOTO.getDescricao();
 		this.endereco = new EnderecoEntidade();
 	}
 
