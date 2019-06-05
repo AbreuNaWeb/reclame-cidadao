@@ -32,6 +32,7 @@ public class AlteraDadosPessoaisTela implements Serializable {
 	
 	public void atualizar() {
 		usuarioRegras.atualizarComConversaoDeSenhaParaMD5(usuarioLogadoAtualizado);
+		usuarioLogadoAtualizado.setEmailConfirmado("");
 		TelaUtil.adicionarMensagemDeInformacao(MensagemEnum.DADOS_ATUALIZADOS_SUCESSO);
 	}
 	
