@@ -13,6 +13,7 @@ import br.com.principal.constante.TipoReclamacaoSugestaoEnum;
 import br.com.principal.constante.UnidadeFederativaEnum;
 import br.com.principal.entidade.ReclamacaoSugestaoEntidade;
 import br.com.principal.regra.ReclamacaoSugestaoRegras;
+import br.com.principal.tela.util.SessaoUtil;
 import br.com.principal.tela.util.TelaUtil;
 
 @Named
@@ -35,7 +36,7 @@ public class CadastraReclamacaoSugestaoTela implements Serializable {
 
 	public void cadastrar() {
 		try {
-			this.novaReclamacaoSugestao = regra.salvar(novaReclamacaoSugestao, informarEndereco);
+			this.novaReclamacaoSugestao = regra.salvar(novaReclamacaoSugestao, SessaoUtil.obterUsuarioLogado(), informarEndereco);
 			TelaUtil.redirecionarParaOutraPagina("detalheReclamacaoSugestao.xhtml?id=" + novaReclamacaoSugestao.getId(), MensagemEnum.CADASTROU_SUCESSO.getDescricao());
 		} catch (Exception erroDesconhecido) {
 			TelaUtil.adicionarMensagemDeErro(MensagemEnum.ERRO_DESCONHECIDO);

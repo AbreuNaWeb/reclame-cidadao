@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.principal.entidade.ReclamacaoSugestaoEntidade;
+import br.com.principal.entidade.UsuarioEntidade;
 import br.com.principal.persistencia.ReclamacaoSugestaoDAO;
 import br.com.principal.tela.util.TelaUtil;
 
@@ -22,8 +23,9 @@ public class ReclamacaoSugestaoRegras implements Serializable {
 	@Inject
 	private EnderecoRegras enderecoRegras;
 
-	public ReclamacaoSugestaoEntidade salvar(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade, boolean informouEndereco) {
+	public ReclamacaoSugestaoEntidade salvar(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade, UsuarioEntidade usuarioEntidade, boolean informouEndereco) {
 		verificarEndereco(reclamacaoSugestaoEntidade, informouEndereco);
+		reclamacaoSugestaoEntidade.setCidadao(usuarioEntidade);
 		reclamacaoSugestaoEntidade.setHoraCriacao(TelaUtil.converterCalendarParaHoraMinuto(Calendar.getInstance()));
 		return (ReclamacaoSugestaoEntidade) reclamacaoSugestaoDAO.salvar(reclamacaoSugestaoEntidade);
 	}

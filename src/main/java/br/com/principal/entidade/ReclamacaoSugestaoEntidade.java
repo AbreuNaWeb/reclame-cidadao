@@ -57,9 +57,13 @@ public class ReclamacaoSugestaoEntidade {
 	@JoinColumn(name = "ID_ENDERECO")
 	private EnderecoEntidade endereco;
 	
-	@OneToOne(orphanRemoval = true)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "CPF_AGENTE")
-	private UsuarioEntidade usuario;
+	private UsuarioEntidade agente;
+	
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "CPF_CIDADAO")
+	private UsuarioEntidade cidadao;
 
 	public ReclamacaoSugestaoEntidade() {
 		this.tipo = TipoReclamacaoSugestaoEnum.RECLAMACAO.getDescricao();
@@ -155,5 +159,21 @@ public class ReclamacaoSugestaoEntidade {
 
 	public void setEndereco(EnderecoEntidade endereco) {
 		this.endereco = endereco;
+	}
+
+	public UsuarioEntidade getAgente() {
+		return agente;
+	}
+
+	public void setAgente(UsuarioEntidade agente) {
+		this.agente = agente;
+	}
+
+	public UsuarioEntidade getCidadao() {
+		return cidadao;
+	}
+
+	public void setCidadao(UsuarioEntidade cidadao) {
+		this.cidadao = cidadao;
 	}
 }
