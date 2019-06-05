@@ -19,26 +19,27 @@ import br.com.principal.tela.util.TelaUtil;
 public class UsuarioRegras implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Inject
 	private UsuarioDAO usuarioDAO;
-	
+
 	@Inject
 	private ReclamacaoSugestaoRegras reclamacaoSugestaoRegras;
 
 	public UsuarioEntidade realizarLogin(Long cpfInformado, String senhaInformada) throws RegraValidacaoException {
-		UsuarioEntidade usuarioPesquisado = usuarioDAO.buscarPorCpfESenhaEmMD5(cpfInformado, converterSenhaParaMD5(senhaInformada));
-		
+		UsuarioEntidade usuarioPesquisado = usuarioDAO.buscarPorCpfESenhaEmMD5(cpfInformado,
+				converterSenhaParaMD5(senhaInformada));
+
 		if (usuarioNaoEncontrado(usuarioPesquisado)) {
 			throw new RegraValidacaoException(MensagemEnum.LOGIN_ERRADO);
 		}
-		
+
 		return usuarioPesquisado;
 	}
-	
+
 	public void salvarAgente(UsuarioEntidade novoAgente) throws RegraValidacaoException {
 		UsuarioEntidade usuarioPesquisado = buscarPorCPF(novoAgente.getCpf());
-		
+
 		if (usuarioNaoEncontrado(usuarioPesquisado)) {
 			novoAgente.setTipo(TipoUsuarioEnum.AGENTE.getDescricao());
 			usuarioDAO.salvar(novoAgente);
@@ -46,59 +47,77 @@ public class UsuarioRegras implements Serializable {
 			throw new RegraValidacaoException(MensagemEnum.CPF_JA_CADASTRADO);
 		}
 	}
-	
+
 	public UsuarioEntidade buscarAgenteParaAtualizarOuExcluir(Long cpf) throws RegraValidacaoException {
 		UsuarioEntidade usuario = usuarioDAO.buscarPorCPF(cpf);
 
 		if (usuarioNaoEncontrado(usuario)) {
 			throw new RegraValidacaoException(MensagemEnum.CPF_INEXISTENTE);
 		}
-		
+
 		if (TipoUsuarioEnum.CIDADAO.igual(usuario) || TipoUsuarioEnum.ADMINISTRADOR.igual(usuario)) {
 			throw new RegraValidacaoException(MensagemEnum.CPF_INFORMADO_NAO_PERTENCE_AGENTE);
 		}
-		
+
 		if (reclamacaoSugestaoRegras.existeReclamacaoOuSugestaoAbertaVinculadaAoAgente(cpf)) {
 			throw new RegraValidacaoException(MensagemEnum.RECLAMACAO_SUGESTAO_ABERTA_AGENTE);
 		}
-		
+
 		return usuario;
 	}
-	
+
 	public void salvarCidadao(UsuarioEntidade usuarioEntidade) {
 		usuarioEntidade.setSenha(converterSenhaParaMD5(usuarioEntidade.getSenha()));
 		usuarioEntidade.setTipo(TipoUsuarioEnum.CIDADAO.getDescricao());
 		usuarioEntidade.setDataCadastro(TelaUtil.diaAtualEmFormatoDiaMesAno());
 		usuarioDAO.salvar(usuarioEntidade);
 	}
-	
+
 	public void excluir(UsuarioEntidade usuario) {
 		usuarioDAO.excluir(usuario);
 	}
-	
+
 	public void atualizar(UsuarioEntidade usuario) {
 		usuarioDAO.atualizar(usuario);
 	}
-	
+
+	public void validarDadosPessoais(UsuarioEntidade usuarioEntidade) throws RegraValidacaoException {
+		if (emailsDivergem(usuarioEntidade)) {
+			throw new RegraValidacaoException(MensagemEnum.EMAILS_DIVERGEM);
+		}
+
+		if (celularInvalido(usuarioEntidade)) {
+			throw new RegraValidacaoException(MensagemEnum.CELULAR_INVALIDO);
+		}
+	}
+
+	private boolean celularInvalido(UsuarioEntidade usuarioEntidade) {
+		return !usuarioEntidade.getDddCelular().matches("^[1-9]{2}(?:[2-8]|9[1-9])[0-9]{3}[0-9]{4}$");
+	}
+
+	private boolean emailsDivergem(UsuarioEntidade usuarioEntidade) {
+		return !usuarioEntidade.getEmail().equals(usuarioEntidade.getEmailConfirmado());
+	}
+
 	public void atualizarComConversaoDeSenhaParaMD5(UsuarioEntidade usuarioEntidade) {
 		usuarioEntidade.setSenha(converterSenhaParaMD5(usuarioEntidade.getSenha()));
 		usuarioDAO.atualizar(usuarioEntidade);
 	}
-	
+
 	public UsuarioEntidade buscarPorCPF(Long cpf) {
 		return usuarioDAO.buscarPorCPF(cpf);
 	}
-	
+
 	private boolean usuarioNaoEncontrado(UsuarioEntidade usuarioPesquisado) {
 		return usuarioPesquisado == null;
 	}
-	
+
 	private String converterSenhaParaMD5(String senha) {
 		try {
 			MessageDigest messageDigest = MessageDigest.getInstance("MD5");
 			byte[] valorMD5 = messageDigest.digest(senha.getBytes("UTF-8"));
 			StringBuilder stringBuilder = new StringBuilder();
-			
+
 			for (byte item : valorMD5) {
 				stringBuilder.append(Integer.toHexString((item & 0xFF) | 0x100).substring(1, 3));
 			}

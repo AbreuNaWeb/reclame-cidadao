@@ -31,7 +31,7 @@ public class UsuarioEntidade implements Serializable {
 	private String tipo;
 
 	@Column(name = "DDD_CELULAR")
-	private Long dddCelular;
+	private String dddCelular;
 
 	@Column(name = "STATUS")
 	private String status;
@@ -88,11 +88,11 @@ public class UsuarioEntidade implements Serializable {
 		this.tipo = tipo;
 	}
 
-	public Long getDddCelular() {
+	public String getDddCelular() {
 		return dddCelular;
 	}
 
-	public void setDddCelular(Long dddCelular) {
+	public void setDddCelular(String dddCelular) {
 		this.dddCelular = dddCelular;
 	}
 

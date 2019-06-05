@@ -14,7 +14,9 @@ public enum MensagemEnum {
 	ERRO_DESCONHECIDO("Opss! Aconteceu algum erro desconhecido."),
 	AGENTE_EXCLUIDO_SUCESSO("Agente excluído com sucesso!"),
 	AGENTE_ATUALIZADO_SUCESSO("Agente atualizado com sucesso!"),
-	DADOS_ATUALIZADOS_SUCESSO("Dados atualizados com sucesso.");
+	DADOS_ATUALIZADOS_SUCESSO("Dados atualizados com sucesso."),
+	EMAILS_DIVERGEM("E-mails divergem."),
+	CELULAR_INVALIDO("Celular inválido.");
 	
 	private final String descricao;
 	
