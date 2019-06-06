@@ -15,7 +15,8 @@ public enum MensagemEnum {
 	AGENTE_ATUALIZADO_SUCESSO("Agente atualizado com sucesso!"),
 	DADOS_ATUALIZADOS_SUCESSO("Dados atualizados com sucesso."),
 	CELULAR_INVALIDO("Celular inválido."),
-	ATINGIU_LIMITE_RECLAMACOES_SUGESTOES_ABERTAS("Você atingiu o limite de seis reclamações e/ou sugestões abertas. Aguarde elas serem resolvidas.");
+	ATINGIU_LIMITE_RECLAMACOES_SUGESTOES_ABERTAS("Você atingiu o limite de seis reclamações e/ou sugestões abertas. Aguarde elas serem resolvidas."),
+	ATINGIU_LIMITE_RECLAMACOES_SUGESTOES_CADASTRADAS_DIA("Você atingiu o limite de duas reclamações e/ou sugestões cadastradas por dia.");
 	
 	private final String descricao;
 	

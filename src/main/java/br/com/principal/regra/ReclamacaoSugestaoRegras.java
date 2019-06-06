@@ -35,12 +35,22 @@ public class ReclamacaoSugestaoRegras implements Serializable {
 	public void verificarSeExedeuLimites(UsuarioEntidade usuarioEntidade) throws RegraValidacaoException {
 		List<ReclamacaoSugestaoEntidade> reclamacoesSugestoesAbertas = reclamacaoSugestaoDAO.buscarReclamacoesOuSugestoesAbertasDoCidadao(usuarioEntidade.getCpf());
 		
-		if (exedeuLimiteDeSeisReclamacoesOuSugestoesAbertas(reclamacoesSugestoesAbertas)) {
+		if (exedeuLimiteDeReclamacoesOuSugestoesAbertas(reclamacoesSugestoesAbertas)) {
 			throw new RegraValidacaoException(MensagemEnum.ATINGIU_LIMITE_RECLAMACOES_SUGESTOES_ABERTAS);
+		}
+		
+		List<ReclamacaoSugestaoEntidade> reclamacoesSugestoesCadastradasHoje = reclamacaoSugestaoDAO.buscarReclamacoesOuSugestoesCadastradasHoje(usuarioEntidade.getCpf());
+	
+		if (excedeuLimiteDeReclamacoesOuSugestoesCadastradasPorDia(reclamacoesSugestoesCadastradasHoje)) {
+			throw new RegraValidacaoException(MensagemEnum.ATINGIU_LIMITE_RECLAMACOES_SUGESTOES_CADASTRADAS_DIA);
 		}
 	}
 
-	private boolean exedeuLimiteDeSeisReclamacoesOuSugestoesAbertas(List<ReclamacaoSugestaoEntidade> reclamacoesSugestoesAbertas) {
+	private boolean excedeuLimiteDeReclamacoesOuSugestoesCadastradasPorDia(List<ReclamacaoSugestaoEntidade> reclamacoesSugestoesCadastradasHoje) {
+		return reclamacoesSugestoesCadastradasHoje.size() > 1;
+	}
+
+	private boolean exedeuLimiteDeReclamacoesOuSugestoesAbertas(List<ReclamacaoSugestaoEntidade> reclamacoesSugestoesAbertas) {
 		return reclamacoesSugestoesAbertas.size() > 5;
 	}
 

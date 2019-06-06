@@ -8,6 +8,7 @@ import javax.persistence.Query;
 
 import br.com.principal.constante.StatusEnum;
 import br.com.principal.entidade.ReclamacaoSugestaoEntidade;
+import br.com.principal.tela.util.TelaUtil;
 
 public class ReclamacaoSugestaoDAO extends GenericoDAO {
 	
@@ -53,6 +54,18 @@ public class ReclamacaoSugestaoDAO extends GenericoDAO {
 		Query consulta = em.createNativeQuery(sql.toString(), ReclamacaoSugestaoEntidade.class);
 		consulta.setParameter("CPF_CIDADAO", cpfDoCidadao);
 		consulta.setParameter("STATUS_ABERTO", StatusEnum.ABERTA.getDescricao());
+		return consulta.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ReclamacaoSugestaoEntidade> buscarReclamacoesOuSugestoesCadastradasHoje(Long cpfDoCidadao) {
+		EntityManager em = obtemEntityManager();
+		StringBuilder sql = new StringBuilder("SELECT * FROM ReclamacaoSugestao WHERE ");
+		sql.append("CPF_CIDADAO = :CPF_CIDADAO AND ");
+		sql.append("DATA_CRIACAO = :DATA_CRIACAO");
+		Query consulta = em.createNativeQuery(sql.toString(), ReclamacaoSugestaoEntidade.class);
+		consulta.setParameter("CPF_CIDADAO", cpfDoCidadao);
+		consulta.setParameter("DATA_CRIACAO", TelaUtil.diaAtualEmFormatoDiaMesAno());
 		return consulta.getResultList();
 	}
 }
