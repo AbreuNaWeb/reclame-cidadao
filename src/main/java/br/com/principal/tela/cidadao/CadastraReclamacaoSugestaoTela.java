@@ -3,6 +3,7 @@ package br.com.principal.tela.cidadao;
 import java.io.Serializable;
 
 import javax.annotation.PostConstruct;
+import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -38,15 +39,17 @@ public class CadastraReclamacaoSugestaoTela implements Serializable {
 	}
 	
 	public void verificarSeAtingiuLimite() {
-		try {
-			regra.verificarSeExedeuLimites(SessaoUtil.obterUsuarioLogado());
-			this.naoExedeuLimiteDePublicacoes = true;
-		} catch (RegraValidacaoException erroValidacao) {
-			TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemEnum());
-			this.naoExedeuLimiteDePublicacoes = false;
-		} catch (Exception erroDesconhecido) {
-			TelaUtil.adicionarMensagemDeErro(MensagemEnum.ERRO_DESCONHECIDO);
-			this.naoExedeuLimiteDePublicacoes = true;
+		if (novaRequisicao()) {
+			try {
+				regra.verificarSeExedeuLimites(SessaoUtil.obterUsuarioLogado());
+				this.naoExedeuLimiteDePublicacoes = true;
+			} catch (RegraValidacaoException erroValidacao) {
+				TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemEnum());
+				this.naoExedeuLimiteDePublicacoes = false;
+			} catch (Exception erroDesconhecido) {
+				TelaUtil.adicionarMensagemDeErro(MensagemEnum.ERRO_DESCONHECIDO);
+				this.naoExedeuLimiteDePublicacoes = true;
+			}
 		}
 	}
 
@@ -91,5 +94,9 @@ public class CadastraReclamacaoSugestaoTela implements Serializable {
 	
 	public boolean isNaoExedeuLimiteDePublicacoes() {
 		return naoExedeuLimiteDePublicacoes;
+	}
+	
+	private boolean novaRequisicao() {
+		return !FacesContext.getCurrentInstance().isPostback();
 	}
 }
