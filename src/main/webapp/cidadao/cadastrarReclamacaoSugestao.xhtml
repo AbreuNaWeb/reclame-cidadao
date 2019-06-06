@@ -37,7 +37,7 @@
 		<ui:param name="caminhoGifCarregamentoParametro"
 			value="../imagens/gif_carregando.gif" />
 		<ui:define name="corpo">
-			<h:form>
+			<h:form id="formulario">
 				<h:panelGrid>
 					<f:facet name="header">
 						<p:messages id="mensagens" />
@@ -82,7 +82,8 @@
 					<p:selectBooleanCheckbox
 						value="#{cadastraReclamacaoSugestaoTela.informarEndereco}"
 						itemLabel="#{mensagem.checkbox_informar_endereco}">
-						<p:ajax update="@form" />
+						<p:ajax process="@form"/>
+						<p:ajax update="@form"/>
 					</p:selectBooleanCheckbox>
 				</h:panelGrid>
 
