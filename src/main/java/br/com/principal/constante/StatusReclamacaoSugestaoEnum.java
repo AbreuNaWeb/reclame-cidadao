@@ -1,5 +1,7 @@
 package br.com.principal.constante;
 
+import br.com.principal.entidade.ReclamacaoSugestaoEntidade;
+
 public enum StatusReclamacaoSugestaoEnum {
 
 	ABERTA("Aberta"),
@@ -15,5 +17,9 @@ public enum StatusReclamacaoSugestaoEnum {
 
 	public String getDescricao() {
 		return descricao;
+	}
+	
+	public boolean igual(ReclamacaoSugestaoEntidade reclamacaoSugestaoRegistro) {
+		return getDescricao().equals(reclamacaoSugestaoRegistro.getStatus());
 	}
 }

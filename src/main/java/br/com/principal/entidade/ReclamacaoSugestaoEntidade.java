@@ -1,7 +1,5 @@
 package br.com.principal.entidade;
 
-import java.util.Calendar;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -36,10 +34,10 @@ public class ReclamacaoSugestaoEntidade {
 	private String horaCriacao;
 
 	@Column(name = "DATA_ATUALIZACAO")
-	private Calendar dataAtualizacao;
+	private String dataAtualizacao;
 
 	@Column(name = "DATA_ENCERRAMENTO")
-	private Calendar dataEncerramento;
+	private String dataEncerramento;
 
 	@Column(name = "TITULO")
 	private String titulo;
@@ -105,19 +103,19 @@ public class ReclamacaoSugestaoEntidade {
 		this.horaCriacao = horaCriacao;
 	}
 
-	public Calendar getDataAtualizacao() {
+	public String getDataAtualizacao() {
 		return dataAtualizacao;
 	}
 
-	public void setDataAtualizacao(Calendar dataAtualizacao) {
+	public void setDataAtualizacao(String dataAtualizacao) {
 		this.dataAtualizacao = dataAtualizacao;
 	}
 
-	public Calendar getDataEncerramento() {
+	public String getDataEncerramento() {
 		return dataEncerramento;
 	}
 
-	public void setDataEncerramento(Calendar dataEncerramento) {
+	public void setDataEncerramento(String dataEncerramento) {
 		this.dataEncerramento = dataEncerramento;
 	}
 

@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.principal.constante.MensagemEnum;
+import br.com.principal.constante.StatusReclamacaoSugestaoEnum;
 import br.com.principal.entidade.ReclamacaoSugestaoEntidade;
 import br.com.principal.entidade.UsuarioEntidade;
 import br.com.principal.excecao.RegraValidacaoException;
@@ -25,6 +26,13 @@ public class ReclamacaoSugestaoRegras implements Serializable {
 	@Inject
 	private EnderecoRegras enderecoRegras;
 
+	public void atribuirReclamacaoOuSugestaoParaAgente(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade, UsuarioEntidade agente) {
+		reclamacaoSugestaoEntidade.setAgente(agente);
+		reclamacaoSugestaoEntidade.setStatus(StatusReclamacaoSugestaoEnum.EM_ANALISE.getDescricao());
+		reclamacaoSugestaoEntidade.setDataAtualizacao(TelaUtil.diaAtualEmFormatoDiaMesAno());
+		reclamacaoSugestaoDAO.atualizar(reclamacaoSugestaoEntidade);
+	}
+	
 	public ReclamacaoSugestaoEntidade salvar(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade, UsuarioEntidade usuarioEntidade, boolean informouEndereco) throws RegraValidacaoException {
 		verificarEndereco(reclamacaoSugestaoEntidade, informouEndereco);
 		reclamacaoSugestaoEntidade.setCidadao(usuarioEntidade);

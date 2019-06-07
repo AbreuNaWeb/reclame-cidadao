@@ -81,6 +81,10 @@
 					<p:outputLabel value="#{mensagem.estado}" />
 					<p:outputLabel
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.endereco.estado}" />
+						
+					<p:commandButton value="#{mensagem.atribuir_para_mim}" rendered="#{detalheReclamacaoSugestaoTela.agentePodeAtribuirReclamacaoOuSugestaoParaSi()}"
+						actionListener="#{detalheReclamacaoSugestaoTela.atribuirReclamacaoOuSugestaoParaAgente()}"
+						update="@form" ajax="true" />
 				</h:panelGrid>
 
 				<h:panelGrid columns="2" rendered="false">
