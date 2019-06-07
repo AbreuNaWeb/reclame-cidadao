@@ -16,7 +16,10 @@ public enum MensagemEnum {
 	DADOS_ATUALIZADOS_SUCESSO("Dados atualizados com sucesso."),
 	CELULAR_INVALIDO("Celular inválido."),
 	ATINGIU_LIMITE_RECLAMACOES_SUGESTOES_ABERTAS("Você atingiu o limite de seis reclamações e/ou sugestões abertas. Aguarde elas serem resolvidas."),
-	ATINGIU_LIMITE_RECLAMACOES_SUGESTOES_CADASTRADAS_DIA("Você atingiu o limite de duas reclamações e/ou sugestões cadastradas por dia.");
+	ATINGIU_LIMITE_RECLAMACOES_SUGESTOES_CADASTRADAS_DIA("Você atingiu o limite de duas reclamações e/ou sugestões cadastradas por dia."),
+	CPF_INFORMADO_NAO_PERTENCE_CIDADAO("O CPF informado não pertence a um cidadão."),
+	CIDADAO_BLOQUEADO_SUCESSO("Cidadão bloqueado com sucesso!"),
+	CIDADAO_JA_BLOQUEADO("Cidadão já está bloqueado.");
 	
 	private final String descricao;
 	

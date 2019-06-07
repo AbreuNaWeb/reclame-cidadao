@@ -37,7 +37,7 @@
 		<ui:param name="caminhoGifCarregamentoParametro"
 			value="../imagens/gif_carregando.gif" />
 		<ui:define name="corpo">
-			<h:form id="formulario">
+			<h:form>
 				<h:panelGrid>
 					<f:facet name="header">
 						<p:messages id="mensagens" />
@@ -89,7 +89,7 @@
 
 				<br />
 
-				<h:panelGrid id="painelEndereco" columns="2"
+				<h:panelGrid columns="2"
 					rendered="#{cadastraReclamacaoSugestaoTela.informarEndereco}">
 					<p:outputLabel value="#{mensagem.rua}" />
 					<p:inputText

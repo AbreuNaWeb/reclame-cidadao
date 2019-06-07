@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.principal.constante.MensagemEnum;
+import br.com.principal.constante.StatusUsuarioEnum;
 import br.com.principal.constante.TipoUsuarioEnum;
 import br.com.principal.entidade.UsuarioEntidade;
 import br.com.principal.excecao.RegraValidacaoException;
@@ -49,11 +50,7 @@ public class UsuarioRegras implements Serializable {
 	}
 
 	public UsuarioEntidade buscarAgenteParaAtualizarOuExcluir(Long cpf) throws RegraValidacaoException {
-		UsuarioEntidade usuario = usuarioDAO.buscarPorCPF(cpf);
-
-		if (usuarioNaoEncontrado(usuario)) {
-			throw new RegraValidacaoException(MensagemEnum.CPF_INEXISTENTE);
-		}
+		UsuarioEntidade usuario = buscarUsuario(cpf);
 
 		if (TipoUsuarioEnum.CIDADAO.igual(usuario) || TipoUsuarioEnum.ADMINISTRADOR.igual(usuario)) {
 			throw new RegraValidacaoException(MensagemEnum.CPF_INFORMADO_NAO_PERTENCE_AGENTE);
@@ -63,6 +60,29 @@ public class UsuarioRegras implements Serializable {
 			throw new RegraValidacaoException(MensagemEnum.RECLAMACAO_SUGESTAO_ABERTA_AGENTE);
 		}
 
+		return usuario;
+	}
+	
+	public UsuarioEntidade buscarCidadaoParaBloquear(Long cpf) throws RegraValidacaoException {
+		UsuarioEntidade usuario = buscarUsuario(cpf);
+
+		if (TipoUsuarioEnum.AGENTE.igual(usuario) || TipoUsuarioEnum.ADMINISTRADOR.igual(usuario)) {
+			throw new RegraValidacaoException(MensagemEnum.CPF_INFORMADO_NAO_PERTENCE_CIDADAO);
+		}
+		
+		if (StatusUsuarioEnum.BLOQUEADO.igual(usuario)) {
+			throw new RegraValidacaoException(MensagemEnum.CIDADAO_JA_BLOQUEADO);
+		}
+		
+		return usuario;
+	}
+
+	private UsuarioEntidade buscarUsuario(Long cpf) throws RegraValidacaoException {
+		UsuarioEntidade usuario = usuarioDAO.buscarPorCPF(cpf);
+
+		if (usuarioNaoEncontrado(usuario)) {
+			throw new RegraValidacaoException(MensagemEnum.CPF_INEXISTENTE);
+		}
 		return usuario;
 	}
 
@@ -78,6 +98,11 @@ public class UsuarioRegras implements Serializable {
 	}
 
 	public void atualizar(UsuarioEntidade usuario) {
+		usuarioDAO.atualizar(usuario);
+	}
+	
+	public void bloquear(UsuarioEntidade usuario) {
+		usuario.setStatus(StatusUsuarioEnum.BLOQUEADO.getDescricao());
 		usuarioDAO.atualizar(usuario);
 	}
 	

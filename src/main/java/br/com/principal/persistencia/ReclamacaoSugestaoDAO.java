@@ -6,7 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
-import br.com.principal.constante.StatusEnum;
+import br.com.principal.constante.StatusReclamacaoSugestaoEnum;
 import br.com.principal.entidade.ReclamacaoSugestaoEntidade;
 import br.com.principal.tela.util.TelaUtil;
 
@@ -40,7 +40,7 @@ public class ReclamacaoSugestaoDAO extends GenericoDAO {
 		sql.append("STATUS = :STATUS_ABERTO");
 		Query consulta = em.createNativeQuery(sql.toString(), ReclamacaoSugestaoEntidade.class);
 		consulta.setParameter("CPF", cpf);
-		consulta.setParameter("STATUS_ABERTO", StatusEnum.ABERTA.getDescricao());
+		consulta.setParameter("STATUS_ABERTO", StatusReclamacaoSugestaoEnum.ABERTA.getDescricao());
 		consulta.setMaxResults(1);
 		return !consulta.getResultList().isEmpty();
 	}
@@ -53,7 +53,7 @@ public class ReclamacaoSugestaoDAO extends GenericoDAO {
 		sql.append("STATUS = :STATUS_ABERTO");
 		Query consulta = em.createNativeQuery(sql.toString(), ReclamacaoSugestaoEntidade.class);
 		consulta.setParameter("CPF_CIDADAO", cpfDoCidadao);
-		consulta.setParameter("STATUS_ABERTO", StatusEnum.ABERTA.getDescricao());
+		consulta.setParameter("STATUS_ABERTO", StatusReclamacaoSugestaoEnum.ABERTA.getDescricao());
 		return consulta.getResultList();
 	}
 	

@@ -1,6 +1,6 @@
 package br.com.principal.constante;
 
-public enum StatusEnum {
+public enum StatusReclamacaoSugestaoEnum {
 
 	ABERTA("Aberta"),
 	EM_ANALISE("Em Análise"),
@@ -9,7 +9,7 @@ public enum StatusEnum {
 
 	private final String descricao;
 
-	private StatusEnum(String descricao) {
+	private StatusReclamacaoSugestaoEnum(String descricao) {
 		this.descricao = descricao;
 	}
 

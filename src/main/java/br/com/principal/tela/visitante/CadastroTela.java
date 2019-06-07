@@ -44,7 +44,7 @@ public class CadastroTela {
 	private void atualizarDadosDoAgente(UsuarioEntidade usuarioPesquisada) {
 		usuarioPesquisada.setEmail(this.usuarioRegistro.getEmail());
 		usuarioPesquisada.setSenha(this.usuarioRegistro.getSenha());
-		usuarioPesquisada.setDddCelular(this.usuarioRegistro.getDddCelular());
+		usuarioPesquisada.setDddCelular(null);
 		usuarioPesquisada.setDataCadastro(TelaUtil.diaAtualEmFormatoDiaMesAno());
 		usuarioRegras.atualizarComConversaoDeSenhaParaMD5(usuarioPesquisada);
 	}

@@ -13,7 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import br.com.principal.constante.CategoriasEnum;
-import br.com.principal.constante.StatusEnum;
+import br.com.principal.constante.StatusReclamacaoSugestaoEnum;
 import br.com.principal.constante.TipoReclamacaoSugestaoEnum;
 import br.com.principal.tela.util.TelaUtil;
 
@@ -68,7 +68,7 @@ public class ReclamacaoSugestaoEntidade {
 	public ReclamacaoSugestaoEntidade() {
 		this.tipo = TipoReclamacaoSugestaoEnum.RECLAMACAO.getDescricao();
 		this.dataCriacao = TelaUtil.diaAtualEmFormatoDiaMesAno();
-		this.status = StatusEnum.ABERTA.getDescricao();
+		this.status = StatusReclamacaoSugestaoEnum.ABERTA.getDescricao();
 		this.categoria = CategoriasEnum.AGUA_ESGOTO.getDescricao();
 		this.endereco = new EnderecoEntidade();
 	}

@@ -42,6 +42,9 @@ public class UsuarioEntidade implements Serializable {
 	@Column(name = "DATA_CADASTRO")
 	private String dataCadastro;
 	
+	@Column(name = "MOTIVO_BLOQUEIO")
+	private String motivoBloqueio;
+	
 	@Transient
 	private String senhaConfirmada;
 
@@ -123,5 +126,13 @@ public class UsuarioEntidade implements Serializable {
 
 	public void setSenhaConfirmada(String senhaConfirmada) {
 		this.senhaConfirmada = senhaConfirmada;
+	}
+	
+	public String getMotivoBloqueio() {
+		return motivoBloqueio;
+	}
+	
+	public void setMotivoBloqueio(String motivoBloqueio) {
+		this.motivoBloqueio = motivoBloqueio;
 	}
 }
