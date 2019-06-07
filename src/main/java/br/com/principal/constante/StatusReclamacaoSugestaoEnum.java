@@ -6,6 +6,7 @@ public enum StatusReclamacaoSugestaoEnum {
 
 	ABERTA("Aberta"),
 	EM_ANALISE("Em Análise"),
+	EM_ANDAMENTO("Em Andamento"),
 	INDEFERIDA("Indeferida"),
 	CONCLUIDA("Concluída");
 

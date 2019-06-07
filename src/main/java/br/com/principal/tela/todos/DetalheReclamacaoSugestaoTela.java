@@ -39,12 +39,18 @@ public class DetalheReclamacaoSugestaoTela implements Serializable {
 	}
 	
 	public List<StatusReclamacaoSugestaoEnum> statusDisponiveisAposAnalise() {
-		return Arrays.asList(StatusReclamacaoSugestaoEnum.CONCLUIDA, StatusReclamacaoSugestaoEnum.INDEFERIDA);
+		return Arrays.asList(StatusReclamacaoSugestaoEnum.CONCLUIDA, StatusReclamacaoSugestaoEnum.EM_ANDAMENTO, StatusReclamacaoSugestaoEnum.INDEFERIDA);
 	}
 	
 	public void atribuirReclamacaoOuSugestaoParaAgente() {
 		regra.atribuirReclamacaoOuSugestaoParaAgente(this.reclamacaoSugestaoRegistro, SessaoUtil.obterUsuarioLogado());
 		TelaUtil.adicionarMensagemDeInformacao(MensagemEnum.DADOS_ATUALIZADOS_SUCESSO);
+	}
+	
+	public boolean agentePodeConcluirOuIndeferirReclamacaoOuSugestao() {
+		UsuarioEntidade usuario = SessaoUtil.obterUsuarioLogado();
+		return TipoUsuarioEnum.AGENTE.igual(usuario) && StatusReclamacaoSugestaoEnum.EM_ANALISE.igual(reclamacaoSugestaoRegistro) && reclamacaoSugestaoRegistro.getCategoria().equals(usuario.getSetor()) 
+				&& reclamacaoSugestaoRegistro.getAgente().getCpf().equals(usuario.getCpf());
 	}
 	
 	public boolean agentePodeAtribuirReclamacaoOuSugestaoParaSi() {

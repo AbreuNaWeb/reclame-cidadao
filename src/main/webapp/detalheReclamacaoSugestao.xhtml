@@ -36,7 +36,8 @@
 		<ui:param name="tituloParametro"
 			value="#{mensagem.titulo_detalhe_reclamacao_sugestao}" />
 		<ui:define name="corpo">
-			<h:form rendered="#{not empty detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro}">
+			<h:form
+				rendered="#{not empty detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro}">
 				<h:panelGrid columns="2">
 					<f:facet name="header">
 						<p:messages id="mensagens" />
@@ -81,8 +82,21 @@
 					<p:outputLabel value="#{mensagem.estado}" />
 					<p:outputLabel
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.endereco.estado}" />
-						
-					<p:commandButton value="#{mensagem.atribuir_para_mim}" rendered="#{detalheReclamacaoSugestaoTela.agentePodeAtribuirReclamacaoOuSugestaoParaSi()}"
+
+					<p:outputLabel
+						value="#{mensagem.detalhe_reclamacao_sugestao_status}"
+						rendered="#{detalheReclamacaoSugestaoTela.agentePodeConcluirOuIndeferirReclamacaoOuSugestao()}" />
+					<p:selectOneMenu
+						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.status}"
+						rendered="#{detalheReclamacaoSugestaoTela.agentePodeConcluirOuIndeferirReclamacaoOuSugestao()}">
+						<f:selectItems
+							value="#{detalheReclamacaoSugestaoTela.statusDisponiveisAposAnalise()}"
+							var="status" itemLabel="#{status.descricao}"
+							itemValue="#{status.descricao}" />
+					</p:selectOneMenu>
+
+					<p:commandButton value="#{mensagem.atribuir_para_mim}"
+						rendered="#{detalheReclamacaoSugestaoTela.agentePodeAtribuirReclamacaoOuSugestaoParaSi()}"
 						actionListener="#{detalheReclamacaoSugestaoTela.atribuirReclamacaoOuSugestaoParaAgente()}"
 						update="@form" ajax="true" />
 				</h:panelGrid>
