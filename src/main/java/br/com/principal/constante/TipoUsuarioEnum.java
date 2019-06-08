@@ -19,6 +19,6 @@ public enum TipoUsuarioEnum {
 	}
 	
 	public boolean igual(UsuarioEntidade pessoaRegistro) {
-		return getDescricao().equals(pessoaRegistro.getTipo());
+		return pessoaRegistro != null && getDescricao().equals(pessoaRegistro.getTipo());
 	}
 }
