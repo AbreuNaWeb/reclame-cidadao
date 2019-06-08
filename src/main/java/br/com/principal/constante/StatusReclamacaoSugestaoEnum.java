@@ -23,4 +23,8 @@ public enum StatusReclamacaoSugestaoEnum {
 	public boolean igual(ReclamacaoSugestaoEntidade reclamacaoSugestaoRegistro) {
 		return getDescricao().equals(reclamacaoSugestaoRegistro.getStatus());
 	}
+	
+	public boolean diferente(ReclamacaoSugestaoEntidade reclamacaoSugestaoRegistro) {
+		return !igual(reclamacaoSugestaoRegistro);
+	}
 }

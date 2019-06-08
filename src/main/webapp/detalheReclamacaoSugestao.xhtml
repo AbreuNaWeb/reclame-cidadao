@@ -85,30 +85,43 @@
 
 					<p:outputLabel
 						value="#{mensagem.detalhe_reclamacao_sugestao_status}"
-						rendered="#{detalheReclamacaoSugestaoTela.agentePodeConcluirOuIndeferirReclamacaoOuSugestao()}" />
+						rendered="#{detalheReclamacaoSugestaoTela.reclamaoOuSugestaoEmAnaliseOuAndamento()}" />
 					<p:selectOneMenu
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.status}"
-						rendered="#{detalheReclamacaoSugestaoTela.agentePodeConcluirOuIndeferirReclamacaoOuSugestao()}">
+						rendered="#{detalheReclamacaoSugestaoTela.reclamaoOuSugestaoEmAnaliseOuAndamento()}">
 						<f:selectItems
-							value="#{detalheReclamacaoSugestaoTela.statusDisponiveisAposAnalise()}"
+							value="#{detalheReclamacaoSugestaoTela.statusDisponiveisQuandoEmAnaliseEmAndamento()}"
 							var="status" itemLabel="#{status.descricao}"
 							itemValue="#{status.descricao}" />
 					</p:selectOneMenu>
 
+					<p:outputLabel value="#{mensagem.comentario_agente}" rendered="#{detalheReclamacaoSugestaoTela.agenteComentouReclamacaoOuSugestao()}" />
+					<p:outputLabel value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.comentarioAgente}" rendered="#{detalheReclamacaoSugestaoTela.agenteComentouReclamacaoOuSugestao()}" />
+					
+					
 					<p:commandButton value="#{mensagem.atribuir_para_mim}"
 						rendered="#{detalheReclamacaoSugestaoTela.agentePodeAtribuirReclamacaoOuSugestaoParaSi()}"
 						actionListener="#{detalheReclamacaoSugestaoTela.atribuirReclamacaoOuSugestaoParaAgente()}"
 						update="@form" ajax="true" />
+						
+					
 				</h:panelGrid>
 
-				<h:panelGrid columns="2" rendered="false">
-					<p:outputLabel value="#{mensagem.feedback}" />
-					<p:inputTextarea rows="3" cols="40"
+				<h:panelGrid columns="2" rendered="#{detalheReclamacaoSugestaoTela.reclamaoOuSugestaoIndeferidaOuConcluida()}" >
+					<p:outputLabel value="#{mensagem.comentario_agente}" />
+					<p:inputTextarea value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.comentarioAgente}" rows="3" cols="40"
 						counter="mostraQuantidadeCaracteres" maxlength="50"
 						counterTemplate="#{mensagem.mostraQuantidadeCaracteres}"
-						autoResize="false" rendered="false" />
+						autoResize="false" />
 					<br />
 					<h:outputText id="mostraQuantidadeCaracteres" />
+				</h:panelGrid>
+				
+				<h:panelGrid columns="1">
+					<p:commandButton value="#{mensagem.atualizar}"
+						rendered="#{detalheReclamacaoSugestaoTela.exibeBotaoAtualizar()}"
+						actionListener="#{detalheReclamacaoSugestaoTela.atualizar()}"
+						update="@form" ajax="true" />
 				</h:panelGrid>
 			</h:form>
 		</ui:define>

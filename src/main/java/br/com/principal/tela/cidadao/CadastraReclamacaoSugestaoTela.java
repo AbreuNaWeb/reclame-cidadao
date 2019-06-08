@@ -56,7 +56,7 @@ public class CadastraReclamacaoSugestaoTela implements Serializable {
 	public void cadastrar() {
 		try {
 			this.novaReclamacaoSugestao = regra.salvar(novaReclamacaoSugestao, SessaoUtil.obterUsuarioLogado(), informarEndereco);
-			TelaUtil.redirecionarParaOutraPagina("detalheReclamacaoSugestao.xhtml?id=" + novaReclamacaoSugestao.getId(), MensagemEnum.CADASTROU_SUCESSO.getDescricao());
+			TelaUtil.redirecionarParaOutraPagina("/reclame-cidadao/detalheReclamacaoSugestao.xhtml?id=" + novaReclamacaoSugestao.getId(), MensagemEnum.CADASTROU_SUCESSO.getDescricao());
 		} catch (RegraValidacaoException erroValidacao) {
 			TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemEnum());
 		} catch (Exception erroDesconhecido) {

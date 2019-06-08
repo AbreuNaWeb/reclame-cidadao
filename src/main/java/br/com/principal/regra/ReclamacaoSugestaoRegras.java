@@ -33,6 +33,11 @@ public class ReclamacaoSugestaoRegras implements Serializable {
 		reclamacaoSugestaoDAO.atualizar(reclamacaoSugestaoEntidade);
 	}
 	
+	public void atualizar(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade) {
+		reclamacaoSugestaoEntidade.setDataAtualizacao(TelaUtil.diaAtualEmFormatoDiaMesAno());
+		reclamacaoSugestaoDAO.atualizar(reclamacaoSugestaoEntidade);
+	}
+	
 	public ReclamacaoSugestaoEntidade salvar(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade, UsuarioEntidade usuarioEntidade, boolean informouEndereco) throws RegraValidacaoException {
 		verificarEndereco(reclamacaoSugestaoEntidade, informouEndereco);
 		reclamacaoSugestaoEntidade.setCidadao(usuarioEntidade);
