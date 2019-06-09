@@ -53,6 +53,12 @@ public class ReclamacaoSugestaoEntidade {
 	
 	@Column(name = "COMENTARIO_AGENTE")
 	private String comentarioAgente;
+	
+	@Column(name = "NOTA_CIDADAO")
+	private Integer nota;
+	
+	@Column(name = "FEEDBACK_CIDADAO")
+	private String feedbackCidadao;
 
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "ID_ENDERECO")
@@ -160,6 +166,22 @@ public class ReclamacaoSugestaoEntidade {
 	
 	public void setComentarioAgente(String comentarioAgente) {
 		this.comentarioAgente = comentarioAgente;
+	}
+	
+	public Integer getNota() {
+		return nota;
+	}
+	
+	public void setNota(Integer nota) {
+		this.nota = nota;
+	}
+	
+	public String getFeedbackCidadao() {
+		return feedbackCidadao;
+	}
+	
+	public void setFeedbackCidadao(String feedbackCidadao) {
+		this.feedbackCidadao = feedbackCidadao;
 	}
 
 	public EnderecoEntidade getEndereco() {

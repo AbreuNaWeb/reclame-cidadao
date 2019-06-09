@@ -58,8 +58,9 @@
 					<p:outputLabel value="#{mensagem.categoria}" />
 					<p:outputLabel
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.categoria}" />
-						
-					<p:outputLabel value="#{mensagem.detalhe_reclamacao_sugestao_status}" />
+
+					<p:outputLabel
+						value="#{mensagem.detalhe_reclamacao_sugestao_status}" />
 					<p:outputLabel
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.status}" />
 
@@ -99,32 +100,71 @@
 							itemValue="#{status.descricao}" />
 					</p:selectOneMenu>
 
-					<p:outputLabel value="#{mensagem.comentario_agente}" rendered="#{detalheReclamacaoSugestaoTela.agenteComentouReclamacaoOuSugestao()}" />
-					<p:outputLabel value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.comentarioAgente}" rendered="#{detalheReclamacaoSugestaoTela.agenteComentouReclamacaoOuSugestao()}" />
-					
-					
+					<p:outputLabel value="#{mensagem.comentario_agente}"
+						rendered="#{detalheReclamacaoSugestaoTela.reclamaoSugestaoIndeferidaOuConcluida()}" />
+					<p:outputLabel
+						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.comentarioAgente}"
+						rendered="#{detalheReclamacaoSugestaoTela.reclamaoSugestaoIndeferidaOuConcluida()}" />
+
+					<p:outputLabel value="#{mensagem.nota}"
+						rendered="#{detalheReclamacaoSugestaoTela.cidadaoAtribuiuNota()}" />
+					<p:rating
+						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.nota}"
+						stars="5" readonly="true"
+						rendered="#{detalheReclamacaoSugestaoTela.cidadaoAtribuiuNota()}" />
+						
+					<p:outputLabel value="#{mensagem.feedback_cidadao}"
+						rendered="#{detalheReclamacaoSugestaoTela.reclamaoSugestaoIndeferidaOuConcluida()}" />
+					<p:outputLabel
+						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.feedbackCidadao}"
+						rendered="#{detalheReclamacaoSugestaoTela.reclamaoSugestaoIndeferidaOuConcluida()}" />
+
 					<p:commandButton value="#{mensagem.atribuir_para_mim}"
 						rendered="#{detalheReclamacaoSugestaoTela.agentePodeAtribuirReclamacaoOuSugestaoParaSi()}"
 						actionListener="#{detalheReclamacaoSugestaoTela.atribuirReclamacaoOuSugestaoParaAgente()}"
 						update="@form" ajax="true" />
-						
-					
 				</h:panelGrid>
 
-				<h:panelGrid columns="2" rendered="#{detalheReclamacaoSugestaoTela.reclamaoOuSugestaoIndeferidaOuConcluida()}" >
+				<h:panelGrid columns="2"
+					rendered="#{detalheReclamacaoSugestaoTela.agenteAindaNaoComentou()}">
 					<p:outputLabel value="#{mensagem.comentario_agente}" />
-					<p:inputTextarea value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.comentarioAgente}" rows="3" cols="40"
-						counter="mostraQuantidadeCaracteres" maxlength="50"
+					<p:inputTextarea
+						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.comentarioAgente}"
+						rows="3" cols="40" counter="mostraQuantidadeCaracteres"
+						maxlength="50"
 						counterTemplate="#{mensagem.mostraQuantidadeCaracteres}"
 						autoResize="false" />
 					<br />
 					<h:outputText id="mostraQuantidadeCaracteres" />
 				</h:panelGrid>
-				
+
+				<h:panelGrid columns="2"
+					rendered="#{detalheReclamacaoSugestaoTela.cidadaoPodeIncluirNotaEComentario()}">
+					<h:outputText value="#{mensagem.nota}" />
+					<p:rating
+						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.nota}"
+						stars="5" cancel="false" required="true"
+						requiredMessage="#{mensagem.campo_nota_obrigatorio}" />
+
+					<h:outputText value="#{mensagem.feedback_cidadao}" />
+					<p:inputTextarea
+						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.feedbackCidadao}"
+						rows="3" cols="40" counter="mostraQuantidadeCaracteresCidadao"
+						maxlength="50"
+						counterTemplate="#{mensagem.mostraQuantidadeCaracteres}"
+						autoResize="false" />
+					<br />
+					<h:outputText id="mostraQuantidadeCaracteresCidadao" />
+				</h:panelGrid>
+
 				<h:panelGrid columns="1">
 					<p:commandButton value="#{mensagem.atualizar}"
-						rendered="#{detalheReclamacaoSugestaoTela.exibeBotaoAtualizar()}"
-						actionListener="#{detalheReclamacaoSugestaoTela.atualizar()}"
+						rendered="#{detalheReclamacaoSugestaoTela.exibeBotaoAtualizarParaCidadao()}"
+						actionListener="#{detalheReclamacaoSugestaoTela.atualizarReclamacaoOuSugestaoPorAgente()}"
+						update="@form" ajax="true" />
+					<p:commandButton value="#{mensagem.atualizar}"
+						rendered="#{detalheReclamacaoSugestaoTela.cidadaoPodeIncluirNotaEComentario()}"
+						actionListener="#{detalheReclamacaoSugestaoTela.atualizarReclamacaoOuSugestaoPorCidadao()}"
 						update="@form" ajax="true" />
 				</h:panelGrid>
 			</h:form>

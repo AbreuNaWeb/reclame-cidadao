@@ -44,13 +44,17 @@ public class DetalheReclamacaoSugestaoTela implements Serializable {
 		}
 	}
 
-	public void atualizar() {
+	public void atualizarReclamacaoOuSugestaoPorAgente() {
 		reclamacaoSugestaoRegra.atualizar(reclamacaoSugestaoRegistro);
 		usuarioRegras.marcarParaMostrarNotificacao(reclamacaoSugestaoRegistro.getCidadao());
 	}
-
-	public boolean agenteComentouReclamacaoOuSugestao() {
-		return StringUtils.isNotBlank(reclamacaoSugestaoRegistro.getComentarioAgente());
+	
+	public void atualizarReclamacaoOuSugestaoPorCidadao() {
+		reclamacaoSugestaoRegra.atualizar(reclamacaoSugestaoRegistro);
+	}
+	
+	public boolean cidadaoAtribuiuNota() {
+		return reclamacaoSugestaoRegistro.getNota() != null;
 	}
 
 	public List<StatusReclamacaoSugestaoEnum> statusDisponiveisQuandoEmAnaliseEmAndamento() {
@@ -62,7 +66,7 @@ public class DetalheReclamacaoSugestaoTela implements Serializable {
 		return Arrays.asList(StatusReclamacaoSugestaoEnum.CONCLUIDA);
 	}
 
-	public boolean exibeBotaoAtualizar() {
+	public boolean exibeBotaoAtualizarParaCidadao() {
 		UsuarioEntidade usuario = SessaoUtil.obterUsuarioLogado();
 		return TipoUsuarioEnum.AGENTE.igual(usuario)
 				&& StatusReclamacaoSugestaoEnum.ABERTA.diferente(reclamacaoSugestaoRegistro)
@@ -86,10 +90,14 @@ public class DetalheReclamacaoSugestaoTela implements Serializable {
 				&& reclamacaoSugestaoRegistro.getAgente().getCpf().equals(usuario.getCpf());
 	}
 
-	public boolean reclamaoOuSugestaoIndeferidaOuConcluida() {
+	public boolean agenteAindaNaoComentou() {
 		return StringUtils.isBlank(reclamacaoSugestaoRegistro.getComentarioAgente())
-				&& (StatusReclamacaoSugestaoEnum.INDEFERIDA.igual(reclamacaoSugestaoRegistro)
-						|| StatusReclamacaoSugestaoEnum.CONCLUIDA.igual(reclamacaoSugestaoRegistro));
+				&& reclamaoSugestaoIndeferidaOuConcluida();
+	}
+
+	public boolean reclamaoSugestaoIndeferidaOuConcluida() {
+		return StatusReclamacaoSugestaoEnum.INDEFERIDA.igual(reclamacaoSugestaoRegistro)
+				|| StatusReclamacaoSugestaoEnum.CONCLUIDA.igual(reclamacaoSugestaoRegistro);
 	}
 
 	public boolean agentePodeAtribuirReclamacaoOuSugestaoParaSi() {
@@ -97,6 +105,15 @@ public class DetalheReclamacaoSugestaoTela implements Serializable {
 		return TipoUsuarioEnum.AGENTE.igual(usuario)
 				&& StatusReclamacaoSugestaoEnum.ABERTA.igual(reclamacaoSugestaoRegistro)
 				&& reclamacaoSugestaoRegistro.getCategoria().equals(usuario.getSetor());
+	}
+	
+	public boolean cidadaoPodeIncluirNotaEComentario() {
+		UsuarioEntidade usuario = SessaoUtil.obterUsuarioLogado();
+		return TipoUsuarioEnum.CIDADAO.igual(usuario)
+				&& reclamacaoSugestaoRegistro.getCidadao().getCpf().equals(usuario.getCpf())
+				&& (StatusReclamacaoSugestaoEnum.CONCLUIDA.igual(reclamacaoSugestaoRegistro)
+						|| StatusReclamacaoSugestaoEnum.INDEFERIDA.igual(reclamacaoSugestaoRegistro))
+				&& reclamacaoSugestaoRegistro.getNota() == null;
 	}
 
 	public ReclamacaoSugestaoEntidade getReclamacaoSugestaoRegistro() {
