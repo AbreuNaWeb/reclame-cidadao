@@ -45,6 +45,9 @@ public class UsuarioEntidade implements Serializable {
 	@Column(name = "MOTIVO_BLOQUEIO")
 	private String motivoBloqueio;
 	
+	@Column(name = "MOSTRAR_NOTIFICACAO")
+	private String mostrarNotificacao;
+	
 	@Transient
 	private String senhaConfirmada;
 
@@ -134,5 +137,13 @@ public class UsuarioEntidade implements Serializable {
 	
 	public void setMotivoBloqueio(String motivoBloqueio) {
 		this.motivoBloqueio = motivoBloqueio;
+	}
+	
+	public String getMostrarNotificacao() {
+		return mostrarNotificacao;
+	}
+	
+	public void setMostrarNotificacao(String mostrarNotificacao) {
+		this.mostrarNotificacao = mostrarNotificacao;
 	}
 }

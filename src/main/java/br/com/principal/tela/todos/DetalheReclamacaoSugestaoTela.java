@@ -16,6 +16,7 @@ import br.com.principal.constante.TipoUsuarioEnum;
 import br.com.principal.entidade.ReclamacaoSugestaoEntidade;
 import br.com.principal.entidade.UsuarioEntidade;
 import br.com.principal.regra.ReclamacaoSugestaoRegras;
+import br.com.principal.regra.UsuarioRegras;
 import br.com.principal.tela.util.SessaoUtil;
 import br.com.principal.tela.util.TelaUtil;
 
@@ -26,7 +27,10 @@ public class DetalheReclamacaoSugestaoTela implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private ReclamacaoSugestaoRegras regra;
+	private ReclamacaoSugestaoRegras reclamacaoSugestaoRegra;
+	
+	@Inject
+	private UsuarioRegras usuarioRegras;
 
 	private ReclamacaoSugestaoEntidade reclamacaoSugestaoRegistro;
 
@@ -34,14 +38,15 @@ public class DetalheReclamacaoSugestaoTela implements Serializable {
 
 	public void inicializar() {
 		if (informadoID()) {
-			this.reclamacaoSugestaoRegistro = regra.buscarPorID(id);
+			this.reclamacaoSugestaoRegistro = reclamacaoSugestaoRegra.buscarPorID(id);
 		} else {
 			TelaUtil.adicionarMensagemDeErro(MensagemEnum.ERRO_FAVOR_RETORNAR_PAGINA_INICIAL);
 		}
 	}
 
 	public void atualizar() {
-		regra.atualizar(reclamacaoSugestaoRegistro);
+		reclamacaoSugestaoRegra.atualizar(reclamacaoSugestaoRegistro);
+		usuarioRegras.marcarParaMostrarNotificacao(reclamacaoSugestaoRegistro.getCidadao());
 	}
 
 	public boolean agenteComentouReclamacaoOuSugestao() {
@@ -67,7 +72,8 @@ public class DetalheReclamacaoSugestaoTela implements Serializable {
 	}
 
 	public void atribuirReclamacaoOuSugestaoParaAgente() {
-		regra.atribuirReclamacaoOuSugestaoParaAgente(this.reclamacaoSugestaoRegistro, SessaoUtil.obterUsuarioLogado());
+		reclamacaoSugestaoRegra.atribuirReclamacaoOuSugestaoParaAgente(this.reclamacaoSugestaoRegistro, SessaoUtil.obterUsuarioLogado());
+		usuarioRegras.marcarParaMostrarNotificacao(reclamacaoSugestaoRegistro.getCidadao());
 		TelaUtil.adicionarMensagemDeInformacao(MensagemEnum.DADOS_ATUALIZADOS_SUCESSO);
 	}
 

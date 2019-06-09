@@ -1,18 +1,34 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:p="http://primefaces.org/ui"
-    xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
 	<title>Teste</title>
 </h:head>
 <h:body>
 	<ui:composition template="layout.xhtml">
-    	<ui:param name="caminhoGifCarregamentoParametro"
+		<ui:param name="caminhoGifCarregamentoParametro"
 			value="imagens/gif_carregando.gif" />
-    	<ui:define name="corpo">
-    	</ui:define>
+		<ui:define name="corpo">
+			<h:form>
+				<p:dialog widgetVar="dialogNotificacao"
+					header="#{mensagem.dialog_titulo}" modal="true"
+					visible="#{layoutTela.deveExibirNotificacao()}" appendTo="@(body)"
+					resizable="false" closable="false">
+					<h:form>
+						<h:outputText value="#{mensagem.dialog_texto}" />
+						<br />
+						<p:commandButton
+							onclick="PF('dialogNotificacao').hide();"
+							value="#{mensagem.dialog_botao}" type="button">
+							<p:ajax event="click" listener="#{layoutTela.marcarParaNaoMostrarNotificacao()}"/>
+							</p:commandButton>
+					</h:form>
+				</p:dialog>
+			</h:form>
+		</ui:define>
 	</ui:composition>
 </h:body>
 </html>

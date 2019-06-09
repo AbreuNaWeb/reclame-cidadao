@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.principal.constante.MensagemEnum;
+import br.com.principal.constante.MostrarNotificacaoEnum;
 import br.com.principal.constante.StatusUsuarioEnum;
 import br.com.principal.constante.TipoUsuarioEnum;
 import br.com.principal.entidade.UsuarioEntidade;
@@ -26,6 +27,16 @@ public class UsuarioRegras implements Serializable {
 
 	@Inject
 	private ReclamacaoSugestaoRegras reclamacaoSugestaoRegras;
+	
+	public void marcarParaMostrarNotificacao(UsuarioEntidade usuarioEntidade) {
+		usuarioEntidade.setMostrarNotificacao(MostrarNotificacaoEnum.SIM.getDescricao());
+		atualizar(usuarioEntidade);
+	}
+	
+	public void marcarParaNaoMostrarNotificacao(UsuarioEntidade usuarioEntidade) {
+		usuarioEntidade.setMostrarNotificacao(MostrarNotificacaoEnum.NAO.getDescricao());
+		atualizar(usuarioEntidade);
+	}
 
 	public UsuarioEntidade realizarLogin(Long cpfInformado, String senhaInformada) throws RegraValidacaoException {
 		UsuarioEntidade usuarioPesquisado = usuarioDAO.buscarPorCpfESenhaEmMD5(cpfInformado,
