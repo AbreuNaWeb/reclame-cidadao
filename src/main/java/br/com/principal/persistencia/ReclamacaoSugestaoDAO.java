@@ -88,7 +88,7 @@ public class ReclamacaoSugestaoDAO extends GenericoDAO {
 		sql.append("STATUS = :STATUS ");
 		
 		if (cpfDoCidadao != null) {
-			sql.append("AND CPF_CIDADAO = :CPF_CIDADAO");
+			sql.append("AND CPF_CIDADAO = :CPF_CIDADAO ");
 		}
 		
 		sql.append("ORDER BY DATA_ATUALIZACAO DESC");

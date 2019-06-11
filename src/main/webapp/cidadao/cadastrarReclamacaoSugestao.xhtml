@@ -72,7 +72,7 @@
 					<p:selectOneMenu
 						value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.categoria}">
 						<f:selectItems
-							value="#{cadastraReclamacaoSugestaoTela.categorias()}"
+							value="#{cadastraReclamacaoSugestaoTela.getCategorias()}"
 							var="categoria" itemLabel="#{categoria.descricao}"
 							itemValue="#{categoria.descricao}"/>
 					</p:selectOneMenu>
