@@ -32,6 +32,8 @@ public class CadastraReclamacaoSugestaoTela implements Serializable {
 	private boolean informarEndereco;
 	
 	private boolean naoExedeuLimiteDePublicacoes;
+	
+	private boolean possuiPermissao;
 
 	@PostConstruct
 	public void inicializar() {
@@ -40,15 +42,23 @@ public class CadastraReclamacaoSugestaoTela implements Serializable {
 	
 	public void verificarSeAtingiuLimite() {
 		if (novaRequisicao()) {
+			if (SessaoUtil.isNotCidadao()) {
+				this.possuiPermissao = false;
+				TelaUtil.adicionarMensagemDeErro(MensagemEnum.VOCE_NAO_TEM_PERMISSAO);
+				return;
+			}
+			
+			this.possuiPermissao = true;
+			
 			try {
 				regra.verificarSeExedeuLimites(SessaoUtil.obterUsuarioLogado());
 				this.naoExedeuLimiteDePublicacoes = true;
 			} catch (RegraValidacaoException erroValidacao) {
-				TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemEnum());
 				this.naoExedeuLimiteDePublicacoes = false;
+				TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemEnum());
 			} catch (Exception erroDesconhecido) {
-				TelaUtil.adicionarMensagemDeErro(MensagemEnum.ERRO_DESCONHECIDO);
 				this.naoExedeuLimiteDePublicacoes = true;
+				TelaUtil.adicionarMensagemDeErro(MensagemEnum.ERRO_DESCONHECIDO);
 			}
 		}
 	}
@@ -98,5 +108,9 @@ public class CadastraReclamacaoSugestaoTela implements Serializable {
 	
 	private boolean novaRequisicao() {
 		return !FacesContext.getCurrentInstance().isPostback();
+	}
+	
+	public boolean isPossuiPermissao() {
+		return possuiPermissao;
 	}
 }

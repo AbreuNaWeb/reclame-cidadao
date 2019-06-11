@@ -19,7 +19,8 @@ public enum MensagemEnum {
 	ATINGIU_LIMITE_RECLAMACOES_SUGESTOES_CADASTRADAS_DIA("Você atingiu o limite de duas reclamações e/ou sugestões cadastradas por dia."),
 	CPF_INFORMADO_NAO_PERTENCE_CIDADAO("O CPF informado não pertence a um cidadão."),
 	CIDADAO_BLOQUEADO_SUCESSO("Cidadão bloqueado com sucesso!"),
-	CIDADAO_JA_BLOQUEADO("Cidadão já está bloqueado.");
+	CIDADAO_JA_BLOQUEADO("Cidadão já está bloqueado."),
+	VOCE_NAO_TEM_PERMISSAO("Você não tem permissão para acessar a página!");
 	
 	private final String descricao;
 	

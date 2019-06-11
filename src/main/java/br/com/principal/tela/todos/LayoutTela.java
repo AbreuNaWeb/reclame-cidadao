@@ -5,7 +5,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.principal.constante.MostrarNotificacaoEnum;
-import br.com.principal.constante.TipoUsuarioEnum;
 import br.com.principal.regra.UsuarioRegras;
 import br.com.principal.tela.util.SessaoUtil;
 
@@ -25,15 +24,15 @@ public class LayoutTela {
 	}
 
 	public boolean isAdministrador() {
-		return usuarioEstaLogado() && TipoUsuarioEnum.ADMINISTRADOR.igual(SessaoUtil.obterUsuarioLogado());
+		return SessaoUtil.isAdministrador();
 	}
 
 	public boolean isCidadao() {
-		return usuarioEstaLogado() && TipoUsuarioEnum.CIDADAO.igual(SessaoUtil.obterUsuarioLogado());
+		return SessaoUtil.isCidadao();
 	}
 
 	public boolean isAgente() {
-		return usuarioEstaLogado() && TipoUsuarioEnum.AGENTE.igual(SessaoUtil.obterUsuarioLogado());
+		return SessaoUtil.isAgente();
 	}
 	
 	public boolean deveExibirNotificacao() {
