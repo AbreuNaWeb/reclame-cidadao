@@ -40,8 +40,7 @@
 					<p:inputMask value="#{cadastroAgenteTela.novoAgente.cpf}" size="14"
 						mask="999.999.999-99" maxlength="14" converter="conversorCpf"
 						required="true"
-						requiredMessage="#{mensagem.campo_cpf_obrigatorio}">
-					</p:inputMask>
+						requiredMessage="#{mensagem.campo_cpf_obrigatorio}" />
 
 					<p:outputLabel value="#{mensagem.setor}" />
 					<p:selectOneMenu value="#{cadastroAgenteTela.novoAgente.setor}">

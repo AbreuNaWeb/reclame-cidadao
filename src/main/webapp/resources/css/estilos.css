@@ -1,0 +1,15 @@
+.botoes {
+
+    /*Especifica a cor chocolate, como pano de fundo do elemento */
+
+    background-color: #D2691E;
+
+    /*Especifica como preta a cor da fonte do elemento */
+
+    color: #FFFFFF;
+
+    /*Define a borda do elemento, com um efeito de alto-relevo menor que o padrão */
+
+    border: 1px outset;
+
+}

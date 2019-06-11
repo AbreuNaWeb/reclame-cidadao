@@ -8,41 +8,78 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<!-- 	<h:outputStylesheet library="css" name="/default.css" /> Futuramente será utilizado -->
 	<title>Cadastro - Reclame Cidadão</title>
 </h:head>
 
 <h:body style="display:flex;">
+<h:outputStylesheet library="css" name="estilos.css" />
 	<h:form style=" margin:auto;">
-		<p:panel header="#{mensagem.login}" style="width:400px;">
-			<p:messages id="messages" closable="true" autoUpdate="true"/>
+		<p:panel header="#{mensagem.login}">
+			<p:messages id="messages" closable="true" autoUpdate="true" />
 			<h:panelGrid columns="2" cellpadding="10">
 				<h:panelGrid columns="2" cellpadding="5">
 					<p:outputLabel value="#{mensagem.cpf}" />
-					<p:inputText value="#{cadastroTela.usuarioRegistro.cpf}" />
-					
+					<p:inputMask value="#{cadastroTela.usuarioRegistro.cpf}" size="12"
+						mask="999.999.999-99" maxlength="14" converter="conversorCpf"
+						required="true"
+						requiredMessage="#{mensagem.campo_cpf_obrigatorio}" />
+
 					<p:outputLabel value="#{mensagem.nome}" />
-					<p:inputText value="#{cadastroTela.usuarioRegistro.nome}" />
+					<p:inputText value="#{cadastroTela.usuarioRegistro.nome}"
+						required="true" requiredMessage="#{mensagem.nome_obrigatorio}"
+						maxlength="40" size="36">
+						<p:keyFilter regEx="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/" />
+					</p:inputText>
 
 					<p:outputLabel value="#{mensagem.email}" />
-					<p:inputText value="#{cadastroTela.usuarioRegistro.email}" />
-					
+					<p:inputText value="#{cadastroTela.usuarioRegistro.email}"
+						required="true"
+						requiredMessage="#{mensagem.campo_email_obrigatorio}"
+						validatorMessage="#{mensagem.email_invalido}" maxlength="40"
+						size="36">
+						<f:validateRegex
+							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
+					</p:inputText>
+
 					<p:outputLabel value="#{mensagem.senha}" />
-					<p:inputText value="#{cadastroTela.usuarioRegistro.senha}" />
+					<p:password value="#{cadastroTela.usuarioRegistro.senha}"
+						feedback="true" promptLabel="#{mensagem.senha_insira}"
+						weakLabel="#{mensagem.senha_fraca}"
+						goodLabel="#{mensagem.senha_medio}"
+						strongLabel="#{mensagem.senha_forte}" match="confirmaSenha"
+						required="true"
+						requiredMessage="#{mensagem.campo_senha_obrigatorio}"
+						validatorMessage="#{mensagem.senha_nao_coicidem}" maxlength="16"
+						size="12">
+						<f:validator validatorId="validadorSenha" />
+					</p:password>
 
 					<p:outputLabel value="#{mensagem.confirma_senha}" />
-					<p:inputText value="#{cadastroTela.usuarioRegistro.senhaConfirmada}" />
+					<p:password id="confirmaSenha"
+						value="#{cadastroTela.usuarioRegistro.senhaConfirmada}"
+						required="true"
+						requiredMessage="#{mensagem.campo_confirma_senha_obrigatorio}"
+						maxlength="16" size="12" />
 
 					<p:outputLabel value="#{mensagem.ddd_numero}" />
-					<p:inputText value="#{cadastroTela.usuarioRegistro.dddCelular}" />
+					<p:inputMask value="#{cadastroTela.usuarioRegistro.dddCelular}"
+						mask="(99) 99999-9999" converter="conversorDddCelular"
+						required="true"
+						requiredMessage="#{mensagem.campo_ddd_numero_celular_obrigatorio}"
+						validatorMessage="#{mensagem.numero_celular_invalido}" size="12">
+						<f:validateRegex
+							pattern="^[1-9]{2}(?:[2-8]|9[1-9])[0-9]{3}[0-9]{4}$" />
+					</p:inputMask>
 
 					<br />
-					<p:commandButton value="#{mensagem.cadastrar}" icon="ui-icon-gear" actionListener="#{cadastroTela.cadastrar()}" ajax="true" />
+					<p:commandButton value="#{mensagem.cadastrar}" icon="ui-icon-gear"
+						actionListener="#{cadastroTela.cadastrar()}" ajax="true"
+						styleClass=".botoes" />
 				</h:panelGrid>
 			</h:panelGrid>
 		</p:panel>
 	</h:form>
-	
+
 	<p:ajaxStatus onstart="PF('statusDialog').show()"
 		onsuccess="PF('statusDialog').hide()" />
 
