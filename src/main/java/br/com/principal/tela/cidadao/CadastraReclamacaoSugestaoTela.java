@@ -68,7 +68,7 @@ public class CadastraReclamacaoSugestaoTela implements Serializable {
 		return TipoReclamacaoSugestaoEnum.values();
 	}
 
-	public CategoriasEnum[] categorias() {
+	public CategoriasEnum[] getCategorias() {
 		return CategoriasEnum.values();
 	}
 

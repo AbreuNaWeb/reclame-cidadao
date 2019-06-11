@@ -33,28 +33,55 @@
 		<ui:param name="caminhoGifCarregamentoParametro"
 			value="imagens/gif_carregando.gif" />
 		<ui:define name="corpo">
-			<p:dataTable var="dado"
-				emptyMessage="#{mensagem.nenhum_registro_encontrado}"
-				value="#{listaReclamacaoSugestaoTela.listaReclamacaoSugestaoEntidade}">
-				<p:column headerText="#{mensagem.data_criacao}">
-					<h:link value="#{dado.dataCriacao}"
-						outcome="detalheReclamacaoSugestao.xhtml" includeViewParams="true">
-						<f:param name="id" value="#{dado.id}" />
-					</h:link>
-				</p:column>
 
-				<p:column headerText="#{mensagem.titulo_label_tabela}">
-					<h:outputText value="#{dado.titulo}" />
-				</p:column>
+			<h:form>
+				<p:commandButton value="#{mensagem.pesquisar}"
+					action="#{listaReclamacaoSugestaoTela.pesquisar()}" update="@form"
+					icon="ui-icon-search" />
+				<p:separator />
 
-				<p:column headerText="#{mensagem.listar_reclamacoes_status}">
-					<h:outputText value="#{dado.status}" />
-				</p:column>
+				<h:panelGrid columns="2">
+					<p:outputLabel value="#{mensagem.categoria}" />
+					<p:selectOneMenu
+						value="#{listaReclamacaoSugestaoTela.categoriaParaPesquisar}">
+						<f:selectItems value="#{listaReclamacaoSugestaoTela.categorias}"
+							var="categoria" itemLabel="#{categoria.descricao}"
+							itemValue="#{categoria}" />
+					</p:selectOneMenu>
 
-				<p:column headerText="#{mensagem.categoria_label_tabela}">
-					<h:outputText value="#{dado.categoria}" />
-				</p:column>
-			</p:dataTable>
+					<p:outputLabel value="#{mensagem.label_status}" />
+					<p:selectOneMenu
+						value="#{listaReclamacaoSugestaoTela.statusParaPesquisar}">
+						<f:selectItems value="#{listaReclamacaoSugestaoTela.status}"
+							var="status" itemLabel="#{status.descricao}"
+							itemValue="#{status}" />
+					</p:selectOneMenu>
+				</h:panelGrid>
+
+				<p:dataTable var="dado"
+					emptyMessage="#{mensagem.nenhum_registro_encontrado}"
+					value="#{listaReclamacaoSugestaoTela.listaReclamacaoSugestaoEntidade}">
+					<p:column headerText="#{mensagem.data_criacao}">
+						<h:link value="#{dado.dataCriacao}"
+							outcome="detalheReclamacaoSugestao.xhtml"
+							includeViewParams="true">
+							<f:param name="id" value="#{dado.id}" />
+						</h:link>
+					</p:column>
+
+					<p:column headerText="#{mensagem.titulo_label_tabela}">
+						<h:outputText value="#{dado.titulo}" />
+					</p:column>
+
+					<p:column headerText="#{mensagem.listar_reclamacoes_status}">
+						<h:outputText value="#{dado.status}" />
+					</p:column>
+
+					<p:column headerText="#{mensagem.categoria_label_tabela}">
+						<h:outputText value="#{dado.categoria}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
 		</ui:define>
 	</ui:composition>
 </h:body>

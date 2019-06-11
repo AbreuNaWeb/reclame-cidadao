@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 
+import br.com.principal.constante.CategoriasEnum;
 import br.com.principal.constante.StatusReclamacaoSugestaoEnum;
 import br.com.principal.entidade.ReclamacaoSugestaoEntidade;
 import br.com.principal.tela.util.TelaUtil;
@@ -66,6 +67,30 @@ public class ReclamacaoSugestaoDAO extends GenericoDAO {
 		Query consulta = em.createNativeQuery(sql.toString(), ReclamacaoSugestaoEntidade.class);
 		consulta.setParameter("CPF_CIDADAO", cpfDoCidadao);
 		consulta.setParameter("DATA_CRIACAO", TelaUtil.diaAtualEmFormatoDiaMesAno());
+		return consulta.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ReclamacaoSugestaoEntidade> buscarReclamacoesOuSugestoesComFiltro(CategoriasEnum categoriaEnum, StatusReclamacaoSugestaoEnum statusEnum, Long cpfDoCidadao) {
+		EntityManager em = obtemEntityManager();
+		StringBuilder sql = new StringBuilder("SELECT * FROM ReclamacaoSugestao WHERE ");
+		sql.append("CATEGORIA = :CATEGORIA AND ");
+		sql.append("STATUS = :STATUS ");
+		
+		if (cpfDoCidadao != null) {
+			sql.append("AND CPF_CIDADAO = :CPF_CIDADAO");
+		}
+		
+		sql.append("ORDER BY DATA_ATUALIZACAO DESC");
+		
+		Query consulta = em.createNativeQuery(sql.toString(), ReclamacaoSugestaoEntidade.class);
+		consulta.setParameter("CATEGORIA", categoriaEnum.getDescricao());
+		consulta.setParameter("STATUS", statusEnum.getDescricao());
+		
+		if (cpfDoCidadao != null) {
+			consulta.setParameter("CPF_CIDADAO", cpfDoCidadao);
+		}
+		
 		return consulta.getResultList();
 	}
 }
