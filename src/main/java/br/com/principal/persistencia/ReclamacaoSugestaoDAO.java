@@ -59,6 +59,16 @@ public class ReclamacaoSugestaoDAO extends GenericoDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
+	public List<ReclamacaoSugestaoEntidade> buscarReclamacoesOuSugestoesDoCidadao(Long cpfDoCidadao) {
+		EntityManager em = obtemEntityManager();
+		StringBuilder sql = new StringBuilder("SELECT * FROM ReclamacaoSugestao WHERE ");
+		sql.append("CPF_CIDADAO = :CPF_CIDADAO");
+		Query consulta = em.createNativeQuery(sql.toString(), ReclamacaoSugestaoEntidade.class);
+		consulta.setParameter("CPF_CIDADAO", cpfDoCidadao);
+		return consulta.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
 	public List<ReclamacaoSugestaoEntidade> buscarReclamacoesOuSugestoesCadastradasHoje(Long cpfDoCidadao) {
 		EntityManager em = obtemEntityManager();
 		StringBuilder sql = new StringBuilder("SELECT * FROM ReclamacaoSugestao WHERE ");

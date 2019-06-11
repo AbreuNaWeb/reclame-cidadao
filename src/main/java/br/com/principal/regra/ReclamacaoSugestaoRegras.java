@@ -59,6 +59,10 @@ public class ReclamacaoSugestaoRegras implements Serializable {
 			throw new RegraValidacaoException(MensagemEnum.ATINGIU_LIMITE_RECLAMACOES_SUGESTOES_CADASTRADAS_DIA);
 		}
 	}
+	
+	public List<ReclamacaoSugestaoEntidade> buscarReclamacoesOuSugestoesDoCidadao(Long cpfDoCidadao) {
+		return reclamacaoSugestaoDAO.buscarReclamacoesOuSugestoesDoCidadao(cpfDoCidadao);
+	}
 
 	private boolean excedeuLimiteDeReclamacoesOuSugestoesCadastradasPorDia(List<ReclamacaoSugestaoEntidade> reclamacoesSugestoesCadastradasHoje) {
 		return reclamacoesSugestoesCadastradasHoje.size() > 1;

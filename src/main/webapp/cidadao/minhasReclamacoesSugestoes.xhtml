@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<style type="text/css">
+.ui-datalist .ui-datalist-content {
+	border: 0 none
+}
+
+.ui-datalist ul {
+	padding: 0px 10px 0 20px;
+	margin: 5px 0;
+}
+
+.value {
+	font-weight: bold;
+}
+
+.ui-autocomplete-itemtip {
+	-moz-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	box-sizing: content-box;
+}
+</style>
+</h:head>
+<h:body>
+	<ui:composition template="/layout.xhtml">
+		<ui:param name="tituloParametro"
+			value="#{mensagem.titulo_alterar_dados_pessoais}" />
+		<ui:param name="caminhoGifCarregamentoParametro"
+			value="../imagens/gif_carregando.gif" />
+		<ui:define name="corpo">
+
+			<h:form>
+				<p:commandButton value="#{mensagem.pesquisar}"
+					action="#{minhasReclamacoesSugestoesTela.pesquisar()}"
+					update="@form" icon="ui-icon-search" />
+				<p:separator />
+
+				<h:panelGrid columns="2">
+					<p:outputLabel value="#{mensagem.categoria}" />
+					<p:selectOneMenu
+						value="#{minhasReclamacoesSugestoesTela.categoriaParaPesquisar}">
+						<f:selectItems
+							value="#{minhasReclamacoesSugestoesTela.categorias}"
+							var="categoria" itemLabel="#{categoria.descricao}"
+							itemValue="#{categoria}" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="#{mensagem.label_status}" />
+					<p:selectOneMenu
+						value="#{minhasReclamacoesSugestoesTela.statusParaPesquisar}">
+						<f:selectItems value="#{minhasReclamacoesSugestoesTela.status}"
+							var="status" itemLabel="#{status.descricao}"
+							itemValue="#{status}" />
+					</p:selectOneMenu>
+				</h:panelGrid>
+
+				<p:dataTable var="dado"
+					emptyMessage="#{mensagem.nenhum_registro_encontrado}"
+					value="#{minhasReclamacoesSugestoesTela.listaReclamacaoSugestaoEntidade}">
+					<p:column headerText="#{mensagem.data_criacao}">
+						<h:link value="#{dado.dataCriacao}"
+							outcome="/detalheReclamacaoSugestao.xhtml"
+							includeViewParams="true">
+							<f:param name="id" value="#{dado.id}" />
+						</h:link>
+					</p:column>
+
+					<p:column headerText="#{mensagem.titulo_label_tabela}">
+						<h:outputText value="#{dado.titulo}" />
+					</p:column>
+
+					<p:column headerText="#{mensagem.listar_reclamacoes_status}">
+						<h:outputText value="#{dado.status}" />
+					</p:column>
+
+					<p:column headerText="#{mensagem.categoria_label_tabela}">
+						<h:outputText value="#{dado.categoria}" />
+					</p:column>
+				</p:dataTable>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

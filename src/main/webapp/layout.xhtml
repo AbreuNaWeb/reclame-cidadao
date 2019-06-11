@@ -31,6 +31,14 @@
 					action="/cidadao/alterarDadosPessoais?faces-redirect=true"
 					style="margin-right:20px; width:250px"
 					rendered="#{layoutTela.isCidadao()}" ajax="true" />
+				<p:commandButton value="#{mensagem.cadastrar_reclamacao_sugestao}"
+					action="/cidadao/cadastrarReclamacaoSugestao?faces-redirect=true"
+					style="margin-right:20px; width:250px"
+					rendered="#{layoutTela.isCidadao()}" ajax="true" />
+				<p:commandButton value="#{mensagem.minhas_reclamacoes_sugestoes}"
+					action="/cidadao/minhasReclamacoesSugestoes?faces-redirect=true"
+					style="margin-right:20px; width:250px"
+					rendered="#{layoutTela.isCidadao()}" ajax="true" />
 				<p:commandButton value="#{mensagem.atualizar_agente}"
 					action="/admin/atualizarAgente?faces-redirect=true"
 					style="margin-right:20px; width:250px"
@@ -43,10 +51,6 @@
 					action="/admin/excluirAgente?faces-redirect=true"
 					style="margin-right:20px; width:250px"
 					rendered="#{layoutTela.isAdministrador()}" ajax="true" />
-				<p:commandButton value="#{mensagem.cadastrar_reclamacao_sugestao}"
-					action="/cidadao/cadastrarReclamacaoSugestao?faces-redirect=true"
-					style="margin-right:20px; width:250px"
-					rendered="#{layoutTela.isCidadao()}" ajax="true" />
 				<p:commandButton value="#{mensagem.listar_reclamacoes_sugestoes}"
 					action="/listarReclamacoesSugestoes?faces-redirect=true"
 					style="margin-right:20px; width:250px" ajax="true" />
