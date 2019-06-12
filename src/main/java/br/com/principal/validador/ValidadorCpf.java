@@ -19,7 +19,7 @@ public class ValidadorCpf implements Validator<Long>, Serializable {
 	@Override
 	public void validate(FacesContext contexto, UIComponent componente, Long cpf) throws ValidatorException {
 		try {
-			new CPFValidator().assertValid(cpf.toString());
+			new CPFValidator().assertValid(cpf.toString().length() == 11 ? cpf.toString() : "0" + cpf.toString());
 		} catch (Exception excecao) {
 			throw new ValidatorException(new FacesMessage());
 		}
