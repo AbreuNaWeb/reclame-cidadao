@@ -24,11 +24,23 @@ public class AlteraDadosPessoaisTela implements Serializable {
 	private UsuarioRegras usuarioRegras;
 
 	private UsuarioEntidade usuarioLogadoAtualizado;
+	
+	private boolean possuiPermissao;
 
 	@PostConstruct
 	public void inicializar() {
 		UsuarioEntidade usuarioLogado = SessaoUtil.obterUsuarioLogado();
-		this.usuarioLogadoAtualizado = usuarioRegras.buscarPorCPF(usuarioLogado.getCpf());
+		this.possuiPermissao = SessaoUtil.isNotCidadao() ? false : true;
+		
+		if (possuiPermissao) {
+			this.usuarioLogadoAtualizado = usuarioRegras.buscarPorCPF(usuarioLogado);
+		}
+	}
+	
+	public void exibeMensagemCasoNaoPossuirPermissao() {
+		if (!possuiPermissao) {
+			TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.VOCE_NAO_TEM_PERMISSAO);
+		}
 	}
 
 	public void atualizar() {
@@ -46,5 +58,9 @@ public class AlteraDadosPessoaisTela implements Serializable {
 
 	public void setUsuarioLogadoAtualizado(UsuarioEntidade usuarioLogadoAtualizado) {
 		this.usuarioLogadoAtualizado = usuarioLogadoAtualizado;
+	}
+	
+	public boolean isPossuiPermissao() {
+		return possuiPermissao;
 	}
 }

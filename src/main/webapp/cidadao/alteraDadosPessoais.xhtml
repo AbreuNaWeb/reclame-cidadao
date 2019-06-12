@@ -5,26 +5,10 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-	<style type="text/css">
-.ui-datalist .ui-datalist-content {
-	border: 0 none
-}
-
-.ui-datalist ul {
-	padding: 0px 10px 0 20px;
-	margin: 5px 0;
-}
-
-.value {
-	font-weight: bold;
-}
-
-.ui-autocomplete-itemtip {
-	-moz-box-sizing: content-box;
-	-webkit-box-sizing: content-box;
-	box-sizing: content-box;
-}
-</style>
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{alteraDadosPessoaisTela.exibeMensagemCasoNaoPossuirPermissao}" />
+	</f:metadata>
 </h:head>
 <h:body>
 	<ui:composition template="/layout.xhtml">
@@ -35,14 +19,14 @@
 		<ui:define name="corpo">
 			<h:form>
 				<p:messages id="mensagens" autoUpdate="true" />
-				<h:panelGrid columns="2" cellspacing="5">
+				<h:panelGrid columns="2" cellspacing="5" rendered="#{alteraDadosPessoaisTela.possuiPermissao}">
 					<p:outputLabel value="#{mensagem.email}" />
 					<p:inputText
 						value="#{alteraDadosPessoaisTela.usuarioLogadoAtualizado.email}"
 						required="true"
 						requiredMessage="#{mensagem.campo_email_obrigatorio}"
-						validatorMessage="#{mensagem.email_invalido}" maxlength="60"
-						size="55">
+						validatorMessage="#{mensagem.email_invalido}" maxlength="40"
+						size="36">
 						<f:validateRegex
 							pattern="^[_A-Za-z0-9-\+]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})$" />
 					</p:inputText>
@@ -68,7 +52,7 @@
 						required="true"
 						requiredMessage="#{mensagem.campo_senha_obrigatorio}"
 						validatorMessage="#{mensagem.senha_nao_coicidem}" maxlength="16"
-						size="11">
+						size="12">
 						<f:validator validatorId="validadorSenha" />
 					</p:password>
 
@@ -77,7 +61,7 @@
 						value="#{alteraDadosPessoaisTela.usuarioLogadoAtualizado.senhaConfirmada}"
 						required="true"
 						requiredMessage="#{mensagem.campo_confirma_senha_obrigatorio}"
-						maxlength="16" size="11" />
+						maxlength="16" size="12" />
 
 					<p:commandButton value="#{mensagem.atualizar}"
 						action="#{alteraDadosPessoaisTela.atualizar()}" update="@form" />

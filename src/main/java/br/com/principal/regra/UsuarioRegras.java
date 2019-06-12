@@ -29,7 +29,7 @@ public class UsuarioRegras implements Serializable {
 	private ReclamacaoSugestaoRegras reclamacaoSugestaoRegras;
 	
 	public void cadastrarUsuario(UsuarioEntidade novoUsuario) throws RegraValidacaoException {
-		UsuarioEntidade usuarioPesquisado = buscarPorCPF(novoUsuario.getCpf());
+		UsuarioEntidade usuarioPesquisado = buscarPorCPF(novoUsuario);
 		
 		if (usuarioNaoEncontrado(usuarioPesquisado)) {
 			salvarCidadao(novoUsuario);
@@ -40,8 +40,8 @@ public class UsuarioRegras implements Serializable {
 		}
 	}
 	
-	public UsuarioEntidade buscarPorCPF(Long cpf) {
-		return usuarioDAO.buscarPorCPF(cpf);
+	public UsuarioEntidade buscarPorCPF(UsuarioEntidade usuarioEntidade) {
+		return usuarioDAO.buscarPorCPF(usuarioEntidade.getCpf());
 	}
 	
 	public UsuarioEntidade realizarLogin(Long cpfInformado, String senhaInformada) throws RegraValidacaoException {
@@ -52,6 +52,11 @@ public class UsuarioRegras implements Serializable {
 		}
 
 		return usuarioPesquisado;
+	}
+	
+	public void atualizarComConversaoDeSenhaParaMD5(UsuarioEntidade usuarioEntidade) {
+		usuarioEntidade.setSenha(converterSenhaParaMD5(usuarioEntidade.getSenha()));
+		usuarioDAO.atualizar(usuarioEntidade);
 	}
 	
 	///////////////////////////////
@@ -67,7 +72,7 @@ public class UsuarioRegras implements Serializable {
 	}
 
 	public void salvarAgente(UsuarioEntidade novoAgente) throws RegraValidacaoException {
-		UsuarioEntidade usuarioPesquisado = buscarPorCPF(novoAgente.getCpf());
+		UsuarioEntidade usuarioPesquisado = buscarPorCPF(novoAgente);
 
 		if (usuarioNaoEncontrado(usuarioPesquisado)) {
 			novoAgente.setTipo(TipoUsuarioEnum.AGENTE.getDescricao());
@@ -125,11 +130,6 @@ public class UsuarioRegras implements Serializable {
 		usuarioDAO.atualizar(usuario);
 	}
 	
-	public void atualizarComConversaoDeSenhaParaMD5(UsuarioEntidade usuarioEntidade) {
-		usuarioEntidade.setSenha(converterSenhaParaMD5(usuarioEntidade.getSenha()));
-		usuarioDAO.atualizar(usuarioEntidade);
-	}
-
 	private boolean usuarioNaoEncontrado(UsuarioEntidade usuarioPesquisado) {
 		return usuarioPesquisado == null;
 	}
