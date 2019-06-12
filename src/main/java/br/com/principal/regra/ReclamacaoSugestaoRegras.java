@@ -1,7 +1,6 @@
 package br.com.principal.regra;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -44,7 +43,8 @@ public class ReclamacaoSugestaoRegras implements Serializable {
 	public ReclamacaoSugestaoEntidade salvar(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade, UsuarioEntidade usuarioEntidade, boolean informouEndereco) throws RegraValidacaoException {
 		verificarEndereco(reclamacaoSugestaoEntidade, informouEndereco);
 		reclamacaoSugestaoEntidade.setCidadao(usuarioEntidade);
-		reclamacaoSugestaoEntidade.setHoraCriacao(TelaUtil.converterCalendarParaHoraMinuto(Calendar.getInstance()));
+		reclamacaoSugestaoEntidade.setHoraCriacao(TelaUtil.horaMinutoAtualFormatado());
+		reclamacaoSugestaoEntidade.setHoraAtualizacao(TelaUtil.horaMinutoAtualFormatado());
 		return (ReclamacaoSugestaoEntidade) reclamacaoSugestaoDAO.salvar(reclamacaoSugestaoEntidade);
 	}
 	
@@ -54,11 +54,13 @@ public class ReclamacaoSugestaoRegras implements Serializable {
 		reclamacaoSugestaoEntidade.setAgente(agente);
 		reclamacaoSugestaoEntidade.setStatus(StatusReclamacaoSugestaoEnum.EM_ANALISE.getDescricao());
 		reclamacaoSugestaoEntidade.setDataAtualizacao(TelaUtil.diaAtualEmFormatoDiaMesAno());
+		reclamacaoSugestaoEntidade.setHoraAtualizacao(TelaUtil.horaMinutoAtualFormatado());
 		reclamacaoSugestaoDAO.atualizar(reclamacaoSugestaoEntidade);
 	}
 	
 	public void atualizar(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade) {
 		reclamacaoSugestaoEntidade.setDataAtualizacao(TelaUtil.diaAtualEmFormatoDiaMesAno());
+		reclamacaoSugestaoEntidade.setHoraAtualizacao(TelaUtil.horaMinutoAtualFormatado());
 		reclamacaoSugestaoDAO.atualizar(reclamacaoSugestaoEntidade);
 	}
 	

@@ -46,8 +46,8 @@ public class TelaUtil {
 		return formatoData.format(Calendar.getInstance().getTime());
 	}
 	
-	public static String converterCalendarParaHoraMinuto(Calendar calendar) {
+	public static String horaMinutoAtualFormatado() {
 		DateFormat formatoData = new SimpleDateFormat("HH:mm");
-		return formatoData.format(calendar.getTime());
+		return formatoData.format(Calendar.getInstance().getTime());
 	}
 }

@@ -16,7 +16,7 @@ public class ReclamacaoSugestaoDAO extends GenericoDAO {
 	@SuppressWarnings("unchecked")
 	public List<ReclamacaoSugestaoEntidade> buscarTodasReclamacoesSugestoes() {
 		EntityManager em = obtemEntityManager();
-		StringBuilder sql = new StringBuilder("SELECT * FROM ReclamacaoSugestao"); 
+		StringBuilder sql = new StringBuilder("SELECT * FROM ReclamacaoSugestao ORDER BY DATA_ATUALIZACAO DESC, HORA_ATUALIZACAO DESC"); 
 		Query consulta = em.createNativeQuery(sql.toString(), ReclamacaoSugestaoEntidade.class);
 		return consulta.getResultList();
 	}
@@ -91,7 +91,7 @@ public class ReclamacaoSugestaoDAO extends GenericoDAO {
 			sql.append("AND CPF_CIDADAO = :CPF_CIDADAO ");
 		}
 		
-		sql.append("ORDER BY DATA_ATUALIZACAO DESC");
+		sql.append("ORDER BY DATA_ATUALIZACAO DESC, HORA_ATUALIZACAO DESC");
 		
 		Query consulta = em.createNativeQuery(sql.toString(), ReclamacaoSugestaoEntidade.class);
 		consulta.setParameter("CATEGORIA", categoriaEnum.getDescricao());

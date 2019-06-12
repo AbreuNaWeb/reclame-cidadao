@@ -32,10 +32,13 @@ public class ReclamacaoSugestaoEntidade {
 
 	@Column(name = "HORA_CRIACAO")
 	private String horaCriacao;
-
+	
 	@Column(name = "DATA_ATUALIZACAO")
 	private String dataAtualizacao;
-
+	
+	@Column(name = "HORA_ATUALIZACAO")
+	private String horaAtualizacao;
+	
 	@Column(name = "DATA_ENCERRAMENTO")
 	private String dataEncerramento;
 
@@ -75,6 +78,7 @@ public class ReclamacaoSugestaoEntidade {
 	public ReclamacaoSugestaoEntidade() {
 		this.tipo = TipoReclamacaoSugestaoEnum.RECLAMACAO.getDescricao();
 		this.dataCriacao = TelaUtil.diaAtualEmFormatoDiaMesAno();
+		this.dataAtualizacao = TelaUtil.diaAtualEmFormatoDiaMesAno();
 		this.status = StatusReclamacaoSugestaoEnum.ABERTA.getDescricao();
 		this.categoria = CategoriasEnum.AGUA_ESGOTO.getDescricao();
 		this.endereco = new EnderecoEntidade();
@@ -118,6 +122,14 @@ public class ReclamacaoSugestaoEntidade {
 
 	public void setDataAtualizacao(String dataAtualizacao) {
 		this.dataAtualizacao = dataAtualizacao;
+	}
+	
+	public String getHoraAtualizacao() {
+		return horaAtualizacao;
+	}
+	
+	public void setHoraAtualizacao(String horaAtualizacao) {
+		this.horaAtualizacao = horaAtualizacao;
 	}
 
 	public String getDataEncerramento() {

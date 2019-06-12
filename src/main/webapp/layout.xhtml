@@ -36,6 +36,9 @@
 					action="/cidadao/cadastraReclamacaoSugestao?faces-redirect=true"
 					style="margin-right:20px; width:250px"
 					rendered="#{layoutTela.isCidadao()}" ajax="true" />
+				<p:commandButton value="#{mensagem.listar_reclamacoes_sugestoes}"
+					action="/listaReclamacoesSugestoes?faces-redirect=true"
+					style="margin-right:20px; width:250px" ajax="true" />
 				<p:commandButton value="#{mensagem.minhas_reclamacoes_sugestoes}"
 					action="/cidadao/minhasReclamacoesSugestoes?faces-redirect=true"
 					style="margin-right:20px; width:250px"
@@ -52,9 +55,6 @@
 					action="/admin/excluirAgente?faces-redirect=true"
 					style="margin-right:20px; width:250px"
 					rendered="#{layoutTela.isAdministrador()}" ajax="true" />
-				<p:commandButton value="#{mensagem.listar_reclamacoes_sugestoes}"
-					action="/listarReclamacoesSugestoes?faces-redirect=true"
-					style="margin-right:20px; width:250px" ajax="true" />
 				<p:commandButton value="#{mensagem.pesquisar_cidadao}"
 					action="/agente/bloquearCidadao?faces-redirect=true"
 					style="margin-right:20px; width:250px"
