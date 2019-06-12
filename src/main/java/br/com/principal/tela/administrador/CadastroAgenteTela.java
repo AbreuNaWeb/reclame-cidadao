@@ -11,6 +11,7 @@ import br.com.principal.constante.MensagemErroEnum;
 import br.com.principal.entidade.UsuarioEntidade;
 import br.com.principal.excecao.RegraValidacaoException;
 import br.com.principal.regra.UsuarioRegras;
+import br.com.principal.tela.util.SessaoUtil;
 import br.com.principal.tela.util.TelaUtil;
 
 @Named
@@ -22,9 +23,19 @@ public class CadastroAgenteTela {
 
 	private UsuarioEntidade novoAgente;
 
+	private boolean possuiPermissao;
+	
 	@PostConstruct
 	public void inicializar() {
 		this.novoAgente = new UsuarioEntidade();
+	}
+	
+	public void exibeMensagemCasoNaoPossuirPermissao() {
+		this.possuiPermissao = SessaoUtil.isNotAdministrador() ? false : true;
+		
+		if (!possuiPermissao) {
+			TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.VOCE_NAO_TEM_PERMISSAO);
+		}
 	}
 
 	public void cadastrar() {
@@ -49,5 +60,9 @@ public class CadastroAgenteTela {
 
 	public void setNovoAgente(UsuarioEntidade novoAgente) {
 		this.novoAgente = novoAgente;
+	}
+	
+	public boolean isPossuiPermissao() {
+		return possuiPermissao;
 	}
 }

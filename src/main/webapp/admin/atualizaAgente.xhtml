@@ -17,8 +17,8 @@
 		<ui:param name="caminhoGifCarregamentoParametro"
 			value="../imagens/gif_carregando.gif" />
 		<ui:define name="corpo">
-			<h:form>
-				<p:messages id="mensagens" autoUpdate="true" />
+			<p:messages id="mensagens" autoUpdate="true" />
+			<h:form rendered="#{atualizaAgenteTela.possuiPermissao}">
 				<h:panelGrid columns="2">
 					<p:outputLabel value="#{mensagem.cpf}" />
 					<p:inputMask value="#{atualizaAgenteTela.cpfInformado}" size="12"

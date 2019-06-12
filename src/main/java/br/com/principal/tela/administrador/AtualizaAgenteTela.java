@@ -76,4 +76,8 @@ public class AtualizaAgenteTela implements Serializable {
 	public void setCpfInformado(Long cpfInformado) {
 		this.cpfInformado = cpfInformado;
 	}
+	
+	public boolean isPossuiPermissao() {
+		return possuiPermissao;
+	}
 }

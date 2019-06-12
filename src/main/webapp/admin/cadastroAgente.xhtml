@@ -5,26 +5,10 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-	<style type="text/css">
-.ui-datalist .ui-datalist-content {
-	border: 0 none
-}
-
-.ui-datalist ul {
-	padding: 0px 10px 0 20px;
-	margin: 5px 0;
-}
-
-.value {
-	font-weight: bold;
-}
-
-.ui-autocomplete-itemtip {
-	-moz-box-sizing: content-box;
-	-webkit-box-sizing: content-box;
-	box-sizing: content-box;
-}
-</style>
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{cadastroAgenteTela.exibeMensagemCasoNaoPossuirPermissao}" />
+	</f:metadata>
 </h:head>
 <h:body>
 	<ui:composition template="/layout.xhtml">
@@ -33,14 +17,17 @@
 		<ui:param name="caminhoGifCarregamentoParametro"
 			value="../imagens/gif_carregando.gif" />
 		<ui:define name="corpo">
-			<h:form>
-				<p:messages id="mensagens" autoUpdate="true" />
+			<p:messages id="mensagens" autoUpdate="true" />
+			<h:form rendered="#{cadastroAgenteTela.possuiPermissao}">
 				<h:panelGrid columns="2">
 					<p:outputLabel value="#{mensagem.cpf}" />
-					<p:inputMask value="#{cadastroAgenteTela.novoAgente.cpf}" size="14"
+					<p:inputMask value="#{cadastroAgenteTela.novoAgente.cpf}" size="12"
 						mask="999.999.999-99" maxlength="14" converter="conversorCpf"
 						required="true"
-						requiredMessage="#{mensagem.campo_cpf_obrigatorio}" />
+						requiredMessage="#{mensagem.campo_cpf_obrigatorio}"
+						validatorMessage="#{mensagem.cpf_invalido}">
+						<f:validator validatorId="validadorCpf" />
+					</p:inputMask>
 
 					<p:outputLabel value="#{mensagem.setor}" />
 					<p:selectOneMenu value="#{cadastroAgenteTela.novoAgente.setor}">
