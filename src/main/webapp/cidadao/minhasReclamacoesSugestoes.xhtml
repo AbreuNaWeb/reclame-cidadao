@@ -62,7 +62,8 @@
 				<p:dataTable var="dado"
 					emptyMessage="#{mensagem.nenhum_registro_encontrado}"
 					value="#{minhasReclamacoesSugestoesTela.listaReclamacaoSugestaoEntidade}">
-					<p:column headerText="#{mensagem.data_criacao}">
+					<p:column headerText="#{mensagem.data_criacao}"
+						style="text-align: center; width: 15%">
 						<h:link value="#{dado.dataCriacao}"
 							outcome="/detalheReclamacaoSugestao.xhtml"
 							includeViewParams="true">
@@ -74,12 +75,20 @@
 						<h:outputText value="#{dado.titulo}" />
 					</p:column>
 
-					<p:column headerText="#{mensagem.listar_reclamacoes_status}">
+					<p:column headerText="#{mensagem.categoria_label_tabela}"
+						style="text-align: center; width: 10%">
+						<h:outputText value="#{dado.categoria}" />
+					</p:column>
+
+					<p:column headerText="#{mensagem.listar_reclamacoes_status}"
+						style="text-align: center; width: 10%">
 						<h:outputText value="#{dado.status}" />
 					</p:column>
 
-					<p:column headerText="#{mensagem.categoria_label_tabela}">
-						<h:outputText value="#{dado.categoria}" />
+					<p:column headerText="#{mensagem.data_atualizacao}"
+						style="text-align: center; width: 15%">
+						<h:outputText
+							value="#{dado.dataAtualizacao} #{dado.horaAtualizacao}" />
 					</p:column>
 				</p:dataTable>
 			</h:form>
