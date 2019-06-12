@@ -5,6 +5,10 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{bloqueioCidadaoTela.exibeMensagemCasoNaoPossuirPermissao}" />
+	</f:metadata>
 </h:head>
 <h:body>
 	<ui:composition template="/layout.xhtml">
@@ -13,14 +17,16 @@
 		<ui:param name="caminhoGifCarregamentoParametro"
 			value="../imagens/gif_carregando.gif" />
 		<ui:define name="corpo">
-			<h:form>
-				<p:messages id="mensagens" autoUpdate="true" />
+			<p:messages id="mensagens" autoUpdate="true" />
+			<h:form rendered="#{bloqueioCidadaoTela.possuiPermissao}">
 				<h:panelGrid columns="2">
 					<p:outputLabel value="#{mensagem.cpf}" />
-					<p:inputMask value="#{bloqueioCidadaoTela.cpfInformado}" size="14"
+					<p:inputMask value="#{bloqueioCidadaoTela.cpfInformado}" size="12"
 						mask="999.999.999-99" maxlength="14" converter="conversorCpf"
 						required="true"
-						requiredMessage="#{mensagem.campo_cpf_obrigatorio}">
+						requiredMessage="#{mensagem.campo_cpf_obrigatorio}"
+						validatorMessage="#{mensagem.cpf_invalido}">
+						<f:validator validatorId="validadorCpf" />
 					</p:inputMask>
 				</h:panelGrid>
 				<h:panelGrid columns="2"
