@@ -11,6 +11,7 @@ import br.com.principal.constante.MensagemErroEnum;
 import br.com.principal.entidade.UsuarioEntidade;
 import br.com.principal.excecao.RegraValidacaoException;
 import br.com.principal.regra.UsuarioRegras;
+import br.com.principal.tela.util.SessaoUtil;
 import br.com.principal.tela.util.TelaUtil;
 
 @Named
@@ -25,7 +26,17 @@ public class ExcluirAgenteTela implements Serializable {
 	private UsuarioEntidade agenteParaExcluir;
 
 	private Long cpfInformado;
+	
+	private boolean possuiPermissao;
 
+	public void exibeMensagemCasoNaoPossuirPermissao() {
+		this.possuiPermissao = SessaoUtil.isNotAdministrador() ? false : true;
+		
+		if (!possuiPermissao) {
+			TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.VOCE_NAO_TEM_PERMISSAO);
+		}
+	}
+	
 	public void pesquisarAgenteParaExcluir() {
 		try {
 			this.agenteParaExcluir = usuarioRegras.buscarAgenteParaAtualizarOuExcluir(cpfInformado);
@@ -59,5 +70,9 @@ public class ExcluirAgenteTela implements Serializable {
 
 	public UsuarioEntidade getAgenteParaExcluir() {
 		return agenteParaExcluir;
+	}
+	
+	public boolean isPossuiPermissao() {
+		return possuiPermissao;
 	}
 }

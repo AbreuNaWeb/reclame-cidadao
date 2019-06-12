@@ -5,26 +5,10 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-	<style type="text/css">
-.ui-datalist .ui-datalist-content {
-	border: 0 none
-}
-
-.ui-datalist ul {
-	padding: 0px 10px 0 20px;
-	margin: 5px 0;
-}
-
-.value {
-	font-weight: bold;
-}
-
-.ui-autocomplete-itemtip {
-	-moz-box-sizing: content-box;
-	-webkit-box-sizing: content-box;
-	box-sizing: content-box;
-}
-</style>
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{excluirAgenteTela.exibeMensagemCasoNaoPossuirPermissao}" />
+	</f:metadata>
 </h:head>
 <h:body>
 	<ui:composition template="/layout.xhtml">
@@ -47,7 +31,7 @@
 					rendered="#{not empty excluirAgenteTela.agenteParaExcluir}">
 					<p:outputLabel value="#{mensagem.nome}" />
 					<p:outputLabel value="#{excluirAgenteTela.agenteParaExcluir.nome}" />
-					
+
 					<p:outputLabel value="#{mensagem.setor}" />
 					<p:outputLabel value="#{excluirAgenteTela.agenteParaExcluir.setor}" />
 
@@ -65,7 +49,7 @@
 						update="@form" />
 					<p:commandButton value="#{mensagem.excluir}"
 						actionListener="#{excluirAgenteTela.excluir()}" update="@form"
-						rendered="#{not empty excluirAgenteTela.agenteParaExcluir}"  />
+						rendered="#{not empty excluirAgenteTela.agenteParaExcluir}" />
 				</h:panelGrid>
 			</h:form>
 		</ui:define>
