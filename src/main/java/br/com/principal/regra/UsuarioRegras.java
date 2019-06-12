@@ -35,9 +35,9 @@ public class UsuarioRegras implements Serializable {
 			salvarCidadao(novoUsuario);
 		} else if (agenteAindaNaoSeCadastrou(usuarioPesquisado)) {
 			atualizarDadosDoAgente(usuarioPesquisado, novoUsuario);
+		} else {
+			throw new RegraValidacaoException(MensagemErroEnum.CPF_JA_CADASTRADO);
 		}
-		
-		throw new RegraValidacaoException(MensagemErroEnum.CPF_JA_CADASTRADO);
 	}
 	
 	public UsuarioEntidade buscarPorCPF(Long cpf) {
