@@ -5,7 +5,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.principal.constante.LinkPaginasEnum;
+import br.com.principal.constante.LinkPaginaEnum;
 import br.com.principal.constante.MensagemEnum;
 import br.com.principal.constante.MensagemErroEnum;
 import br.com.principal.entidade.UsuarioEntidade;
@@ -30,7 +30,7 @@ public class CadastroUsuarioTela {
 	public void cadastrar() {
 		try {
 			usuarioRegras.cadastrarUsuario(usuarioRegistro);
-			TelaUtil.redirecionarParaOutraPagina(LinkPaginasEnum.LOGIN.getDescricao(), MensagemEnum.CADASTROU_SUCESSO.getDescricao());
+			TelaUtil.redirecionarParaOutraPagina(LinkPaginaEnum.LOGIN.getLink(), MensagemEnum.CADASTROU_SUCESSO.getDescricao());
 		} catch (RegraValidacaoException erroValidacao) {
 			TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemErroEnum());
 		} catch (Exception erroDesconhecido) {

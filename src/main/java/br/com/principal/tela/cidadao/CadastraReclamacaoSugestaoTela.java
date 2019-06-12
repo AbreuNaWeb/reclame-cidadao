@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.principal.constante.CategoriasEnum;
+import br.com.principal.constante.LinkPaginaEnum;
 import br.com.principal.constante.MensagemEnum;
 import br.com.principal.constante.MensagemErroEnum;
 import br.com.principal.constante.TipoReclamacaoSugestaoEnum;
@@ -29,18 +30,18 @@ public class CadastraReclamacaoSugestaoTela implements Serializable {
 	private ReclamacaoSugestaoRegras regra;
 
 	private ReclamacaoSugestaoEntidade novaReclamacaoSugestao;
-	
+
 	private boolean informarEndereco;
-	
+
 	private boolean naoExedeuLimiteDePublicacoes;
-	
+
 	private boolean possuiPermissao;
 
 	@PostConstruct
 	public void inicializar() {
 		this.novaReclamacaoSugestao = new ReclamacaoSugestaoEntidade();
 	}
-	
+
 	public void verificarSeAtingiuLimite() {
 		if (novaRequisicao()) {
 			if (SessaoUtil.isNotCidadao()) {
@@ -48,9 +49,9 @@ public class CadastraReclamacaoSugestaoTela implements Serializable {
 				TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.VOCE_NAO_TEM_PERMISSAO);
 				return;
 			}
-			
+
 			this.possuiPermissao = true;
-			
+
 			try {
 				regra.verificarSeExedeuLimites(SessaoUtil.obterUsuarioLogado());
 				this.naoExedeuLimiteDePublicacoes = true;
@@ -67,14 +68,15 @@ public class CadastraReclamacaoSugestaoTela implements Serializable {
 	public void cadastrar() {
 		try {
 			this.novaReclamacaoSugestao = regra.salvar(novaReclamacaoSugestao, SessaoUtil.obterUsuarioLogado(), informarEndereco);
-			TelaUtil.redirecionarParaOutraPagina("/reclame-cidadao/detalheReclamacaoSugestao.xhtml?id=" + novaReclamacaoSugestao.getId(), MensagemEnum.CADASTROU_SUCESSO.getDescricao());
+			TelaUtil.redirecionarParaOutraPagina(LinkPaginaEnum.DETALHE_RECLAMACAO_SUGESTAO.getLink() + novaReclamacaoSugestao.getId(),
+					MensagemEnum.CADASTROU_SUCESSO.getDescricao());
 		} catch (RegraValidacaoException erroValidacao) {
 			TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemErroEnum());
 		} catch (Exception erroDesconhecido) {
 			TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.ERRO_DESCONHECIDO);
 		}
 	}
-	
+
 	public TipoReclamacaoSugestaoEnum[] opcoesDeTipo() {
 		return TipoReclamacaoSugestaoEnum.values();
 	}
@@ -94,23 +96,23 @@ public class CadastraReclamacaoSugestaoTela implements Serializable {
 	public void setNovaReclamacaoSugestao(ReclamacaoSugestaoEntidade novaReclamacaoSugestao) {
 		this.novaReclamacaoSugestao = novaReclamacaoSugestao;
 	}
-	
+
 	public boolean isInformarEndereco() {
 		return informarEndereco;
 	}
-	
+
 	public void setInformarEndereco(boolean informarEndereco) {
 		this.informarEndereco = informarEndereco;
 	}
-	
+
 	public boolean isNaoExedeuLimiteDePublicacoes() {
 		return naoExedeuLimiteDePublicacoes;
 	}
-	
+
 	private boolean novaRequisicao() {
 		return !FacesContext.getCurrentInstance().isPostback();
 	}
-	
+
 	public boolean isPossuiPermissao() {
 		return possuiPermissao;
 	}

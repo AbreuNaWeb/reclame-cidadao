@@ -28,14 +28,14 @@ public class TelaUtil {
 				mensagemEnum.getDescricao(), null));
 	}
 	
-	public static void redirecionarParaOutraPagina(String url, String mensagem) {
+	public static void redirecionarParaOutraPagina(String linkPagina, String mensagem) {
 		try {
 			FacesContext contextoAtual = FacesContext.getCurrentInstance();
 			ExternalContext contextoExterno = contextoAtual.getExternalContext();
 			Flash memoria = contextoExterno.getFlash();
 			memoria.setKeepMessages(true);
 			contextoAtual.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, mensagem, null));
-			contextoExterno.redirect(url);
+			contextoExterno.redirect(linkPagina);
 		} catch (IOException excecao) {
 			adicionarMensagemDeErro(MensagemErroEnum.ERRO_FAVOR_RETORNAR_PAGINA_INICIAL);
 		}
