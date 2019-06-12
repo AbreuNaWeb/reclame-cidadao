@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{cadastraReclamacaoSugestaoTela.verificarSeAtingiuLimite()}" />
+	</f:metadata>
+</h:head>
+<h:body>
+	<ui:composition template="/layout.xhtml">
+		<ui:param name="tituloParametro"
+			value="#{mensagem.titulo_cadastro_reclamacao_sugestao}" />
+		<ui:param name="caminhoGifCarregamentoParametro"
+			value="../imagens/gif_carregando.gif" />
+		<ui:define name="corpo">
+			<h:form>
+				<h:panelGrid>
+					<f:facet name="header">
+						<p:messages id="mensagens" />
+					</f:facet>
+				</h:panelGrid>
+				<p:panel
+					rendered="#{cadastraReclamacaoSugestaoTela.naoExedeuLimiteDePublicacoes or cadastraReclamacaoSugestaoTela.possuiPermissao}">
+					<h:panelGrid columns="2">
+						<h:outputText value="#{mensagem.tipo}" />
+						<p:selectOneMenu
+							value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.tipo}">
+							<f:selectItems
+								value="#{cadastraReclamacaoSugestaoTela.opcoesDeTipo()}"
+								var="tipo" itemLabel="#{tipo.descricao}"
+								itemValue="#{tipo.descricao}" />
+						</p:selectOneMenu>
+
+						<p:outputLabel value="#{mensagem.titulo}" />
+						<p:inputText
+							value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.titulo}"
+							required="true" requiredMessage="#{mensagem.titulo_obrigatorio}"
+							maxlength="25" size="21">
+							<p:keyFilter
+								regEx="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/" />
+						</p:inputText>
+
+						<p:outputLabel value="#{mensagem.descricao}" />
+						<p:inputTextarea rows="8" cols="50" maxlength="300"
+							value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.descricao}"
+							required="true"
+							requiredMessage="#{mensagem.descricao_obrigatorio}" />
+
+						<p:outputLabel value="#{mensagem.categoria}" />
+						<p:selectOneMenu
+							value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.categoria}">
+							<f:selectItems
+								value="#{cadastraReclamacaoSugestaoTela.getCategorias()}"
+								var="categoria" itemLabel="#{categoria.descricao}"
+								itemValue="#{categoria.descricao}" />
+						</p:selectOneMenu>
+
+						<br />
+						<br />
+						<p:selectBooleanCheckbox
+							value="#{cadastraReclamacaoSugestaoTela.informarEndereco}"
+							itemLabel="#{mensagem.checkbox_informar_endereco}">
+							<p:ajax process="@form" />
+							<p:ajax update="@form" />
+						</p:selectBooleanCheckbox>
+					</h:panelGrid>
+
+					<br />
+
+					<h:panelGrid columns="2"
+						rendered="#{cadastraReclamacaoSugestaoTela.informarEndereco}">
+						<p:outputLabel value="#{mensagem.rua}" />
+						<p:inputText
+							value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.rua}"
+							required="true"
+							requiredMessage="#{mensagem.campo_rua_obrigatorio}"
+							maxlength="30" size="26">
+							<p:keyFilter
+								regEx="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/" />
+						</p:inputText>
+
+						<p:outputLabel value="#{mensagem.numero}" />
+						<p:inputText
+							value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.numero}"
+							required="true"
+							requiredMessage="#{mensagem.campo_numero_obrigatorio}"
+							maxlength="7" size="4">
+							<p:keyFilter regEx="/[\d\.]/" />
+						</p:inputText>
+
+						<p:outputLabel value="#{mensagem.complemento}" />
+						<p:inputText
+							value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.complemento}"
+							maxlength="25" size="21">
+							<p:keyFilter
+								regEx="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/" />
+						</p:inputText>
+
+						<p:outputLabel value="#{mensagem.bairro}" />
+						<p:inputText
+							value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.bairro}"
+							required="true"
+							requiredMessage="#{mensagem.campo_bairro_obrigatorio}"
+							maxlength="25" size="21">
+							<p:keyFilter
+								regEx="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/" />
+						</p:inputText>
+
+						<p:outputLabel value="#{mensagem.cidade}" />
+						<p:inputText
+							value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.cidade}"
+							required="true"
+							requiredMessage="#{mensagem.campo_cidade_obrigatorio}"
+							maxlength="25" size="21">
+							<p:keyFilter
+								regEx="/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/" />
+						</p:inputText>
+
+						<p:outputLabel value="#{mensagem.estado}" />
+						<p:selectOneMenu
+							value="#{cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.endereco.estado}"
+							required="true"
+							requiredMessage="#{mensagem.campo_estado_obrigatorio}">
+							<f:selectItems
+								value="#{cadastraReclamacaoSugestaoTela.unidadesFederativas()}"
+								var="unidadeFederativa" itemLabel="#{unidadeFederativa.nome}"
+								itemValue="#{unidadeFederativa.nome}">
+							</f:selectItems>
+						</p:selectOneMenu>
+					</h:panelGrid>
+
+					<h:panelGrid columns="1">
+						<p:commandButton value="#{mensagem.cadastrar}"
+							actionListener="#{cadastraReclamacaoSugestaoTela.cadastrar()}"
+							update="@form" ajax="true" />
+					</h:panelGrid>
+				</p:panel>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

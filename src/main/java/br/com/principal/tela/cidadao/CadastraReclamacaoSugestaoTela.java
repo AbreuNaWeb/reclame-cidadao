@@ -47,20 +47,19 @@ public class CadastraReclamacaoSugestaoTela implements Serializable {
 			if (SessaoUtil.isNotCidadao()) {
 				this.possuiPermissao = false;
 				TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.VOCE_NAO_TEM_PERMISSAO);
-				return;
-			}
+			} else {
+				this.possuiPermissao = true;
 
-			this.possuiPermissao = true;
-
-			try {
-				regra.verificarSeExedeuLimites(SessaoUtil.obterUsuarioLogado());
-				this.naoExedeuLimiteDePublicacoes = true;
-			} catch (RegraValidacaoException erroValidacao) {
-				this.naoExedeuLimiteDePublicacoes = false;
-				TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemErroEnum());
-			} catch (Exception erroDesconhecido) {
-				this.naoExedeuLimiteDePublicacoes = true;
-				TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.ERRO_DESCONHECIDO);
+				try {
+					regra.verificarSeExedeuLimites(SessaoUtil.obterUsuarioLogado());
+					this.naoExedeuLimiteDePublicacoes = true;
+				} catch (RegraValidacaoException erroValidacao) {
+					this.naoExedeuLimiteDePublicacoes = false;
+					TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemErroEnum());
+				} catch (Exception erroDesconhecido) {
+					this.naoExedeuLimiteDePublicacoes = true;
+					TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.ERRO_DESCONHECIDO);
+				}
 			}
 		}
 	}
@@ -68,8 +67,7 @@ public class CadastraReclamacaoSugestaoTela implements Serializable {
 	public void cadastrar() {
 		try {
 			this.novaReclamacaoSugestao = regra.salvar(novaReclamacaoSugestao, SessaoUtil.obterUsuarioLogado(), informarEndereco);
-			TelaUtil.redirecionarParaOutraPagina(LinkPaginaEnum.DETALHE_RECLAMACAO_SUGESTAO.getLink() + novaReclamacaoSugestao.getId(),
-					MensagemEnum.CADASTROU_SUCESSO.getDescricao());
+			TelaUtil.redirecionarParaOutraPagina(LinkPaginaEnum.DETALHE_RECLAMACAO_SUGESTAO.getLink() + novaReclamacaoSugestao.getId(), MensagemEnum.CADASTROU_SUCESSO.getDescricao());
 		} catch (RegraValidacaoException erroValidacao) {
 			TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemErroEnum());
 		} catch (Exception erroDesconhecido) {

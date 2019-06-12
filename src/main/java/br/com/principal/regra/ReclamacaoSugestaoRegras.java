@@ -27,6 +27,29 @@ public class ReclamacaoSugestaoRegras implements Serializable {
 	@Inject
 	private EnderecoRegras enderecoRegras;
 
+	public void verificarSeExedeuLimites(UsuarioEntidade cidadao) throws RegraValidacaoException {
+		List<ReclamacaoSugestaoEntidade> reclamacoesSugestoesAbertas = reclamacaoSugestaoDAO.buscarReclamacoesOuSugestoesAbertasDoCidadao(cidadao.getCpf());
+		
+		if (exedeuLimiteDeReclamacoesOuSugestoesAbertas(reclamacoesSugestoesAbertas)) {
+			throw new RegraValidacaoException(MensagemErroEnum.ATINGIU_LIMITE_RECLAMACOES_SUGESTOES_ABERTAS);
+		}
+		
+		List<ReclamacaoSugestaoEntidade> reclamacoesSugestoesCadastradasHoje = reclamacaoSugestaoDAO.buscarReclamacoesOuSugestoesCadastradasHoje(cidadao.getCpf());
+	
+		if (excedeuLimiteDeReclamacoesOuSugestoesCadastradasPorDia(reclamacoesSugestoesCadastradasHoje)) {
+			throw new RegraValidacaoException(MensagemErroEnum.ATINGIU_LIMITE_RECLAMACOES_SUGESTOES_CADASTRADAS_DIA);
+		}
+	}
+	
+	public ReclamacaoSugestaoEntidade salvar(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade, UsuarioEntidade usuarioEntidade, boolean informouEndereco) throws RegraValidacaoException {
+		verificarEndereco(reclamacaoSugestaoEntidade, informouEndereco);
+		reclamacaoSugestaoEntidade.setCidadao(usuarioEntidade);
+		reclamacaoSugestaoEntidade.setHoraCriacao(TelaUtil.converterCalendarParaHoraMinuto(Calendar.getInstance()));
+		return (ReclamacaoSugestaoEntidade) reclamacaoSugestaoDAO.salvar(reclamacaoSugestaoEntidade);
+	}
+	
+	////////////////////////////////////////
+	
 	public void atribuirReclamacaoOuSugestaoParaAgente(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade, UsuarioEntidade agente) {
 		reclamacaoSugestaoEntidade.setAgente(agente);
 		reclamacaoSugestaoEntidade.setStatus(StatusReclamacaoSugestaoEnum.EM_ANALISE.getDescricao());
@@ -39,37 +62,24 @@ public class ReclamacaoSugestaoRegras implements Serializable {
 		reclamacaoSugestaoDAO.atualizar(reclamacaoSugestaoEntidade);
 	}
 	
-	public ReclamacaoSugestaoEntidade salvar(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade, UsuarioEntidade usuarioEntidade, boolean informouEndereco) throws RegraValidacaoException {
-		verificarEndereco(reclamacaoSugestaoEntidade, informouEndereco);
-		reclamacaoSugestaoEntidade.setCidadao(usuarioEntidade);
-		reclamacaoSugestaoEntidade.setHoraCriacao(TelaUtil.converterCalendarParaHoraMinuto(Calendar.getInstance()));
-		return (ReclamacaoSugestaoEntidade) reclamacaoSugestaoDAO.salvar(reclamacaoSugestaoEntidade);
-	}
-
-	public void verificarSeExedeuLimites(UsuarioEntidade usuarioEntidade) throws RegraValidacaoException {
-		List<ReclamacaoSugestaoEntidade> reclamacoesSugestoesAbertas = reclamacaoSugestaoDAO.buscarReclamacoesOuSugestoesAbertasDoCidadao(usuarioEntidade.getCpf());
-		
-		if (exedeuLimiteDeReclamacoesOuSugestoesAbertas(reclamacoesSugestoesAbertas)) {
-			throw new RegraValidacaoException(MensagemErroEnum.ATINGIU_LIMITE_RECLAMACOES_SUGESTOES_ABERTAS);
-		}
-		
-		List<ReclamacaoSugestaoEntidade> reclamacoesSugestoesCadastradasHoje = reclamacaoSugestaoDAO.buscarReclamacoesOuSugestoesCadastradasHoje(usuarioEntidade.getCpf());
-	
-		if (excedeuLimiteDeReclamacoesOuSugestoesCadastradasPorDia(reclamacoesSugestoesCadastradasHoje)) {
-			throw new RegraValidacaoException(MensagemErroEnum.ATINGIU_LIMITE_RECLAMACOES_SUGESTOES_CADASTRADAS_DIA);
-		}
-	}
-	
 	public List<ReclamacaoSugestaoEntidade> buscarReclamacoesOuSugestoesDoCidadao(Long cpfDoCidadao) {
 		return reclamacaoSugestaoDAO.buscarReclamacoesOuSugestoesDoCidadao(cpfDoCidadao);
+	}
+	
+	private boolean exedeuLimiteDeReclamacoesOuSugestoesAbertas(List<ReclamacaoSugestaoEntidade> reclamacoesSugestoesAbertas) {
+		return reclamacoesSugestoesAbertas.size() > 5;
 	}
 
 	private boolean excedeuLimiteDeReclamacoesOuSugestoesCadastradasPorDia(List<ReclamacaoSugestaoEntidade> reclamacoesSugestoesCadastradasHoje) {
 		return reclamacoesSugestoesCadastradasHoje.size() > 1;
 	}
-
-	private boolean exedeuLimiteDeReclamacoesOuSugestoesAbertas(List<ReclamacaoSugestaoEntidade> reclamacoesSugestoesAbertas) {
-		return reclamacoesSugestoesAbertas.size() > 5;
+	
+	private void verificarEndereco(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade, boolean informouEndereco) {
+		if (informouEndereco) {
+			reclamacaoSugestaoEntidade.setEndereco(enderecoRegras.salvar(reclamacaoSugestaoEntidade.getEndereco()));
+		} else {
+			reclamacaoSugestaoEntidade.setEndereco(null);
+		}
 	}
 
 	public List<ReclamacaoSugestaoEntidade> buscarTodasReclamacoesSugestoes() {
@@ -86,13 +96,5 @@ public class ReclamacaoSugestaoRegras implements Serializable {
 	
 	public List<ReclamacaoSugestaoEntidade> buscarReclamacoesOuSugestoesComFiltro(CategoriasEnum categoriaEnum, StatusReclamacaoSugestaoEnum statusEnum, Long cpfDoCidadao) {
 		return reclamacaoSugestaoDAO.buscarReclamacoesOuSugestoesComFiltro(categoriaEnum, statusEnum, cpfDoCidadao);
-	}
-
-	private void verificarEndereco(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade, boolean informouEndereco) {
-		if (informouEndereco) {
-			reclamacaoSugestaoEntidade.setEndereco(enderecoRegras.salvar(reclamacaoSugestaoEntidade.getEndereco()));
-		} else {
-			reclamacaoSugestaoEntidade.setEndereco(null);
-		}
 	}
 }
