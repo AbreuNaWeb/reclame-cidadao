@@ -8,10 +8,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.principal.constante.CategoriasEnum;
+import br.com.principal.constante.MensagemErroEnum;
 import br.com.principal.constante.StatusReclamacaoSugestaoEnum;
 import br.com.principal.entidade.ReclamacaoSugestaoEntidade;
 import br.com.principal.regra.ReclamacaoSugestaoRegras;
 import br.com.principal.tela.util.SessaoUtil;
+import br.com.principal.tela.util.TelaUtil;
 
 @Named
 @RequestScoped
@@ -25,6 +27,8 @@ public class MinhasReclamacoesSugestoesTela {
 	private CategoriasEnum categoriaParaPesquisar;
 
 	private StatusReclamacaoSugestaoEnum statusParaPesquisar;
+	
+	private boolean possuiPermissao;
 
 	@PostConstruct
 	public void inicializar() {
@@ -33,6 +37,14 @@ public class MinhasReclamacoesSugestoesTela {
 
 	public void pesquisar() {
 		this.listaReclamacaoSugestaoEntidade = regra.buscarReclamacoesOuSugestoesComFiltro(categoriaParaPesquisar, statusParaPesquisar, SessaoUtil.obterUsuarioLogado().getCpf());
+	}
+	
+	public void exibeMensagemCasoNaoPossuirPermissao() {
+		this.possuiPermissao = SessaoUtil.isNotCidadao() ? false : true;
+		
+		if (!possuiPermissao) {
+			TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.VOCE_NAO_TEM_PERMISSAO);
+		}
 	}
 
 	public List<ReclamacaoSugestaoEntidade> getListaReclamacaoSugestaoEntidade() {
@@ -61,5 +73,9 @@ public class MinhasReclamacoesSugestoesTela {
 
 	public void setStatusParaPesquisar(StatusReclamacaoSugestaoEnum statusParaPesquisar) {
 		this.statusParaPesquisar = statusParaPesquisar;
+	}
+	
+	public boolean isPossuiPermissao() {
+		return possuiPermissao;
 	}
 }

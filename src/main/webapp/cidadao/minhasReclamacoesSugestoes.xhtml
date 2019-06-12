@@ -5,26 +5,10 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-	<style type="text/css">
-.ui-datalist .ui-datalist-content {
-	border: 0 none
-}
-
-.ui-datalist ul {
-	padding: 0px 10px 0 20px;
-	margin: 5px 0;
-}
-
-.value {
-	font-weight: bold;
-}
-
-.ui-autocomplete-itemtip {
-	-moz-box-sizing: content-box;
-	-webkit-box-sizing: content-box;
-	box-sizing: content-box;
-}
-</style>
+	<f:metadata>
+		<f:event type="preRenderView"
+			listener="#{minhasReclamacoesSugestoesTela.exibeMensagemCasoNaoPossuirPermissao}" />
+	</f:metadata>
 </h:head>
 <h:body>
 	<ui:composition template="/layout.xhtml">
@@ -33,8 +17,11 @@
 		<ui:param name="caminhoGifCarregamentoParametro"
 			value="../imagens/gif_carregando.gif" />
 		<ui:define name="corpo">
-
 			<h:form>
+				<p:messages id="mensagens" autoUpdate="true" />
+			</h:form>
+			
+			<h:form rendered="#{minhasReclamacoesSugestoesTela.possuiPermissao}">
 				<p:commandButton value="#{mensagem.pesquisar}"
 					action="#{minhasReclamacoesSugestoesTela.pesquisar()}"
 					update="@form" icon="ui-icon-search" />
