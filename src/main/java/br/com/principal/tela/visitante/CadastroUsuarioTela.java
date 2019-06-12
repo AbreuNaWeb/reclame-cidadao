@@ -13,7 +13,7 @@ import br.com.principal.tela.util.TelaUtil;
 
 @Named
 @RequestScoped
-public class CadastroTela {
+public class CadastroUsuarioTela {
 
 	@Inject
 	private UsuarioRegras usuarioRegras;
@@ -21,12 +21,12 @@ public class CadastroTela {
 	private UsuarioEntidade usuarioRegistro;
 
 	private boolean cpfDeAgente;
-	
+
 	@PostConstruct
 	public void inicializar() {
 		this.usuarioRegistro = new UsuarioEntidade();
 	}
-	
+
 	public void cadastrar() {
 		UsuarioEntidade usuarioPesquisada = usuarioRegras.buscarPorCPF(this.usuarioRegistro.getCpf());
 
@@ -60,11 +60,11 @@ public class CadastroTela {
 	public UsuarioEntidade getusuarioRegistro() {
 		return usuarioRegistro;
 	}
-	
+
 	public void setusuarioRegistro(UsuarioEntidade usuarioRegistro) {
 		this.usuarioRegistro = usuarioRegistro;
 	}
-	
+
 	public boolean isCpfDeAgente() {
 		return cpfDeAgente;
 	}
