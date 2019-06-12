@@ -8,35 +8,51 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	<!-- 	<h:outputStylesheet library="css" name="/default.css" /> Futuramente será utilizado -->
 	<title>Login - Reclame Cidadão</title>
+	<h:outputStylesheet name="css/estilos.css" />
 </h:head>
 
 <h:body style="display:flex;">
 	<h:form style=" margin:auto;">
-		<p:panel header="#{mensagem.login}" style="width:400px;">
+		<p:panel header="#{mensagem.login}">
 			<p:messages id="mensagens" autoUpdate="true" />
 			<h:panelGrid columns="2" cellpadding="10">
 				<h:panelGrid columns="2" cellpadding="5">
 					<p:outputLabel value="#{mensagem.cpf}" />
-					<p:inputText value="#{loginTela.cpf}" />
+					<p:inputMask value="#{loginTela.cpf}" size="12"
+						mask="999.999.999-99" maxlength="14" converter="conversorCpf"
+						required="true"
+						requiredMessage="#{mensagem.campo_cpf_obrigatorio}"
+						validatorMessage="#{mensagem.cpf_invalido}">
+						<f:validator validatorId="validadorCpf" />
+					</p:inputMask>
 
 					<p:outputLabel value="#{mensagem.senha}" />
-					<p:password value="#{loginTela.senha}" />
+					<p:password value="#{loginTela.senha}"
+						required="true"
+						requiredMessage="#{mensagem.campo_senha_obrigatorio}"
+						validatorMessage="#{mensagem.senha_nao_coicidem}" maxlength="16"
+						size="12">
+						<f:validator validatorId="validadorSenha" />
+					</p:password>
 
 				</h:panelGrid>
 			</h:panelGrid>
 			<div align="center">
 				<h:panelGrid columns="2">
-					<p:commandButton value="#{mensagem.voltar}" action="home" />
+					<p:commandButton type="button" value="#{mensagem.voltar}"
+						action="home?faces-redirect=true"
+						icon="ui-icon-arrowreturnthick-1-w">
+						<f:ajax />
+					</p:commandButton>
 					<p:commandButton value="#{mensagem.acessar}"
 						action="#{loginTela.realizarLogin()}" ajax="true"
-						icon="ui-icon-gear" />
+						icon="ui-icon-locked" />
 				</h:panelGrid>
 			</div>
 		</p:panel>
 	</h:form>
-	
+
 	<p:ajaxStatus onstart="PF('statusDialog').show()"
 		onsuccess="PF('statusDialog').hide()" />
 
