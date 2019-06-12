@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.principal.constante.MensagemEnum;
+import br.com.principal.constante.MensagemErroEnum;
 import br.com.principal.entidade.UsuarioEntidade;
 import br.com.principal.regra.UsuarioRegras;
 import br.com.principal.tela.util.SessaoUtil;
@@ -35,7 +36,7 @@ public class AlteraDadosPessoaisTela implements Serializable {
 			usuarioRegras.atualizarComConversaoDeSenhaParaMD5(usuarioLogadoAtualizado);
 			TelaUtil.adicionarMensagemDeInformacao(MensagemEnum.DADOS_ATUALIZADOS_SUCESSO);
 		} catch (Exception erroDesconhecido) {
-			TelaUtil.adicionarMensagemDeErro(MensagemEnum.ERRO_DESCONHECIDO);
+			TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.ERRO_DESCONHECIDO);
 		}
 	}
 

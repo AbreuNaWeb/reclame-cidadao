@@ -8,6 +8,7 @@ import javax.inject.Named;
 
 import br.com.principal.constante.CategoriasEnum;
 import br.com.principal.constante.MensagemEnum;
+import br.com.principal.constante.MensagemErroEnum;
 import br.com.principal.entidade.UsuarioEntidade;
 import br.com.principal.excecao.RegraValidacaoException;
 import br.com.principal.regra.UsuarioRegras;
@@ -31,10 +32,10 @@ public class AtualizaAgenteTela implements Serializable {
 			this.agenteParaAtualizar = usuarioRegras.buscarAgenteParaAtualizarOuExcluir(cpfInformado);
 		} catch (RegraValidacaoException erroValidacao) {
 			this.agenteParaAtualizar = null;
-			TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemEnum());
+			TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemErroEnum());
 		} catch (Exception erroDesconhecido) {
 			this.agenteParaAtualizar = null;
-			TelaUtil.adicionarMensagemDeErro(MensagemEnum.ERRO_DESCONHECIDO);
+			TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.ERRO_DESCONHECIDO);
 		}
 	}
 
@@ -45,7 +46,7 @@ public class AtualizaAgenteTela implements Serializable {
 			this.agenteParaAtualizar = null;
 			TelaUtil.adicionarMensagemDeInformacao(MensagemEnum.AGENTE_ATUALIZADO_SUCESSO);
 		} catch (Exception erroDesconhecido) {
-			TelaUtil.adicionarMensagemDeErro(MensagemEnum.ERRO_DESCONHECIDO);
+			TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.ERRO_DESCONHECIDO);
 		}
 	}
 

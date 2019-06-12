@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.principal.constante.MensagemEnum;
+import br.com.principal.constante.MensagemErroEnum;
 import br.com.principal.entidade.UsuarioEntidade;
 import br.com.principal.excecao.RegraValidacaoException;
 import br.com.principal.regra.UsuarioRegras;
@@ -30,10 +31,10 @@ public class ExcluirAgenteTela implements Serializable {
 			this.agenteParaExcluir = usuarioRegras.buscarAgenteParaAtualizarOuExcluir(cpfInformado);
 		} catch (RegraValidacaoException erroValidacao) {
 			this.agenteParaExcluir = null;
-			TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemEnum());
+			TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemErroEnum());
 		} catch (Exception erroDesconhecido) {
 			this.agenteParaExcluir = null;
-			TelaUtil.adicionarMensagemDeErro(MensagemEnum.ERRO_DESCONHECIDO);
+			TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.ERRO_DESCONHECIDO);
 		}
 	}
 
@@ -44,7 +45,7 @@ public class ExcluirAgenteTela implements Serializable {
 			this.agenteParaExcluir = null;
 			TelaUtil.adicionarMensagemDeInformacao(MensagemEnum.AGENTE_EXCLUIDO_SUCESSO);
 		} catch (Exception erroDesconhecido) {
-			TelaUtil.adicionarMensagemDeErro(MensagemEnum.ERRO_DESCONHECIDO);
+			TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.ERRO_DESCONHECIDO);
 		}
 	}
 

@@ -11,6 +11,7 @@ import javax.inject.Named;
 import org.apache.commons.lang3.StringUtils;
 
 import br.com.principal.constante.MensagemEnum;
+import br.com.principal.constante.MensagemErroEnum;
 import br.com.principal.constante.StatusReclamacaoSugestaoEnum;
 import br.com.principal.constante.TipoUsuarioEnum;
 import br.com.principal.entidade.ReclamacaoSugestaoEntidade;
@@ -40,7 +41,7 @@ public class DetalheReclamacaoSugestaoTela implements Serializable {
 		if (informadoID()) {
 			this.reclamacaoSugestaoRegistro = reclamacaoSugestaoRegra.buscarPorID(id);
 		} else {
-			TelaUtil.adicionarMensagemDeErro(MensagemEnum.ERRO_FAVOR_RETORNAR_PAGINA_INICIAL);
+			TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.ERRO_FAVOR_RETORNAR_PAGINA_INICIAL);
 		}
 	}
 

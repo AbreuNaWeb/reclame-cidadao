@@ -1,19 +1,19 @@
 package br.com.principal.excecao;
 
-import br.com.principal.constante.MensagemEnum;
+import br.com.principal.constante.MensagemErroEnum;
 
 public class RegraValidacaoException extends Exception {
 	
 	private static final long serialVersionUID = 1L;
 
-	private final MensagemEnum mensagemEnum;
+	private final MensagemErroEnum mensagemErroEnum;
 	
-	public RegraValidacaoException(MensagemEnum mensagemEnum) {
-		super(mensagemEnum.getDescricao());
-		this.mensagemEnum = mensagemEnum;
+	public RegraValidacaoException(MensagemErroEnum mensagemErroEnum) {
+		super(mensagemErroEnum.getDescricao());
+		this.mensagemErroEnum = mensagemErroEnum;
 	}
 	
-	public MensagemEnum getMensagemEnum() {
-		return mensagemEnum;
+	public MensagemErroEnum getMensagemErroEnum() {
+		return mensagemErroEnum;
 	}
 }

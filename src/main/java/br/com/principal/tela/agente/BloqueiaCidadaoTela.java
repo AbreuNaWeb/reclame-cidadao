@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.principal.constante.MensagemEnum;
+import br.com.principal.constante.MensagemErroEnum;
 import br.com.principal.entidade.UsuarioEntidade;
 import br.com.principal.excecao.RegraValidacaoException;
 import br.com.principal.regra.UsuarioRegras;
@@ -30,10 +31,10 @@ public class BloqueiaCidadaoTela implements Serializable {
 			this.cidadaoParaBloquear = usuarioRegras.buscarCidadaoParaBloquear(cpfInformado);
 		} catch (RegraValidacaoException erroValidacao) {
 			this.cidadaoParaBloquear = null;
-			TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemEnum());
+			TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemErroEnum());
 		} catch (Exception erroDesconhecido) {
 			this.cidadaoParaBloquear = null;
-			TelaUtil.adicionarMensagemDeErro(MensagemEnum.ERRO_DESCONHECIDO);
+			TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.ERRO_DESCONHECIDO);
 		}
 	}
 	
@@ -44,7 +45,7 @@ public class BloqueiaCidadaoTela implements Serializable {
 			this.cidadaoParaBloquear = null;
 			TelaUtil.adicionarMensagemDeInformacao(MensagemEnum.CIDADAO_BLOQUEADO_SUCESSO);
 		} catch (Exception erroDesconhecido) {
-			TelaUtil.adicionarMensagemDeErro(MensagemEnum.ERRO_DESCONHECIDO);
+			TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.ERRO_DESCONHECIDO);
 		}
 	}
 	

@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
-import br.com.principal.constante.MensagemEnum;
+import br.com.principal.constante.MensagemErroEnum;
 import br.com.principal.entidade.UsuarioEntidade;
 import br.com.principal.excecao.RegraValidacaoException;
 import br.com.principal.regra.UsuarioRegras;
@@ -52,7 +52,7 @@ public class LoginTela implements Serializable {
 	}
 
 	private String tratarErroDesconhecido() {
-		TelaUtil.adicionarMensagemDeErro(MensagemEnum.ERRO_REALIZAR_LOGIN);
+		TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.ERRO_REALIZAR_LOGIN);
 		FacesContext.getCurrentInstance().validationFailed();
 		return "";
 	}
@@ -64,7 +64,7 @@ public class LoginTela implements Serializable {
 	}
 
 	private String retornarMensagemDeUsuarioNaoEncontrado() {
-		TelaUtil.adicionarMensagemDeErro(MensagemEnum.LOGIN_ERRADO);
+		TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.LOGIN_ERRADO);
 		FacesContext.getCurrentInstance().validationFailed();
 		return "";
 	}

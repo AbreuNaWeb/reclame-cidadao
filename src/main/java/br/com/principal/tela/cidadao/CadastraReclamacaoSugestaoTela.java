@@ -10,6 +10,7 @@ import javax.inject.Named;
 
 import br.com.principal.constante.CategoriasEnum;
 import br.com.principal.constante.MensagemEnum;
+import br.com.principal.constante.MensagemErroEnum;
 import br.com.principal.constante.TipoReclamacaoSugestaoEnum;
 import br.com.principal.constante.UnidadeFederativaEnum;
 import br.com.principal.entidade.ReclamacaoSugestaoEntidade;
@@ -44,7 +45,7 @@ public class CadastraReclamacaoSugestaoTela implements Serializable {
 		if (novaRequisicao()) {
 			if (SessaoUtil.isNotCidadao()) {
 				this.possuiPermissao = false;
-				TelaUtil.adicionarMensagemDeErro(MensagemEnum.VOCE_NAO_TEM_PERMISSAO);
+				TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.VOCE_NAO_TEM_PERMISSAO);
 				return;
 			}
 			
@@ -55,10 +56,10 @@ public class CadastraReclamacaoSugestaoTela implements Serializable {
 				this.naoExedeuLimiteDePublicacoes = true;
 			} catch (RegraValidacaoException erroValidacao) {
 				this.naoExedeuLimiteDePublicacoes = false;
-				TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemEnum());
+				TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemErroEnum());
 			} catch (Exception erroDesconhecido) {
 				this.naoExedeuLimiteDePublicacoes = true;
-				TelaUtil.adicionarMensagemDeErro(MensagemEnum.ERRO_DESCONHECIDO);
+				TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.ERRO_DESCONHECIDO);
 			}
 		}
 	}
@@ -68,9 +69,9 @@ public class CadastraReclamacaoSugestaoTela implements Serializable {
 			this.novaReclamacaoSugestao = regra.salvar(novaReclamacaoSugestao, SessaoUtil.obterUsuarioLogado(), informarEndereco);
 			TelaUtil.redirecionarParaOutraPagina("/reclame-cidadao/detalheReclamacaoSugestao.xhtml?id=" + novaReclamacaoSugestao.getId(), MensagemEnum.CADASTROU_SUCESSO.getDescricao());
 		} catch (RegraValidacaoException erroValidacao) {
-			TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemEnum());
+			TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemErroEnum());
 		} catch (Exception erroDesconhecido) {
-			TelaUtil.adicionarMensagemDeErro(MensagemEnum.ERRO_DESCONHECIDO);
+			TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.ERRO_DESCONHECIDO);
 		}
 	}
 	

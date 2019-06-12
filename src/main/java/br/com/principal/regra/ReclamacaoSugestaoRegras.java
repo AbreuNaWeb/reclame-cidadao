@@ -8,7 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.principal.constante.CategoriasEnum;
-import br.com.principal.constante.MensagemEnum;
+import br.com.principal.constante.MensagemErroEnum;
 import br.com.principal.constante.StatusReclamacaoSugestaoEnum;
 import br.com.principal.entidade.ReclamacaoSugestaoEntidade;
 import br.com.principal.entidade.UsuarioEntidade;
@@ -50,13 +50,13 @@ public class ReclamacaoSugestaoRegras implements Serializable {
 		List<ReclamacaoSugestaoEntidade> reclamacoesSugestoesAbertas = reclamacaoSugestaoDAO.buscarReclamacoesOuSugestoesAbertasDoCidadao(usuarioEntidade.getCpf());
 		
 		if (exedeuLimiteDeReclamacoesOuSugestoesAbertas(reclamacoesSugestoesAbertas)) {
-			throw new RegraValidacaoException(MensagemEnum.ATINGIU_LIMITE_RECLAMACOES_SUGESTOES_ABERTAS);
+			throw new RegraValidacaoException(MensagemErroEnum.ATINGIU_LIMITE_RECLAMACOES_SUGESTOES_ABERTAS);
 		}
 		
 		List<ReclamacaoSugestaoEntidade> reclamacoesSugestoesCadastradasHoje = reclamacaoSugestaoDAO.buscarReclamacoesOuSugestoesCadastradasHoje(usuarioEntidade.getCpf());
 	
 		if (excedeuLimiteDeReclamacoesOuSugestoesCadastradasPorDia(reclamacoesSugestoesCadastradasHoje)) {
-			throw new RegraValidacaoException(MensagemEnum.ATINGIU_LIMITE_RECLAMACOES_SUGESTOES_CADASTRADAS_DIA);
+			throw new RegraValidacaoException(MensagemErroEnum.ATINGIU_LIMITE_RECLAMACOES_SUGESTOES_CADASTRADAS_DIA);
 		}
 	}
 	

@@ -11,15 +11,16 @@ import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
 
 import br.com.principal.constante.MensagemEnum;
+import br.com.principal.constante.MensagemErroEnum;
 
 public class TelaUtil {
 	
 	TelaUtil() {
 	}
 
-	public static void adicionarMensagemDeErro(MensagemEnum mensagemEnum) {
+	public static void adicionarMensagemDeErro(MensagemErroEnum mensagemErroEnum) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, 
-				mensagemEnum.getDescricao(), null));
+				mensagemErroEnum.getDescricao(), null));
 	}
 	
 	public static void adicionarMensagemDeInformacao(MensagemEnum mensagemEnum) {
@@ -36,7 +37,7 @@ public class TelaUtil {
 			contextoAtual.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, mensagem, null));
 			contextoExterno.redirect(url);
 		} catch (IOException excecao) {
-			adicionarMensagemDeErro(MensagemEnum.ERRO_FAVOR_RETORNAR_PAGINA_INICIAL);
+			adicionarMensagemDeErro(MensagemErroEnum.ERRO_FAVOR_RETORNAR_PAGINA_INICIAL);
 		}
 	}
 	

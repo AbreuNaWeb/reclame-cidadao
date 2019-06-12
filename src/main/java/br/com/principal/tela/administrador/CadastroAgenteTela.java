@@ -7,6 +7,7 @@ import javax.inject.Named;
 
 import br.com.principal.constante.CategoriasEnum;
 import br.com.principal.constante.MensagemEnum;
+import br.com.principal.constante.MensagemErroEnum;
 import br.com.principal.entidade.UsuarioEntidade;
 import br.com.principal.excecao.RegraValidacaoException;
 import br.com.principal.regra.UsuarioRegras;
@@ -32,9 +33,9 @@ public class CadastroAgenteTela {
 			this.novoAgente = new UsuarioEntidade();
 			TelaUtil.adicionarMensagemDeInformacao(MensagemEnum.CADASTROU_SUCESSO);
 		} catch (RegraValidacaoException erroValidacao) {
-			TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemEnum());
+			TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemErroEnum());
 		} catch (Exception erroDesconhecido) {
-			TelaUtil.adicionarMensagemDeErro(MensagemEnum.ERRO_DESCONHECIDO);
+			TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.ERRO_DESCONHECIDO);
 		}
 	}
 

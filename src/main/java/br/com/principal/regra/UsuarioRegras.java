@@ -8,7 +8,7 @@ import java.security.NoSuchAlgorithmException;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import br.com.principal.constante.MensagemEnum;
+import br.com.principal.constante.MensagemErroEnum;
 import br.com.principal.constante.MostrarNotificacaoEnum;
 import br.com.principal.constante.StatusUsuarioEnum;
 import br.com.principal.constante.TipoUsuarioEnum;
@@ -28,6 +28,22 @@ public class UsuarioRegras implements Serializable {
 	@Inject
 	private ReclamacaoSugestaoRegras reclamacaoSugestaoRegras;
 	
+	public void cadastrarUsuario(UsuarioEntidade novoUsuario) throws RegraValidacaoException {
+		UsuarioEntidade usuarioPesquisado = buscarPorCPF(novoUsuario.getCpf());
+		
+		if (usuarioNaoEncontrado(usuarioPesquisado)) {
+			salvarCidadao(novoUsuario);
+		} else if (agenteAindaNaoSeCadastrou(usuarioPesquisado)) {
+			atualizarDadosDoAgente(usuarioPesquisado, novoUsuario);
+		}
+		
+		throw new RegraValidacaoException(MensagemErroEnum.CPF_JA_CADASTRADO);
+	}
+	
+	public UsuarioEntidade buscarPorCPF(Long cpf) {
+		return usuarioDAO.buscarPorCPF(cpf);
+	}
+	
 	public void marcarParaMostrarNotificacao(UsuarioEntidade usuarioEntidade) {
 		usuarioEntidade.setMostrarNotificacao(MostrarNotificacaoEnum.SIM.getDescricao());
 		atualizar(usuarioEntidade);
@@ -43,7 +59,7 @@ public class UsuarioRegras implements Serializable {
 				converterSenhaParaMD5(senhaInformada));
 
 		if (usuarioNaoEncontrado(usuarioPesquisado)) {
-			throw new RegraValidacaoException(MensagemEnum.LOGIN_ERRADO);
+			throw new RegraValidacaoException(MensagemErroEnum.LOGIN_ERRADO);
 		}
 
 		return usuarioPesquisado;
@@ -56,7 +72,7 @@ public class UsuarioRegras implements Serializable {
 			novoAgente.setTipo(TipoUsuarioEnum.AGENTE.getDescricao());
 			usuarioDAO.salvar(novoAgente);
 		} else {
-			throw new RegraValidacaoException(MensagemEnum.CPF_JA_CADASTRADO);
+			throw new RegraValidacaoException(MensagemErroEnum.CPF_JA_CADASTRADO);
 		}
 	}
 
@@ -64,11 +80,11 @@ public class UsuarioRegras implements Serializable {
 		UsuarioEntidade usuario = buscarUsuario(cpf);
 
 		if (TipoUsuarioEnum.CIDADAO.igual(usuario) || TipoUsuarioEnum.ADMINISTRADOR.igual(usuario)) {
-			throw new RegraValidacaoException(MensagemEnum.CPF_INFORMADO_NAO_PERTENCE_AGENTE);
+			throw new RegraValidacaoException(MensagemErroEnum.CPF_INFORMADO_NAO_PERTENCE_AGENTE);
 		}
 
 		if (reclamacaoSugestaoRegras.existeReclamacaoOuSugestaoAbertaVinculadaAoAgente(cpf)) {
-			throw new RegraValidacaoException(MensagemEnum.RECLAMACAO_SUGESTAO_ABERTA_AGENTE);
+			throw new RegraValidacaoException(MensagemErroEnum.RECLAMACAO_SUGESTAO_ABERTA_AGENTE);
 		}
 
 		return usuario;
@@ -78,22 +94,13 @@ public class UsuarioRegras implements Serializable {
 		UsuarioEntidade usuario = buscarUsuario(cpf);
 
 		if (TipoUsuarioEnum.AGENTE.igual(usuario) || TipoUsuarioEnum.ADMINISTRADOR.igual(usuario)) {
-			throw new RegraValidacaoException(MensagemEnum.CPF_INFORMADO_NAO_PERTENCE_CIDADAO);
+			throw new RegraValidacaoException(MensagemErroEnum.CPF_INFORMADO_NAO_PERTENCE_CIDADAO);
 		}
 		
 		if (StatusUsuarioEnum.BLOQUEADO.igual(usuario)) {
-			throw new RegraValidacaoException(MensagemEnum.CIDADAO_JA_BLOQUEADO);
+			throw new RegraValidacaoException(MensagemErroEnum.CIDADAO_JA_BLOQUEADO);
 		}
 		
-		return usuario;
-	}
-
-	private UsuarioEntidade buscarUsuario(Long cpf) throws RegraValidacaoException {
-		UsuarioEntidade usuario = usuarioDAO.buscarPorCPF(cpf);
-
-		if (usuarioNaoEncontrado(usuario)) {
-			throw new RegraValidacaoException(MensagemEnum.CPF_INEXISTENTE);
-		}
 		return usuario;
 	}
 
@@ -122,14 +129,10 @@ public class UsuarioRegras implements Serializable {
 		usuarioDAO.atualizar(usuarioEntidade);
 	}
 
-	public UsuarioEntidade buscarPorCPF(Long cpf) {
-		return usuarioDAO.buscarPorCPF(cpf);
-	}
-
 	private boolean usuarioNaoEncontrado(UsuarioEntidade usuarioPesquisado) {
 		return usuarioPesquisado == null;
 	}
-
+	
 	private String converterSenhaParaMD5(String senha) {
 		try {
 			MessageDigest messageDigest = MessageDigest.getInstance("MD5");
@@ -145,5 +148,26 @@ public class UsuarioRegras implements Serializable {
 		} catch (NoSuchAlgorithmException | UnsupportedEncodingException excecao) {
 			return null;
 		}
+	}
+	
+	private boolean agenteAindaNaoSeCadastrou(UsuarioEntidade usuarioPesquisado) {
+		return TipoUsuarioEnum.AGENTE.igual(usuarioPesquisado) && usuarioPesquisado.getDataCadastro() == null;
+	}
+	
+	private void atualizarDadosDoAgente(UsuarioEntidade usuarioPesquisado, UsuarioEntidade agente) {
+		usuarioPesquisado.setEmail(agente.getEmail());
+		usuarioPesquisado.setSenha(agente.getSenha());
+		usuarioPesquisado.setDddCelular(agente.getDddCelular());
+		usuarioPesquisado.setDataCadastro(TelaUtil.diaAtualEmFormatoDiaMesAno());
+		atualizarComConversaoDeSenhaParaMD5(usuarioPesquisado);
+	}
+	
+	private UsuarioEntidade buscarUsuario(Long cpf) throws RegraValidacaoException {
+		UsuarioEntidade usuario = usuarioDAO.buscarPorCPF(cpf);
+
+		if (usuarioNaoEncontrado(usuario)) {
+			throw new RegraValidacaoException(MensagemErroEnum.CPF_INEXISTENTE);
+		}
+		return usuario;
 	}
 }
