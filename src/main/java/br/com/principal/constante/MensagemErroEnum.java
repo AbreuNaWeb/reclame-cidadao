@@ -15,7 +15,8 @@ public enum MensagemErroEnum {
 	CELULAR_INVALIDO("Celular inválido."),
 	CPF_INFORMADO_NAO_PERTENCE_CIDADAO("O CPF informado não pertence a um cidadão."),
 	CIDADAO_JA_BLOQUEADO("Cidadão já está bloqueado."),
-	VOCE_NAO_TEM_PERMISSAO("Você não tem permissão para acessar a página!");
+	VOCE_NAO_TEM_PERMISSAO("Você não tem permissão para acessar a página!"),
+	VOCE_FOI_BLOQUEADO("Você foi bloqueado por violar as regras do Reclame Cidadão.");
 	
 	private final String descricao;
 

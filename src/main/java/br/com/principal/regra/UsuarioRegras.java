@@ -50,6 +50,10 @@ public class UsuarioRegras implements Serializable {
 		if (usuarioNaoEncontrado(usuarioPesquisado)) {
 			throw new RegraValidacaoException(MensagemErroEnum.LOGIN_ERRADO);
 		}
+		
+		if (StatusUsuarioEnum.BLOQUEADO.igual(usuarioPesquisado)) {
+			throw new RegraValidacaoException(MensagemErroEnum.VOCE_FOI_BLOQUEADO);
+		}
 
 		return usuarioPesquisado;
 	}
