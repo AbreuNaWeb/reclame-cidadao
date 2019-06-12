@@ -156,6 +156,7 @@ public class UsuarioRegras implements Serializable {
 	}
 	
 	private void atualizarDadosDoAgente(UsuarioEntidade usuarioPesquisado, UsuarioEntidade agente) {
+		usuarioPesquisado.setNome(agente.getNome());
 		usuarioPesquisado.setEmail(agente.getEmail());
 		usuarioPesquisado.setSenha(agente.getSenha());
 		usuarioPesquisado.setDddCelular(agente.getDddCelular());

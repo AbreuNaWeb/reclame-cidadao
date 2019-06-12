@@ -12,6 +12,7 @@ import br.com.principal.constante.MensagemErroEnum;
 import br.com.principal.entidade.UsuarioEntidade;
 import br.com.principal.excecao.RegraValidacaoException;
 import br.com.principal.regra.UsuarioRegras;
+import br.com.principal.tela.util.SessaoUtil;
 import br.com.principal.tela.util.TelaUtil;
 
 @Named
@@ -26,7 +27,17 @@ public class AtualizaAgenteTela implements Serializable {
 	private UsuarioEntidade agenteParaAtualizar;
 
 	private Long cpfInformado;
+	
+	private boolean possuiPermissao;
 
+	public void exibeMensagemCasoNaoPossuirPermissao() {
+		this.possuiPermissao = SessaoUtil.isNotAdministrador() ? false : true;
+		
+		if (!possuiPermissao) {
+			TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.VOCE_NAO_TEM_PERMISSAO);
+		}
+	}
+	
 	public void pesquisarAgenteParaAtualizar() {
 		try {
 			this.agenteParaAtualizar = usuarioRegras.buscarAgenteParaAtualizarOuExcluir(cpfInformado);
