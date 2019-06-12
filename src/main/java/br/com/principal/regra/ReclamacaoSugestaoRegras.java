@@ -56,8 +56,6 @@ public class ReclamacaoSugestaoRegras implements Serializable {
 		return reclamacaoSugestaoDAO.buscarReclamacoesOuSugestoesComFiltro(categoriaEnum, statusEnum, cpfDoCidadao);
 	}
 	
-	////////////////////////////////////////
-	
 	public void atribuirReclamacaoOuSugestaoParaAgente(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade, UsuarioEntidade agente) {
 		reclamacaoSugestaoEntidade.setAgente(agente);
 		reclamacaoSugestaoEntidade.setStatus(StatusReclamacaoSugestaoEnum.EM_ANALISE.getDescricao());

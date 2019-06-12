@@ -78,8 +78,6 @@ public class UsuarioRegras implements Serializable {
 		usuarioDAO.atualizar(usuario);
 	}
 	
-	///////////////////////////////
-	
 	public void marcarParaMostrarNotificacao(UsuarioEntidade usuarioEntidade) {
 		usuarioEntidade.setMostrarNotificacao(MostrarNotificacaoEnum.SIM.getDescricao());
 		atualizar(usuarioEntidade);
