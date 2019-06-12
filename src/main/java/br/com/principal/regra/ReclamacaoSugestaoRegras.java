@@ -48,6 +48,14 @@ public class ReclamacaoSugestaoRegras implements Serializable {
 		return (ReclamacaoSugestaoEntidade) reclamacaoSugestaoDAO.salvar(reclamacaoSugestaoEntidade);
 	}
 	
+	public List<ReclamacaoSugestaoEntidade> buscarTodasReclamacoesSugestoes() {
+		return reclamacaoSugestaoDAO.buscarTodasReclamacoesSugestoes();
+	}
+	
+	public List<ReclamacaoSugestaoEntidade> buscarReclamacoesOuSugestoesComFiltro(CategoriasEnum categoriaEnum, StatusReclamacaoSugestaoEnum statusEnum, Long cpfDoCidadao) {
+		return reclamacaoSugestaoDAO.buscarReclamacoesOuSugestoesComFiltro(categoriaEnum, statusEnum, cpfDoCidadao);
+	}
+	
 	////////////////////////////////////////
 	
 	public void atribuirReclamacaoOuSugestaoParaAgente(ReclamacaoSugestaoEntidade reclamacaoSugestaoEntidade, UsuarioEntidade agente) {
@@ -84,19 +92,11 @@ public class ReclamacaoSugestaoRegras implements Serializable {
 		}
 	}
 
-	public List<ReclamacaoSugestaoEntidade> buscarTodasReclamacoesSugestoes() {
-		return reclamacaoSugestaoDAO.buscarTodasReclamacoesSugestoes();
-	}
-
 	public ReclamacaoSugestaoEntidade buscarPorID(Long id) {
 		return reclamacaoSugestaoDAO.buscarPorID(id);
 	}
 
 	public boolean existeReclamacaoOuSugestaoAbertaVinculadaAoAgente(Long cpf) {
 		return reclamacaoSugestaoDAO.existeReclamacaoOuSugestaoAbertaVinculadaAoAgente(cpf);
-	}
-	
-	public List<ReclamacaoSugestaoEntidade> buscarReclamacoesOuSugestoesComFiltro(CategoriasEnum categoriaEnum, StatusReclamacaoSugestaoEnum statusEnum, Long cpfDoCidadao) {
-		return reclamacaoSugestaoDAO.buscarReclamacoesOuSugestoesComFiltro(categoriaEnum, statusEnum, cpfDoCidadao);
 	}
 }

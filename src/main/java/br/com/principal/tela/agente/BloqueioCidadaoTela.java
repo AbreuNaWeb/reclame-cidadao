@@ -15,7 +15,7 @@ import br.com.principal.tela.util.TelaUtil;
 
 @Named
 @ViewScoped
-public class BloqueiaCidadaoTela implements Serializable {
+public class BloqueioCidadaoTela implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 

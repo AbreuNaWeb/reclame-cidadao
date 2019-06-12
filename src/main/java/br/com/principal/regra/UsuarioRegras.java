@@ -59,6 +59,25 @@ public class UsuarioRegras implements Serializable {
 		usuarioDAO.atualizar(usuarioEntidade);
 	}
 	
+	public UsuarioEntidade buscarCidadaoParaBloquear(Long cpf) throws RegraValidacaoException {
+		UsuarioEntidade usuario = buscarUsuario(cpf);
+
+		if (TipoUsuarioEnum.AGENTE.igual(usuario) || TipoUsuarioEnum.ADMINISTRADOR.igual(usuario)) {
+			throw new RegraValidacaoException(MensagemErroEnum.CPF_INFORMADO_NAO_PERTENCE_CIDADAO);
+		}
+		
+		if (StatusUsuarioEnum.BLOQUEADO.igual(usuario)) {
+			throw new RegraValidacaoException(MensagemErroEnum.CIDADAO_JA_BLOQUEADO);
+		}
+		
+		return usuario;
+	}
+	
+	public void bloquear(UsuarioEntidade usuario) {
+		usuario.setStatus(StatusUsuarioEnum.BLOQUEADO.getDescricao());
+		usuarioDAO.atualizar(usuario);
+	}
+	
 	///////////////////////////////
 	
 	public void marcarParaMostrarNotificacao(UsuarioEntidade usuarioEntidade) {
@@ -96,20 +115,6 @@ public class UsuarioRegras implements Serializable {
 		return usuario;
 	}
 	
-	public UsuarioEntidade buscarCidadaoParaBloquear(Long cpf) throws RegraValidacaoException {
-		UsuarioEntidade usuario = buscarUsuario(cpf);
-
-		if (TipoUsuarioEnum.AGENTE.igual(usuario) || TipoUsuarioEnum.ADMINISTRADOR.igual(usuario)) {
-			throw new RegraValidacaoException(MensagemErroEnum.CPF_INFORMADO_NAO_PERTENCE_CIDADAO);
-		}
-		
-		if (StatusUsuarioEnum.BLOQUEADO.igual(usuario)) {
-			throw new RegraValidacaoException(MensagemErroEnum.CIDADAO_JA_BLOQUEADO);
-		}
-		
-		return usuario;
-	}
-
 	public void salvarCidadao(UsuarioEntidade usuarioEntidade) {
 		usuarioEntidade.setSenha(converterSenhaParaMD5(usuarioEntidade.getSenha()));
 		usuarioEntidade.setTipo(TipoUsuarioEnum.CIDADAO.getDescricao());
@@ -122,11 +127,6 @@ public class UsuarioRegras implements Serializable {
 	}
 
 	public void atualizar(UsuarioEntidade usuario) {
-		usuarioDAO.atualizar(usuario);
-	}
-	
-	public void bloquear(UsuarioEntidade usuario) {
-		usuario.setStatus(StatusUsuarioEnum.BLOQUEADO.getDescricao());
 		usuarioDAO.atualizar(usuario);
 	}
 	
