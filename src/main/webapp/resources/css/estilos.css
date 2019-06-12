@@ -1,15 +1,42 @@
-.botoes {
+body {
+	background-color: #FFFFFF;
+}
 
-    /*Especifica a cor chocolate, como pano de fundo do elemento */
+.ui-widget-content {
+	background-color: #FFFFFF;
+	color: #000000;
+}
 
-    background-color: #D2691E;
+.ui-button-text {
+	background-color: #b3ff66;
+	color: #666633;
+	font-family: Tahoma, Geneva, sans-serif
+}
 
-    /*Especifica como preta a cor da fonte do elemento */
+.ui-widget-header {
+	background-color: #b3ff66;
+	color: #666633;
+	font-family: Tahoma, Geneva, sans-serif;
+	text-align: center;
+}
 
-    color: #FFFFFF;
+.ui-layout-pane-north.ui-widget-content {
+	border: 0;
+}
 
-    /*Define a borda do elemento, com um efeito de alto-relevo menor que o padrão */
+.ui-layout-pane-south.ui-widget-content {
+	border: 0;
+}
 
-    border: 1px outset;
+.ui-layout-pane-east.ui-widget-content {
+	border: 0;
+}
 
+.ui-layout-pane-west.ui-widget-content {
+	border: 0;
+}
+
+}
+.ui-layout-pane-center.ui-widget-content {
+	border: 0;
 }
