@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
+import br.com.principal.constante.LinkPaginaEnum;
 import br.com.principal.constante.MensagemErroEnum;
 import br.com.principal.entidade.UsuarioEntidade;
 import br.com.principal.excecao.RegraValidacaoException;
@@ -46,27 +47,27 @@ public class LoginTela implements Serializable {
 	}
 
 	public String deslogar() {
-		HttpSession session = SessaoUtil.obterSessao();
-		session.invalidate();
-		return "/home.xhtml?faces-redirect=true";
+		HttpSession sessao = SessaoUtil.obterSessao();
+		sessao.invalidate();
+		return LinkPaginaEnum.HOME.getLink();
 	}
 
 	private String tratarErroDesconhecido() {
 		TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.ERRO_REALIZAR_LOGIN);
 		FacesContext.getCurrentInstance().validationFailed();
-		return "";
+		return LinkPaginaEnum.PAGINA_ATUAL.getLink();
 	}
 
 	private String redirecionarParaPaginaInicial(UsuarioEntidade usuario) {
-		HttpSession session = SessaoUtil.obterSessao();
-		session.setAttribute("usuarioLogado", usuario);
-		return "/home.xhtml?faces-redirect=true";
+		HttpSession sessao = SessaoUtil.obterSessao();
+		sessao.setAttribute("usuarioLogado", usuario);
+		return LinkPaginaEnum.HOME.getLink();
 	}
 
 	private String retornarMensagemDeUsuarioNaoEncontrado() {
 		TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.LOGIN_ERRADO);
 		FacesContext.getCurrentInstance().validationFailed();
-		return "";
+		return LinkPaginaEnum.PAGINA_ATUAL.getLink();
 	}
 
 	public Long getCpf() {

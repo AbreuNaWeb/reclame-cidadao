@@ -44,6 +44,18 @@ public class UsuarioRegras implements Serializable {
 		return usuarioDAO.buscarPorCPF(cpf);
 	}
 	
+	public UsuarioEntidade realizarLogin(Long cpfInformado, String senhaInformada) throws RegraValidacaoException {
+		UsuarioEntidade usuarioPesquisado = usuarioDAO.buscarPorCpfESenhaEmMD5(cpfInformado, converterSenhaParaMD5(senhaInformada));
+
+		if (usuarioNaoEncontrado(usuarioPesquisado)) {
+			throw new RegraValidacaoException(MensagemErroEnum.LOGIN_ERRADO);
+		}
+
+		return usuarioPesquisado;
+	}
+	
+	///////////////////////////////
+	
 	public void marcarParaMostrarNotificacao(UsuarioEntidade usuarioEntidade) {
 		usuarioEntidade.setMostrarNotificacao(MostrarNotificacaoEnum.SIM.getDescricao());
 		atualizar(usuarioEntidade);
@@ -52,17 +64,6 @@ public class UsuarioRegras implements Serializable {
 	public void marcarParaNaoMostrarNotificacao(UsuarioEntidade usuarioEntidade) {
 		usuarioEntidade.setMostrarNotificacao(MostrarNotificacaoEnum.NAO.getDescricao());
 		atualizar(usuarioEntidade);
-	}
-
-	public UsuarioEntidade realizarLogin(Long cpfInformado, String senhaInformada) throws RegraValidacaoException {
-		UsuarioEntidade usuarioPesquisado = usuarioDAO.buscarPorCpfESenhaEmMD5(cpfInformado,
-				converterSenhaParaMD5(senhaInformada));
-
-		if (usuarioNaoEncontrado(usuarioPesquisado)) {
-			throw new RegraValidacaoException(MensagemErroEnum.LOGIN_ERRADO);
-		}
-
-		return usuarioPesquisado;
 	}
 
 	public void salvarAgente(UsuarioEntidade novoAgente) throws RegraValidacaoException {
