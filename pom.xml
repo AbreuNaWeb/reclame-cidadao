@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
@@ -38,14 +39,21 @@
 
 		<!-- Hibernate -->
 		<hibernate.agroal.version>5.4.2.Final</hibernate.agroal.version>
-		
+
 		<!-- MySQL Connector -->
 		<mysql.connector.java.version>5.1.44</mysql.connector.java.version>
-		
+
 		<!-- Webapp Runner -->
 		<webapp-runner.version>9.0.13.0</webapp-runner.version>
 
+		<!-- Caelum Stella Core -->
 		<caelum.stella.core.version>2.1.2</caelum.stella.core.version>
+
+		<!-- JUnit -->
+		<junit.version>4.12</junit.version>
+
+		<!-- Mockito -->
+		<mockito.version>2.2.1</mockito.version>
 	</properties>
 
 	<dependencies>
@@ -110,11 +118,24 @@
 			<version>${mysql.connector.java.version}</version>
 		</dependency>
 
-	<dependency>
-		<groupId>br.com.caelum.stella</groupId>
-		<artifactId>caelum-stella-core</artifactId>
-		<version>${caelum.stella.core.version}</version>
-	</dependency>
+		<dependency>
+			<groupId>br.com.caelum.stella</groupId>
+			<artifactId>caelum-stella-core</artifactId>
+			<version>${caelum.stella.core.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>${junit.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>${mockito.version}</version>
+		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -131,7 +152,7 @@
 					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
-			
+
 			<!-- Webapp Runner -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
