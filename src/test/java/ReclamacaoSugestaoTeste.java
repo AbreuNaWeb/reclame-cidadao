@@ -22,7 +22,7 @@ import fabrica.UsuarioFabrica;
 public class ReclamacaoSugestaoTeste {
 
 	@InjectMocks
-	ReclamacaoSugestaoRegras regra;
+	private ReclamacaoSugestaoRegras regra;
 
 	@Mock
 	private ReclamacaoSugestaoDAO reclamacaoSugestaoDAO;

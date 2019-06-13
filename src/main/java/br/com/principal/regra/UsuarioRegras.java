@@ -136,7 +136,7 @@ public class UsuarioRegras implements Serializable {
 		return usuarioPesquisado == null;
 	}
 	
-	private String converterSenhaParaMD5(String senha) {
+	public String converterSenhaParaMD5(String senha) {
 		try {
 			MessageDigest messageDigest = MessageDigest.getInstance("MD5");
 			byte[] valorMD5 = messageDigest.digest(senha.getBytes("UTF-8"));
