@@ -10,6 +10,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import br.com.principal.constante.MensagemErroEnum;
 import br.com.principal.entidade.UsuarioEntidade;
 import br.com.principal.excecao.RegraValidacaoException;
+import br.com.principal.persistencia.GenericoDAO;
 import br.com.principal.persistencia.UsuarioDAO;
 import br.com.principal.regra.ReclamacaoSugestaoRegras;
 import br.com.principal.regra.UsuarioRegras;
@@ -24,6 +25,9 @@ public class UsuarioTeste {
 
 	@Mock
 	private UsuarioDAO usuarioDAO;
+	
+	@Mock
+	private GenericoDAO genericoDAO;
 
 	@Mock
 	private ReclamacaoSugestaoRegras reclamacaoSugestaoRegras;

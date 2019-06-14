@@ -4,7 +4,7 @@ import javax.persistence.EntityManager;
 
 import br.com.principal.conexao.FabricaConexao;
 
-abstract class GenericoDAO {
+public abstract class GenericoDAO {
 	
 	EntityManager gerenciadorDeEntidade;
 	
