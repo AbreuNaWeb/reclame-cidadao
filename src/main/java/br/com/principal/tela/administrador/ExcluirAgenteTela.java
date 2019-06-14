@@ -10,6 +10,7 @@ import br.com.principal.constante.MensagemEnum;
 import br.com.principal.constante.MensagemErroEnum;
 import br.com.principal.entidade.UsuarioEntidade;
 import br.com.principal.excecao.RegraValidacaoException;
+import br.com.principal.regra.ReclamacaoSugestaoRegras;
 import br.com.principal.regra.UsuarioRegras;
 import br.com.principal.tela.util.SessaoUtil;
 import br.com.principal.tela.util.TelaUtil;
@@ -22,7 +23,10 @@ public class ExcluirAgenteTela implements Serializable {
 
 	@Inject
 	private UsuarioRegras usuarioRegras;
-
+	
+	@Inject
+	private ReclamacaoSugestaoRegras reclamacaoSugestaoRegras;
+	
 	private UsuarioEntidade agenteParaExcluir;
 
 	private Long cpfInformado;
@@ -51,6 +55,7 @@ public class ExcluirAgenteTela implements Serializable {
 
 	public void excluir() {
 		try {
+			reclamacaoSugestaoRegras.desvincularAgenteDeReclamacaoSugestao(agenteParaExcluir);
 			usuarioRegras.excluir(agenteParaExcluir);
 			this.cpfInformado = null;
 			this.agenteParaExcluir = null;
