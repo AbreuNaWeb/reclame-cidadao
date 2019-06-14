@@ -5,11 +5,12 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
-	<title>Teste</title>
 	<h:outputStylesheet name="css/estilos.css" />
 </h:head>
 <h:body>
 	<ui:composition template="layout.xhtml">
+		<ui:param name="tituloParametro"
+			value="#{mensagem.titulo_sistema}" />
 		<ui:param name="caminhoGifCarregamentoParametro"
 			value="imagens/gif_carregando.gif" />
 		<ui:define name="corpo">
