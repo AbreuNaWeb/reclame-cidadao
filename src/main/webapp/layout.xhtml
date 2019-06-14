@@ -24,6 +24,9 @@
 				style="margin-right:20px;"
 				rendered="#{layoutTela.usuarioEstaLogado()}"
 				action="#{loginTela.deslogar()}" />
+			<h:outputText value="#{layoutTela.obterNomeDoUsuarioLogado()}"
+				rendered="#{layoutTela.usuarioEstaLogado()}" style="float: right; padding: 6px;" />
+			<p:clock pattern="dd/MM/yyyy HH:mm:ss" />
 		</p:layoutUnit>
 
 		<p:layoutUnit position="west" size="280">
@@ -62,8 +65,8 @@
 			</h:form>
 		</p:layoutUnit>
 
-<!-- 		<p:layoutUnit position="south" size="45" -->
-<!-- 			header="#{mensagem.label_rodape}" /> -->
+		<!-- 		<p:layoutUnit position="south" size="45" -->
+		<!-- 			header="#{mensagem.label_rodape}" /> -->
 
 		<p:layoutUnit position="center">
 			<div id="corpo">

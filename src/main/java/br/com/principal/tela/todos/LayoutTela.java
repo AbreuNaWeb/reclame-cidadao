@@ -42,4 +42,8 @@ public class LayoutTela {
 	public void marcarParaNaoMostrarNotificacao() {
 		usuarioRegras.marcarParaNaoMostrarNotificacao(SessaoUtil.obterUsuarioLogado());
 	}
+	
+	public String obterNomeDoUsuarioLogado() {
+		return SessaoUtil.obterUsuarioLogado().getNome();
+	}
 }
