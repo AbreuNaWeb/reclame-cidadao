@@ -24,7 +24,7 @@
 					</f:facet>
 				</h:panelGrid>
 				<p:panel
-					rendered="#{cadastraReclamacaoSugestaoTela.naoExedeuLimiteDePublicacoes and cadastraReclamacaoSugestaoTela.possuiPermissao}">
+					rendered="#{cadastraReclamacaoSugestaoTela.naoExedeuLimiteDePublicacoes and cadastraReclamacaoSugestaoTela.possuiPermissao and cadastraReclamacaoSugestaoTela.novaReclamacaoSugestao.id == null}">
 					<h:panelGrid columns="2">
 						<h:outputText value="#{mensagem.tipo}" />
 						<p:selectOneMenu

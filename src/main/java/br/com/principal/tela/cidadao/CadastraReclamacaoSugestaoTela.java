@@ -9,7 +9,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.com.principal.constante.CategoriasEnum;
-import br.com.principal.constante.LinkPaginaEnum;
 import br.com.principal.constante.MensagemEnum;
 import br.com.principal.constante.MensagemErroEnum;
 import br.com.principal.constante.TipoReclamacaoSugestaoEnum;
@@ -67,7 +66,7 @@ public class CadastraReclamacaoSugestaoTela implements Serializable {
 	public void cadastrar() {
 		try {
 			this.novaReclamacaoSugestao = regra.salvar(novaReclamacaoSugestao, SessaoUtil.obterUsuarioLogado(), informarEndereco);
-			TelaUtil.redirecionarParaOutraPagina(LinkPaginaEnum.DETALHE_RECLAMACAO_SUGESTAO.getLink() + novaReclamacaoSugestao.getId(), MensagemEnum.CADASTROU_SUCESSO.getDescricao());
+			TelaUtil.adicionarMensagemDeInformacao(MensagemEnum.CADASTROU_SUCESSO);
 		} catch (RegraValidacaoException erroValidacao) {
 			TelaUtil.adicionarMensagemDeErro(erroValidacao.getMensagemErroEnum());
 		} catch (Exception erroDesconhecido) {
