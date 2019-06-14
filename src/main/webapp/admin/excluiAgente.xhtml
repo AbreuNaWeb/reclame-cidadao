@@ -46,7 +46,7 @@
 				<h:panelGrid columns="2">
 					<p:commandButton value="#{mensagem.pesquisar}"
 						actionListener="#{excluirAgenteTela.pesquisarAgenteParaExcluir()}"
-						update="@form" />
+						update="@form" icon="ui-icon-search" />
 					<p:commandButton value="#{mensagem.excluir}"
 						actionListener="#{excluirAgenteTela.excluir()}" update="@form"
 						rendered="#{not empty excluirAgenteTela.agenteParaExcluir}" />
