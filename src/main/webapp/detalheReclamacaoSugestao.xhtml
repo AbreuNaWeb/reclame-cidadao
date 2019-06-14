@@ -35,6 +35,8 @@
 	<ui:composition template="/layout.xhtml">
 		<ui:param name="tituloParametro"
 			value="#{mensagem.titulo_detalhe_reclamacao_sugestao}" />
+		<ui:param name="caminhoGifCarregamentoParametro"
+			value="imagens/gif_carregando.gif" />
 		<ui:define name="corpo">
 			<h:form
 				rendered="#{not empty detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro}">
@@ -59,8 +61,7 @@
 					<p:outputLabel
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.categoria}" />
 
-					<p:outputLabel
-						value="#{mensagem.label_status}" />
+					<p:outputLabel value="#{mensagem.label_status}" />
 					<p:outputLabel
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.status}" />
 
@@ -88,8 +89,7 @@
 					<p:outputLabel
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.endereco.estado}" />
 
-					<p:outputLabel
-						value="#{mensagem.label_status}"
+					<p:outputLabel value="#{mensagem.label_status}"
 						rendered="#{detalheReclamacaoSugestaoTela.reclamaoOuSugestaoEmAnaliseOuAndamento()}" />
 					<p:selectOneMenu
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.status}"
@@ -112,7 +112,7 @@
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.nota}"
 						stars="5" readonly="true"
 						rendered="#{detalheReclamacaoSugestaoTela.cidadaoAtribuiuNota()}" />
-						
+
 					<p:outputLabel value="#{mensagem.feedback_cidadao}"
 						rendered="#{detalheReclamacaoSugestaoTela.reclamaoSugestaoIndeferidaOuConcluida()}" />
 					<p:outputLabel
