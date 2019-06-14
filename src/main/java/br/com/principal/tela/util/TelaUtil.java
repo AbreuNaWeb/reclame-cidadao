@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
+import java.util.TimeZone;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
@@ -43,11 +45,11 @@ public class TelaUtil {
 	
 	public static String diaAtualEmFormatoDiaMesAno() {
 		DateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
-		return formatoData.format(Calendar.getInstance().getTime());
+		return formatoData.format(Calendar.getInstance(TimeZone.getDefault(), new Locale("pt", "BR")).getTime());
 	}
 	
 	public static String horaMinutoAtualFormatado() {
 		DateFormat formatoData = new SimpleDateFormat("HH:mm");
-		return formatoData.format(Calendar.getInstance().getTime());
+		return formatoData.format(Calendar.getInstance(TimeZone.getDefault(), new Locale("pt", "BR")).getTime());
 	}
 }
