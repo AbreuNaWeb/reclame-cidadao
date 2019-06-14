@@ -164,6 +164,7 @@ public class UsuarioRegras implements Serializable {
 		usuarioPesquisado.setSenha(agente.getSenha());
 		usuarioPesquisado.setDddCelular(agente.getDddCelular());
 		usuarioPesquisado.setDataCadastro(TelaUtil.diaAtualEmFormatoDiaMesAno());
+		usuarioPesquisado.setStatus(StatusUsuarioEnum.NORMAL.getDescricao());
 		atualizarComConversaoDeSenhaParaMD5(usuarioPesquisado);
 	}
 	
