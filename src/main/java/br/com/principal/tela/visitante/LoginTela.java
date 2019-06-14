@@ -36,7 +36,7 @@ public class LoginTela implements Serializable {
 			this.usuario = usuarioRegras.realizarLogin(cpf, senha);
 			return redirecionarParaPaginaInicial(usuario);
 		} catch (RegraValidacaoException erroValidacao) {
-			return retornarMensagemDeUsuarioNaoEncontrado();
+			return retornarMensagemDeUsuarioNaoEncontrado(erroValidacao.getMensagemErroEnum());
 		} catch (Exception erroDesconhecido) {
 			return tratarErroDesconhecido();
 		}
@@ -64,8 +64,8 @@ public class LoginTela implements Serializable {
 		return LinkPaginaEnum.HOME.getLink();
 	}
 
-	private String retornarMensagemDeUsuarioNaoEncontrado() {
-		TelaUtil.adicionarMensagemDeErro(MensagemErroEnum.LOGIN_ERRADO);
+	private String retornarMensagemDeUsuarioNaoEncontrado(MensagemErroEnum mensagemErroEnum) {
+		TelaUtil.adicionarMensagemDeErro(mensagemErroEnum);
 		FacesContext.getCurrentInstance().validationFailed();
 		return LinkPaginaEnum.PAGINA_ATUAL.getLink();
 	}
