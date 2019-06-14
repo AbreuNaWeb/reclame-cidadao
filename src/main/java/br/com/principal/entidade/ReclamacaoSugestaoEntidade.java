@@ -3,6 +3,7 @@ package br.com.principal.entidade;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -64,15 +65,15 @@ public class ReclamacaoSugestaoEntidade {
 	private String feedbackCidadao;
 
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "ID_ENDERECO")
+	@JoinColumn(name = "ID_ENDERECO", foreignKey = @ForeignKey(name = "FK_ENDERECO"))
 	private EnderecoEntidade endereco;
 	
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CPF_AGENTE")
+	@JoinColumn(name = "CPF_AGENTE", foreignKey = @ForeignKey(name = "FK_AGENTE"))
 	private UsuarioEntidade agente;
 	
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "CPF_CIDADAO")
+	@JoinColumn(name = "CPF_CIDADAO", foreignKey = @ForeignKey(name = "FK_CIDADAO"))
 	private UsuarioEntidade cidadao;
 
 	public ReclamacaoSugestaoEntidade() {
