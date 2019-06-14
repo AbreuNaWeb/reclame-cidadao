@@ -33,12 +33,12 @@
 			<h:form>
 				<p:commandButton value="#{mensagem.alterar_dados}"
 					action="/cidadao/alteraDadosPessoais?faces-redirect=true"
-					style="margin-right:20px; width:20px"
-					rendered="#{layoutTela.isCidadao()}" ajax="true" />
+					style="margin-right:20px; width:265px"
+					rendered="#{layoutTela.isCidadao()}" ajax="true" icon="ui-icon-contact" />
 				<p:commandButton value="#{mensagem.cadastrar_reclamacao_sugestao}"
 					action="/cidadao/cadastraReclamacaoSugestao?faces-redirect=true"
 					style="margin-right:20px; width:265px"
-					rendered="#{layoutTela.isCidadao()}" ajax="true" />
+					rendered="#{layoutTela.isCidadao()}" ajax="true" icon="ui-icon-script" />
 				<p:commandButton value="#{mensagem.listar_reclamacoes_sugestoes}"
 					action="/listaReclamacoesSugestoes?faces-redirect=true"
 					style="margin-right:20px; width:265px" ajax="true" icon="ui-icon-comment" />
