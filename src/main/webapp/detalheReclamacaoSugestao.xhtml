@@ -45,52 +45,52 @@
 						<p:messages id="mensagens" />
 					</f:facet>
 
-					<p:outputLabel value="#{mensagem.tipo}" />
+					<p:outputLabel value="#{mensagem.tipo}" style="color: #009933;" />
 					<p:outputLabel
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.tipo}" />
 
-					<p:outputLabel value="#{mensagem.titulo}" />
+					<p:outputLabel value="#{mensagem.titulo}" style="color: #009933;" />
 					<p:outputLabel
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.titulo}" />
 
-					<p:outputLabel value="#{mensagem.descricao}" />
+					<p:outputLabel value="#{mensagem.descricao}" style="color: #009933;" />
 					<p:outputLabel
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.descricao}" />
 
-					<p:outputLabel value="#{mensagem.categoria}" />
+					<p:outputLabel value="#{mensagem.categoria}" style="color: #009933;" />
 					<p:outputLabel
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.categoria}" />
 
-					<p:outputLabel value="#{mensagem.label_status}" />
+					<p:outputLabel value="#{mensagem.label_status}" style="color: #009933;" />
 					<p:outputLabel
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.status}" />
 
-					<p:outputLabel value="#{mensagem.rua}" />
+					<p:outputLabel value="#{mensagem.rua}" style="color: #009933;" />
 					<p:outputLabel
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.endereco.rua}" />
 
-					<p:outputLabel value="#{mensagem.numero}" />
+					<p:outputLabel value="#{mensagem.numero}" style="color: #009933;" />
 					<p:outputLabel
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.endereco.numero}" />
 
-					<p:outputLabel value="#{mensagem.complemento}" />
+					<p:outputLabel value="#{mensagem.complemento}" style="color: #009933;" />
 					<p:outputLabel
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.endereco.complemento}" />
 
-					<p:outputLabel value="#{mensagem.bairro}" />
+					<p:outputLabel value="#{mensagem.bairro}" style="color: #009933;" />
 					<p:outputLabel
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.endereco.bairro}" />
 
-					<p:outputLabel value="#{mensagem.cidade}" />
+					<p:outputLabel value="#{mensagem.cidade}" style="color: #009933;" />
 					<p:outputLabel
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.endereco.cidade}" />
 
-					<p:outputLabel value="#{mensagem.estado}" />
+					<p:outputLabel value="#{mensagem.estado}" style="color: #009933;" />
 					<p:outputLabel
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.endereco.estado}" />
 
 					<p:outputLabel value="#{mensagem.label_status}"
-						rendered="#{detalheReclamacaoSugestaoTela.reclamaoOuSugestaoEmAnaliseOuAndamento()}" />
+						rendered="#{detalheReclamacaoSugestaoTela.reclamaoOuSugestaoEmAnaliseOuAndamento()}" style="color: #009933;" />
 					<p:selectOneMenu
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.status}"
 						rendered="#{detalheReclamacaoSugestaoTela.reclamaoOuSugestaoEmAnaliseOuAndamento()}">
@@ -101,20 +101,20 @@
 					</p:selectOneMenu>
 
 					<p:outputLabel value="#{mensagem.comentario_agente}"
-						rendered="#{detalheReclamacaoSugestaoTela.reclamaoSugestaoIndeferidaOuConcluida()}" />
+						rendered="#{detalheReclamacaoSugestaoTela.reclamaoSugestaoIndeferidaOuConcluida()}" style="color: #009933;" />
 					<p:outputLabel
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.comentarioAgente}"
 						rendered="#{detalheReclamacaoSugestaoTela.reclamaoSugestaoIndeferidaOuConcluida()}" />
 
 					<p:outputLabel value="#{mensagem.nota}"
-						rendered="#{detalheReclamacaoSugestaoTela.cidadaoAtribuiuNota()}" />
+						rendered="#{detalheReclamacaoSugestaoTela.cidadaoAtribuiuNota()}" style="color: #009933;" />
 					<p:rating
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.nota}"
 						stars="5" readonly="true"
 						rendered="#{detalheReclamacaoSugestaoTela.cidadaoAtribuiuNota()}" />
 
 					<p:outputLabel value="#{mensagem.feedback_cidadao}"
-						rendered="#{detalheReclamacaoSugestaoTela.reclamaoSugestaoIndeferidaOuConcluida()}" />
+						rendered="#{detalheReclamacaoSugestaoTela.reclamaoSugestaoIndeferidaOuConcluida()}" style="color: #009933;" />
 					<p:outputLabel
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.feedbackCidadao}"
 						rendered="#{detalheReclamacaoSugestaoTela.reclamaoSugestaoIndeferidaOuConcluida()}" />
@@ -127,7 +127,7 @@
 
 				<h:panelGrid columns="2"
 					rendered="#{detalheReclamacaoSugestaoTela.agenteAindaNaoComentou()}">
-					<p:outputLabel value="#{mensagem.comentario_agente}" />
+					<p:outputLabel value="#{mensagem.comentario_agente}" style="color: #009933;" />
 					<p:inputTextarea
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.comentarioAgente}"
 						rows="3" cols="40" counter="mostraQuantidadeCaracteres"
@@ -140,13 +140,13 @@
 
 				<h:panelGrid columns="2"
 					rendered="#{detalheReclamacaoSugestaoTela.cidadaoPodeIncluirNotaEComentario()}">
-					<h:outputText value="#{mensagem.nota}" />
+					<h:outputText value="#{mensagem.nota}" style="color: #009933;" />
 					<p:rating
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.nota}"
 						stars="5" cancel="false" required="true"
 						requiredMessage="#{mensagem.campo_nota_obrigatorio}" />
 
-					<h:outputText value="#{mensagem.feedback_cidadao}" />
+					<h:outputText value="#{mensagem.feedback_cidadao}" style="color: #009933;" />
 					<p:inputTextarea
 						value="#{detalheReclamacaoSugestaoTela.reclamacaoSugestaoRegistro.feedbackCidadao}"
 						rows="3" cols="40" counter="mostraQuantidadeCaracteresCidadao"
