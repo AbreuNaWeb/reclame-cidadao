@@ -122,7 +122,7 @@
 					<p:commandButton value="#{mensagem.atribuir_para_mim}"
 						rendered="#{detalheReclamacaoSugestaoTela.agentePodeAtribuirReclamacaoOuSugestaoParaSi()}"
 						actionListener="#{detalheReclamacaoSugestaoTela.atribuirReclamacaoOuSugestaoParaAgente()}"
-						update="@form" ajax="true" />
+						update="@form" ajax="true" icon="ui-icon-check" />
 				</h:panelGrid>
 
 				<h:panelGrid columns="2"
@@ -161,11 +161,11 @@
 					<p:commandButton value="#{mensagem.atualizar}"
 						rendered="#{detalheReclamacaoSugestaoTela.exibeBotaoAtualizarParaCidadao()}"
 						actionListener="#{detalheReclamacaoSugestaoTela.atualizarReclamacaoOuSugestaoPorAgente()}"
-						update="@form" ajax="true" />
+						update="@form" ajax="true" icon="ui-icon-refresh" />
 					<p:commandButton value="#{mensagem.atualizar}"
 						rendered="#{detalheReclamacaoSugestaoTela.cidadaoPodeIncluirNotaEComentario()}"
 						actionListener="#{detalheReclamacaoSugestaoTela.atualizarReclamacaoOuSugestaoPorCidadao()}"
-						update="@form" ajax="true" />
+						update="@form" ajax="true" icon="ui-icon-refresh" />
 				</h:panelGrid>
 			</h:form>
 		</ui:define>
