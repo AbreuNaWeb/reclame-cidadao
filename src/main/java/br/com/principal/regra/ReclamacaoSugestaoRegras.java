@@ -26,6 +26,13 @@ public class ReclamacaoSugestaoRegras implements Serializable {
 	@Inject
 	private EnderecoRegras enderecoRegras;
 
+	public void desvincularAgenteDeReclamacaoSugestao(UsuarioEntidade agente) {
+		reclamacaoSugestaoDAO.buscarReclamacoesOuSugestoesVinculadasAoAgente(agente.getCpf()).forEach(reclamacaoSugestao -> {
+			reclamacaoSugestao.setAgente(null);
+			reclamacaoSugestaoDAO.atualizar(reclamacaoSugestao);
+		});
+	}
+	
 	public void verificarSeExedeuLimites(UsuarioEntidade cidadao) throws RegraValidacaoException {
 		List<ReclamacaoSugestaoEntidade> reclamacoesSugestoesAbertas = reclamacaoSugestaoDAO.buscarReclamacoesOuSugestoesAbertasDoCidadao(cidadao.getCpf());
 		

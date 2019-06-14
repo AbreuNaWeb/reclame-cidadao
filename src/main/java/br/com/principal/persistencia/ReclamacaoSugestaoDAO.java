@@ -1,5 +1,6 @@
 package br.com.principal.persistencia;
 
+import java.util.Arrays;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -38,10 +39,10 @@ public class ReclamacaoSugestaoDAO extends GenericoDAO {
 		EntityManager em = obtemEntityManager();
 		StringBuilder sql = new StringBuilder("SELECT * FROM ReclamacaoSugestao WHERE ");
 		sql.append("CPF_AGENTE = :CPF AND ");
-		sql.append("STATUS = :STATUS_ABERTO");
+		sql.append("STATUS IN (:STATUS)");
 		Query consulta = em.createNativeQuery(sql.toString(), ReclamacaoSugestaoEntidade.class);
 		consulta.setParameter("CPF", cpf);
-		consulta.setParameter("STATUS_ABERTO", StatusReclamacaoSugestaoEnum.ABERTA.getDescricao());
+		consulta.setParameter("STATUS", Arrays.asList(StatusReclamacaoSugestaoEnum.EM_ANALISE.getDescricao(), StatusReclamacaoSugestaoEnum.EM_ANDAMENTO.getDescricao()));
 		consulta.setMaxResults(1);
 		return !consulta.getResultList().isEmpty();
 	}
@@ -54,7 +55,7 @@ public class ReclamacaoSugestaoDAO extends GenericoDAO {
 		sql.append("STATUS = :STATUS_ABERTO");
 		Query consulta = em.createNativeQuery(sql.toString(), ReclamacaoSugestaoEntidade.class);
 		consulta.setParameter("CPF_CIDADAO", cpfDoCidadao);
-		consulta.setParameter("STATUS_ABERTO", StatusReclamacaoSugestaoEnum.ABERTA.getDescricao());
+		consulta.setParameter("STATUS_ABERTO", StatusReclamacaoSugestaoEnum.EM_ANALISE.getDescricao());
 		return consulta.getResultList();
 	}
 	
@@ -101,6 +102,16 @@ public class ReclamacaoSugestaoDAO extends GenericoDAO {
 			consulta.setParameter("CPF_CIDADAO", cpfDoCidadao);
 		}
 		
+		return consulta.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ReclamacaoSugestaoEntidade> buscarReclamacoesOuSugestoesVinculadasAoAgente(Long cpfDoAgente) {
+		EntityManager em = obtemEntityManager();
+		StringBuilder sql = new StringBuilder("SELECT * FROM ReclamacaoSugestao WHERE CPF_AGENTE = :CPF_AGENTE_PARA_EXCLUSAO");
+		
+		Query consulta = em.createNativeQuery(sql.toString(), ReclamacaoSugestaoEntidade.class);
+		consulta.setParameter("CPF_AGENTE_PARA_EXCLUSAO", cpfDoAgente);
 		return consulta.getResultList();
 	}
 }
