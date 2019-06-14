@@ -121,6 +121,7 @@ public class UsuarioRegras implements Serializable {
 		usuarioEntidade.setSenha(converterSenhaParaMD5(usuarioEntidade.getSenha()));
 		usuarioEntidade.setTipo(TipoUsuarioEnum.CIDADAO.getDescricao());
 		usuarioEntidade.setDataCadastro(TelaUtil.diaAtualEmFormatoDiaMesAno());
+		usuarioEntidade.setStatus(StatusUsuarioEnum.NORMAL.getDescricao());
 		usuarioDAO.salvar(usuarioEntidade);
 	}
 
