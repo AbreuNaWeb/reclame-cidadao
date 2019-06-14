@@ -49,10 +49,10 @@
 					<p:commandButton value="#{mensagem.pesquisar}"
 						actionListener="#{bloqueioCidadaoTela.pesquisarCidadaoParaBloquear()}"
 						update="@form"
-						disabled="#{not empty bloqueioCidadaoTela.cidadaoParaBloquear}" />
+						disabled="#{not empty bloqueioCidadaoTela.cidadaoParaBloquear}" icon="ui-icon-search" />
 					<p:commandButton value="#{mensagem.bloquear}"
 						actionListener="#{bloqueioCidadaoTela.bloquear()}" update="@form"
-						rendered="#{not empty bloqueioCidadaoTela.cidadaoParaBloquear}" />
+						rendered="#{not empty bloqueioCidadaoTela.cidadaoParaBloquear}" icon="ui-icon-refresh" />
 				</h:panelGrid>
 			</h:form>
 		</ui:define>

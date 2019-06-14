@@ -50,7 +50,8 @@
 						update="@form" process="@form" icon="ui-icon-search" />
 					<p:commandButton value="#{mensagem.atualizar}"
 						actionListener="#{atualizaAgenteTela.atualizar()}" update="@form"
-						rendered="#{not empty atualizaAgenteTela.agenteParaAtualizar}" />
+						rendered="#{not empty atualizaAgenteTela.agenteParaAtualizar}"
+						icon="ui-icon-refresh" />
 				</h:panelGrid>
 			</h:form>
 		</ui:define>

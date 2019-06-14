@@ -19,7 +19,8 @@
 		<ui:define name="corpo">
 			<h:form>
 				<p:messages id="mensagens" autoUpdate="true" />
-				<h:panelGrid columns="2" cellspacing="5" rendered="#{alteraDadosPessoaisTela.possuiPermissao}">
+				<h:panelGrid columns="2" cellspacing="5"
+					rendered="#{alteraDadosPessoaisTela.possuiPermissao}">
 					<p:outputLabel value="#{mensagem.email}" />
 					<p:inputText
 						value="#{alteraDadosPessoaisTela.usuarioLogadoAtualizado.email}"
@@ -64,7 +65,8 @@
 						maxlength="16" size="12" />
 
 					<p:commandButton value="#{mensagem.atualizar}"
-						action="#{alteraDadosPessoaisTela.atualizar()}" update="@form" icon="ui-icon-refresh" />
+						action="#{alteraDadosPessoaisTela.atualizar()}" update="@form"
+						icon="ui-icon-refresh" />
 				</h:panelGrid>
 			</h:form>
 		</ui:define>
