@@ -41,7 +41,7 @@
 		<hibernate.agroal.version>5.4.2.Final</hibernate.agroal.version>
 
 		<!-- MySQL Connector -->
-		<mysql.connector.java.version>5.1.44</mysql.connector.java.version>
+		<mysql.connector.java.version>8.0.16</mysql.connector.java.version>
 
 		<!-- Webapp Runner -->
 		<webapp-runner.version>9.0.13.0</webapp-runner.version>
