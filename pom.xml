@@ -50,7 +50,7 @@
 		<caelum.stella.core.version>2.1.2</caelum.stella.core.version>
 
 		<!-- JUnit -->
-		<junit.version>4.12</junit.version>
+		<junit.version>4.13.1</junit.version>
 
 		<!-- Mockito -->
 		<mockito.version>1.10.19</mockito.version>
